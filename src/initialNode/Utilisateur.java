@@ -1,5 +1,5 @@
 package initialNode;
 
 public class Utilisateur {
-bloblo
+private String nom;
 }
