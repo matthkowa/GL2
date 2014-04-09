@@ -1,12 +1,14 @@
-Hello world !
-===========
+------------------ READ ME ----------------------
 
-Au revoir
+A chaque lancement d'Eclipse :
 
-Test 1 2 3
-
-<<<<<<< HEAD
-=======
-POULAILAPILOPOL !
-
-Is ok.
+	- Pull
+	
+	
+En cas d'erreur "non fast-forward" :
+	
+	- Pull
+	- Merge Tool
+	- Add to Index
+	- Commit & Push
+	
