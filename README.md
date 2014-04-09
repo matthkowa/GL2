@@ -9,5 +9,5 @@ En cas d'erreur "non fast-forward" :
 	
 	- Pull
 	- Merge Tool
-	- Add to Index
+	- Sur les fichiers en conflit : Add to Index
 	- Commit & Push
