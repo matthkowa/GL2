@@ -1,7 +1,13 @@
-Hello world !
-===========
+------------------ READ ME ----------------------
 
-Au revoir
+A chaque lancement d'Eclipse :
 
-Test 1 2 3
-Eeee
+	- Pull
+	
+	
+En cas d'erreur "non fast-forward" :
+	
+	- Pull
+	- Merge Tool
+	- Sur les fichiers en conflit : Add to Index
+	- Commit & Push
