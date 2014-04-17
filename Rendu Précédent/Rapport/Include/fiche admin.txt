@@ -1,0 +1,41 @@
+﻿GERER UTILISATEUR
+
+Description : 	L'administrateur doit pouvoir, via une autentification, créer un utilisateur. 
+
+Initiation :	L'administrateur doit avoir son nom d'utilisateur et son mot de passe valide pour s'authentifier.
+				L'utilisateur créé ne doit pas déjà exister.
+						
+Terminaison :    Création d'un utilisateur dans la base de données.
+						
+Exeption : 
+
+Relation : 		Ce cas inclus le cas s'autentifier
+				Ce cas peut entrainer la précision du domaine d'enseignement dans le cas où un professeur est défini
+
+				
+GERER MODULE
+
+Description : 	L'administrateur doit pouvoir, via une autentification, créer un umodule.
+
+Initiation :	Le module créé ne doit pas déjà exister.
+                Le module désigné comme prérequis doit exister.
+                Pour modifier un module, ce dernier doit exister.
+						
+						
+Terminaison :   Création d'une promotionr dans la base de données.
+						
+						
+Relation :  	Ce cas inclus le cas s'autentifier
+				Ce cas peut entrainer la précision des modules prérequis.
+
+
+GERER PROMOTION
+
+Description : 	L'administrateur doit pouvoir, via une autentification, créer une promotion.
+
+Initiation :    La promotion créée ne doit pas déjà exister.
+                Les élèves d'une promotion doivent exister.
+
+Terminaison :   Création d'un module dans la base de données.
+
+Relation :  	Ce cas inclus le cas s'autentifier
