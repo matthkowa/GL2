@@ -1,23 +1,24 @@
 package initialNode;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Utilisateur {
+public class Utilisateur implements Serializable{
 private String nom;
 private String prenom;
 private Date dateNaissance;
 private String adresse;
-private int[] tel = new int[10] ;
+private int tel;
 protected String pseudo;
 protected String motDePasse;
 
 
 
 public Utilisateur(String nom, String prenom, Date dateNaissance,
-		String adresse, int[] tel, String pseudo, String motDePasse) {
+		String adresse, int tel, String pseudo, String motDePasse) {
 	super();
 	this.nom = nom;
 	this.prenom = prenom;
@@ -27,16 +28,21 @@ public Utilisateur(String nom, String prenom, Date dateNaissance,
 	this.pseudo = pseudo;
 	this.motDePasse = motDePasse;
 }
+
+public Utilisateur() {
+	super();
+}
+
 public String getAdresse() {
 	return adresse;
 }
 public void setAdresse(String adresse) {
 	this.adresse = adresse;
 }
-public int[] getTel() {
+public int getTel() {
 	return tel;
 }
-public void setTel(int[] tel) {
+public void setTel(int tel) {
 	this.tel = tel;
 }
 public String getPseudo() {

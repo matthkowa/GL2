@@ -1,10 +1,18 @@
 package initialNode;
 
 public class Professeur extends Utilisateur {
+	private int idProf;
+	
+	public Professeur() {
+		super();
+	}
 
-	public Professeur(String nom, String prenom) {
-		super(nom, prenom);
-		// TODO Auto-generated constructor stub
+	public int getIdProf() {
+		return idProf;
+	}
+
+	public void setIdProf(int idProf) {
+		this.idProf = idProf;
 	}
 
 }
