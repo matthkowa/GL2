@@ -2,16 +2,16 @@ package QCM;
 
 public class Question {
 
-	private int idQuestion;
+	private int id;
 	private String libelle;
 	private QCM corps;
 	
 	/**
-	 * @param idQuestion
+	 * @param id
 	 * @param libelle
 	 */
-	public Question(int idQuestion, String libelle, QCM corps) {
-		this.idQuestion = idQuestion;
+	public Question(int id, String libelle, QCM corps) {
+		this.id = id;
 		this.libelle = libelle;
 		this.corps = corps;
 	}
@@ -28,10 +28,10 @@ public class Question {
 		this.libelle = libelle;
 	}
 	/**
-	 * @return the idQuestion
+	 * @return the id
 	 */
-	public int getIdQuestion() {
-		return idQuestion;
+	public int getId() {
+		return id;
 	}
 	
 	public QCM getCorps() {

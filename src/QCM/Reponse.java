@@ -2,18 +2,18 @@ package QCM;
 
 public class Reponse {
 	
-	private int idReponse;
+	private int id;
 	private String libelle;
 	private Boolean estVraie;
 	private Question intitule;
 	
 	/**
-	 * @param idReponse
+	 * @param id
 	 * @param libelle
 	 * @param estVraie
 	 */
-	public Reponse(int idReponse, String libelle, Boolean estVraie, Question intitule) {
-		this.idReponse = idReponse;
+	public Reponse(int id, String libelle, Boolean estVraie, Question intitule) {
+		this.id = id;
 		this.libelle = libelle;
 		this.estVraie = estVraie;
 		this.intitule = intitule;
@@ -34,10 +34,10 @@ public class Reponse {
 	}
 
 	/**
-	 * @return the idReponse
+	 * @return the id
 	 */
-	public int getIdReponse() {
-		return idReponse;
+	public int getId() {
+		return id;
 	}
 
 	/**

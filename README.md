@@ -5,7 +5,12 @@ A chaque lancement d'Eclipse :
 	- Pull
 	
 	
-En cas d'erreur "non fast-forward" :
+Pour mettre à jour un fichier :
+
+	-Commit & Push
+
+
+En cas d'erreur "non fast-forward" ou ajouter quelque chose pour la première fois :
 	
 	- Pull
 	- Merge Tool
