@@ -21,26 +21,18 @@ public String getPrenom() {
 public void setPrenom(String prenom) {
 	this.prenom = prenom;
 }
-public  int getAge() {
-	Date date = new Date();
-	
-	int age = date.getYear() -  this.dateNaissance.getYear() ;
-	return age;
-	
-	
-	
-}
+
 public Date getDateNaissance() {
 	return dateNaissance;
 }
 public void setDateNaissance(Date dateNaissance) {
 	this.dateNaissance = dateNaissance;
 }
-public Utilisateur(String nom,String prenom)
+public Utilisateur(String nom,String prenom,Date dateNaissance)
 {
 	this.nom = nom;
 	this.prenom=prenom;
-	
+	this.dateNaissance=dateNaissance;
 }
 
 
