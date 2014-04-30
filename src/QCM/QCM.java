@@ -2,17 +2,17 @@ package QCM;
 
 public class QCM {
 	
-	private int idQCM;
+	private int id;
 	private String libelle;
 	private Boolean estPrive;
 	
 	/**
-	 * @param idQCM
+	 * @param id
 	 * @param libelle
 	 * @param estPrive
 	 */
-	public QCM(int idQCM, String libelle, Boolean estPrive) {
-		this.idQCM = idQCM;
+	public QCM(int id, String libelle, Boolean estPrive) {
+		this.id = id;
 		this.libelle = libelle;
 		this.estPrive = estPrive;
 	}
@@ -32,10 +32,10 @@ public class QCM {
 	}
 
 	/**
-	 * @return the idQCM
+	 * @return the id
 	 */
-	public int getIdQCM() {
-		return idQCM;
+	public int getId() {
+		return id;
 	}
 
 	/**
