@@ -28,7 +28,5 @@ public class Main {
 			System.out.println(A.getNom()+" / "+A.getPrenom());
 		}
 		
-		
-		
 	}
 }

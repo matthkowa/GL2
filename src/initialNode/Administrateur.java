@@ -49,20 +49,36 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String adresse = sc.next();
 		System.out.println("Entrer le tel du nouvel Administrateur : ");
 		String telS = sc.next();
+		sc.close();
 		int tel = Integer.parseInt(telS);
+		@SuppressWarnings("deprecation")
 		Date naissance = new Date(jour,moi,annee);
 		String pseudoA=(nom+prenom).toLowerCase();
 		if (pseudoA.length()>10){
 			pseudoA = pseudoA.substring(0,9);
 		}
 		String mdp = "EISTI";
+		String s = "Administrateur";
 
 		AllAdmin newAdmin = new AllAdmin();
-		newAdmin = (AllAdmin) newAdmin.relecture("Administrateur");
-		String s = "Administrateur";
+		newAdmin = (AllAdmin) newAdmin.relecture(s);
 		newAdmin.addAdmin(new Administrateur(nom, prenom, naissance, adresse, tel, pseudoA, mdp, newAdmin.administrateurs.size()));
 		newAdmin.sauvegarder(s);
 	}
+	
+
+	public void modifAdmin(){
+		String s = "Administrateur";
+		AllAdmin newAdmin = new AllAdmin();
+		newAdmin = (AllAdmin) newAdmin.relecture(s);
+		for (Administrateur A : newAdmin.administrateurs){
+			System.out.println("coucou");
+		}
+	}
+ 
+
+
+
 	
 
 }

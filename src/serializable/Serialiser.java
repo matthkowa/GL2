@@ -30,6 +30,7 @@ public class Serialiser implements Serializable{
 				ObjectInputStream ois = new ObjectInputStream(f);
 				key = ((SecretKey) ois.readObject());
 				ois.close();
+				f.close();
 			}
 			catch (Exception e){
 				System.out.println("Erreur"+e);
@@ -41,6 +42,7 @@ public class Serialiser implements Serializable{
 			ObjectOutputStream oos = new ObjectOutputStream(f);
 			oos.writeObject(sealedObject);
 			oos.close();
+			f.close();
 			}
 			catch (Exception e){
 				System.out.println("Erreur "+e);
@@ -57,6 +59,7 @@ public class Serialiser implements Serializable{
 				ObjectInputStream ois = new ObjectInputStream(f);
 				key = ((SecretKey) ois.readObject());
 				ois.close();
+				f.close();
 			}
 			catch (Exception e){
 				System.out.println("Erreur"+e);
@@ -70,6 +73,7 @@ public class Serialiser implements Serializable{
 	        Cipher cipher = Cipher.getInstance(algorithmName);
 	        cipher.init(Cipher.DECRYPT_MODE, key);
 			ois.close();
+			f.close();
 			o = (Object) sealedObject.getObject(cipher);
 			return o;
 			
