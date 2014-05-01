@@ -67,7 +67,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	}
 	
 
-	public void modifAdmin(){
+/*	public void modifAdmin(){
 		String s = "Administrateur";
 		AllAdmin newAdmin = new AllAdmin();
 		newAdmin = (AllAdmin) newAdmin.relecture(s);
@@ -75,7 +75,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 			System.out.println("coucou");
 		}
 	}
- 
+ */
 
 
 
