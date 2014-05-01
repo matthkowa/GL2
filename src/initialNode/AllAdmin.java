@@ -1,10 +1,6 @@
 package initialNode;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -15,13 +11,13 @@ public class AllAdmin extends Serialiser implements Serializable{
 
 	public AllAdmin(Set<Administrateur> administrateur) {
 		super();
-		this.administrateurs = new HashSet();
+		this.administrateurs = new HashSet<Administrateur>();
 		this.administrateurs = administrateur;
 	}
 	
 	public AllAdmin() {
 		super();
-		this.administrateurs=new HashSet();
+		this.administrateurs=new HashSet<Administrateur>();
 	}
 
 	public Set<Administrateur> getAdministrateurs() {

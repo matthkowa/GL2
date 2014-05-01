@@ -2,7 +2,6 @@ package initialNode;
 
 import java.io.Serializable;
 import java.util.Date;
-import serializable.*;
 
 public class Utilisateur implements Serializable{
 	private String nom;
@@ -25,12 +24,10 @@ public class Utilisateur implements Serializable{
 		this.tel = tel;
 		this.pseudo = pseudo;
 		this.motDePasse = motDePasse;
-	}
-	
+	}	
 	public Utilisateur() {
 		super();
 	}
-	
 	public String getAdresse() {
 		return adresse;
 	}
@@ -67,7 +64,6 @@ public class Utilisateur implements Serializable{
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-	
 	public Date getDateNaissance() {
 		return dateNaissance;
 	}

@@ -1,18 +1,16 @@
 package initialNode;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Scanner;
 
 
 public class Administrateur extends Utilisateur implements Serializable{
+	private static final long serialVersionUID = 1160533610734006110L;
 	private int id;
 
 	public Administrateur(String nom, String prenom, Date dateNaissance, String adresse, int tel, String pseudo, String motDePasse,int id) {
@@ -32,7 +30,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		this.id = id;
 	}
 	
-	public void addAdmin(){
+	public void addAdmin() throws IOException{
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Entrer le nom du nouvel Administrateur : ");
 		String nom = sc.nextLine();
@@ -51,8 +49,9 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String telS = sc.next();
 		sc.close();
 		int tel = Integer.parseInt(telS);
+
 		@SuppressWarnings("deprecation")
-		Date naissance = new Date(jour,moi,annee);
+		Date naissance = new Date(annee,moi-1,jour);
 		String pseudoA=(nom+prenom).toLowerCase();
 		if (pseudoA.length()>10){
 			pseudoA = pseudoA.substring(0,9);
@@ -67,15 +66,45 @@ public class Administrateur extends Utilisateur implements Serializable{
 	}
 	
 
-/*	public void modifAdmin(){
+	public void supAdmin() throws NoSuchElementException{
 		String s = "Administrateur";
 		AllAdmin newAdmin = new AllAdmin();
 		newAdmin = (AllAdmin) newAdmin.relecture(s);
+		int i=1;
+		List<Administrateur> listeAdmin = new ArrayList<Administrateur>();
 		for (Administrateur A : newAdmin.administrateurs){
-			System.out.println("coucou");
+			listeAdmin.add(A);
+		};
+		for (Administrateur A : listeAdmin){
+			System.out.println(" - "+i+" => "+A);
+			i++;			
+		}
+		Scanner sc2 = new Scanner(System.in);
+		System.out.println("Entrer le numéro de l'Administrateur a supprimer : ");
+		int num = sc2.nextInt();
+		System.out.println("choisi : "+listeAdmin.get(num-1));
+		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+listeAdmin.get(num-1));
+		String rep = sc2.next();
+		sc2.close();
+		switch(rep){
+			case "oui" : newAdmin.administrateurs.remove(listeAdmin.get(num-1));System.out.println("Well done");newAdmin.sauvegarder(s);break;
+			default : System.out.println("tant pis");break;
 		}
 	}
- */
+
+	@Override
+	public String toString(){
+		String s="";
+		s+=this.getNom()+" / ";
+		s+=this.getPrenom()+" / ";
+		s+=this.getDateNaissance()+" / ";
+		s+=this.getAdresse()+" / ";
+		s+=this.getTel()+" / ";
+		s+=this.getPseudo()+" / ";
+		s+=this.getMotDePasse()+" \n ";
+		return s;
+	}
+ 
 
 
 

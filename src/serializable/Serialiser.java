@@ -1,21 +1,19 @@
 package serializable;
-import initialNode.Administrateur;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.security.Key;
-
 import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
 import javax.crypto.SealedObject;
 import javax.crypto.SecretKey;
 
 public class Serialiser implements Serializable{
-	
-	protected Serialiser(){}//constructor
+	private static final long serialVersionUID = 7112754214151288557L;
+
+
+	public Serialiser(){}//constructor
 	
 	/*public T lecture(String path){
 		return (this.getClass()) "String";
