@@ -14,7 +14,7 @@ public class Main {
 	
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws NoSuchAlgorithmException{
-		Administrateur Jean = new Administrateur();
+		/*Administrateur Jean = new Administrateur();
 		try {
 //			Jean.addAdmin();
 			System.out.println("----Relecture----");
@@ -27,10 +27,10 @@ public class Main {
 		}
 		catch (NoSuchElementException e){
 			System.err.println("mauvaise entrée");
-		}
+		}*/
 //		catch (IOException e){
 //			System.err.println("mauvaise entrée");
 //		}
-		
+		Menu m=new Menu();
 	}
 }
