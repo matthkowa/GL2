@@ -39,7 +39,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		System.out.println("Entrer la date de naissance du nouvel Administrateur (en chiffre) : ");
 		System.out.println(" jour : ");
 		int jour = sc.nextInt();
-		System.out.println("moi : ");
+		System.out.println("mois : ");
 		int moi = sc.nextInt();
 		System.out.println("Année : ");
 		int annee = sc.nextInt();
