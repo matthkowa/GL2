@@ -1,6 +1,6 @@
 package QCM;
 
-import sun.util.calendar.BaseCalendar.Date;
+import java.util.Date;
 
 public class Session {
 
@@ -33,7 +33,7 @@ public class Session {
 		this.dateDebut = dateDebut;
 	}
 
-	public Date getDateFin() {
+	public java.util.Date getDateFin() {
 		return dateFin;
 	}
 
