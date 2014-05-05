@@ -1,6 +1,8 @@
 package initialNode;
 
-import java.util.Date;
+import java.util.*;
+
+import QCM.*;
 
 public class Etudiant extends Utilisateur{
 
@@ -18,8 +20,17 @@ public class Etudiant extends Utilisateur{
 	public void setIdEtudiant(int idEtudiant){
 		this.idEtudiant=idEtudiant;
 	}
+	
 	public int getIdEtudiant(){
 		return this.idEtudiant;
+	}
+	
+	public void consulterResultat(Etudiant etu, Session sess){
+		Date currentDate = new Date();
+		if (currentDate.compareTo(sess.getDateFin())>1){
+			
+		}
+		
 	}
 
 }
