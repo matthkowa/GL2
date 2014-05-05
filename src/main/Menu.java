@@ -17,9 +17,9 @@ public class Menu {
 			String str = sc.nextLine();
 			char carac = str.charAt(0);
 			switch (carac){
-			case '1' : Administrateur();break;
-			case '2' : Professeur();break;
-			case '3' : Etudiant();break;
+			case '1' : administrateur();break;
+			case '2' : professeur();break;
+			case '3' : etudiant();break;
 			case '4' : b=false; break;
 	
 			
@@ -27,41 +27,77 @@ public class Menu {
 		}
 	}
 	}
-	private void Administrateur(){
-		Administrateur a = new Administrateur();
+	
+	private void administrateur2(char choix){
 		boolean b = true;
 		while(b){
-			System.out.println("_______MENU 1______\n 1- Ajouter un utilisateur/modules/promo \n 2- Modifier un utilisateur/modules/promo \n 3- Supprimer \n 4- Quitter \n \n Choix :");
+			System.out.println("_______MENU ______\n 1- Ajouter \n 2- Modifier \n 3- Supprimer \n 4- Quitter \n \n Choix :");
 			Scanner sc = new Scanner(System.in);
 			String str = sc.nextLine();
 			char carac = str.charAt(0);
-			switch (carac){
-			case '1' : 
-				try {
-					a.addAdmin();
+			if(carac=='4') b= false; 
+			else{
+				switch(choix) {
+					case '1' : /*Administrateur*/
+						switch(carac) { 
+						case '1' : /*Ajouter admin*/ 	break;
+						case '2' : /*Modifier admin*/  	break;
+						case '3' : /*Supprimer admin*/  break;
+						}
+					break;
+					
+					case '2' : /*Professeur*/
+						switch(carac) { 
+						case '1' : /*Ajouter Prof*/ 	break;
+						case '2' : /*Modifier Prof*/  	break;
+						case '3' : /*Supprimer Prof*/ 	break;
+						}
+					break;
+					case '3' :/*Etudiant*/
+						switch(carac) { 
+						case '1' : /*Ajouter Etudiant*/ 	break;
+						case '2' : /*Modifier Etudiant*/  	break;
+						case '3' : /*Supprimer Etudiant*/  	break;
+						}
+					break;
+					case '4' :/*Promotion*/
+						switch(carac) { 
+						case '1' : /*Ajouter Promo*/ 		break;
+						case '2' : /*Modifier Promo*/  		break;
+						case '3' : /*Supprimer Promo*/  	break;
+						}
+					break;
+					case '5' :/*Modules*/
+						switch(carac) { 
+						case '1' : /*Ajouter Modules*/ 		break;
+						case '2' : /*Modifier Modules*/  	break;
+						case '3' : /*Supprimer Modules*/  	break;
+						}
+					break;
+					default : System.out.println("Erreur veuillez contacter le support"); break;
 				}
-				catch (NoSuchElementException e){
-					System.err.println("mauvaise entrée");
-				}
-				catch (IOException e){
-					System.err.println("mauvaise entrée");
-					}
-				System.out.println("Done!");
-				break;
-			case '2' : break;
-			case '3' :
-				try {
-					a.supAdmin();
-				}
-				catch (NoSuchElementException e){
-					System.err.println("mauvaise entrée");
-				}
-				System.out.println("Done!");
-				break;
-			case '4' : b=false; break;
-			default : break;
 			}
 		}
+	}
+	
+	private void administrateur(){
+		Administrateur a = new Administrateur();
+		boolean b = true;
+		while(b){
+			System.out.println("_______MENU 1______\n 1- Gérer les administrateur \n 2- Gérer les professeurs \n 3- Gérer les étudiants \n 4- Gérer les promotions \n 5- Gérer les modules \n 6- Quitter \n \n Choix :");
+			Scanner sc = new Scanner(System.in);
+			String str = sc.nextLine();
+			char carac = str.charAt(0);
+			if(carac == '1' || carac == '2' || carac == '3' || carac == '4' || carac == '5'){
+				administrateur2(carac);
+			}
+			else{ 
+				if(carac == '6') b=false;
+			}
+			
+			
+		}
+	}
 		
 		/*Administrateur Jean = new Administrateur();
 		try {
@@ -82,8 +118,8 @@ public class Menu {
 //		}
 		
 		
-	}
-	private void Professeur(){
+	
+	private void professeur(){
 		boolean b = true;
 		while(b)
 		{
@@ -101,7 +137,7 @@ public class Menu {
 		}
 		}
 	}
-	private void Etudiant(){
+	private void etudiant(){
 		boolean b = true;
 		while(b)
 		{
