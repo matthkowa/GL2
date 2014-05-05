@@ -1,6 +1,9 @@
 package main;
 
+import java.io.IOException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
+import initialNode.*;
 
 public class Menu {
 	
@@ -25,23 +28,60 @@ public class Menu {
 	}
 	}
 	private void Administrateur(){
+		Administrateur a = new Administrateur();
 		boolean b = true;
-		while(b)
-		{
+		while(b){
 			System.out.println("_______MENU 1______\n 1- Ajouter un utilisateur/modules/promo \n 2- Modifier un utilisateur/modules/promo \n 3- Supprimer \n 4- Quitter \n \n Choix :");
 			Scanner sc = new Scanner(System.in);
 			String str = sc.nextLine();
 			char carac = str.charAt(0);
 			switch (carac){
-			case '1' : break;
+			case '1' : 
+				try {
+					a.addAdmin();
+				}
+				catch (NoSuchElementException e){
+					System.err.println("mauvaise entrée");
+				}
+				catch (IOException e){
+					System.err.println("mauvaise entrée");
+					}
+				System.out.println("Done!");
+				break;
 			case '2' : break;
-			case '3' : break;
+			case '3' :
+				try {
+					a.supAdmin();
+				}
+				catch (NoSuchElementException e){
+					System.err.println("mauvaise entrée");
+				}
+				System.out.println("Done!");
+				break;
 			case '4' : b=false; break;
-	
-			
 			default : break;
+			}
 		}
-	}
+		
+		/*Administrateur Jean = new Administrateur();
+		try {
+//			Jean.addAdmin();
+			System.out.println("----Relecture----");
+			AllAdmin admin = new AllAdmin();
+			admin = (AllAdmin) admin.relecture("Administrateur");
+			for (Administrateur A : admin.administrateurs){
+				System.out.println(A.getNom()+" / "+A.getPrenom());
+			}
+			Jean.supAdmin();
+		}
+		catch (NoSuchElementException e){
+			System.err.println("mauvaise entrée");
+		}*/
+//		catch (IOException e){
+//			System.err.println("mauvaise entrée");
+//		}
+		
+		
 	}
 	private void Professeur(){
 		boolean b = true;
