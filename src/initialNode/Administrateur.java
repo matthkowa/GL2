@@ -57,7 +57,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 			pseudoA = pseudoA.substring(0,9);
 		}
 		String mdp = "EISTI";
-		String s = "Administrateur";
+		String s = "Utilisateur/Administrateur/Administrateur";
 
 		AllAdmin newAdmin = new AllAdmin();
 		//newAdmin = (AllAdmin) newAdmin.relecture(s);
@@ -87,7 +87,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	
 
 	public void supAdmin() throws NoSuchElementException{
-		String s = "Administrateur";
+		String s = "Utilisateur/Administrateur/Administrateur";
 		AllAdmin newAdmin = new AllAdmin();
 		newAdmin = (AllAdmin) newAdmin.relecture(s);
 		Administrateur a = (Administrateur)choix(newAdmin.administrateurs);
@@ -101,10 +101,10 @@ public class Administrateur extends Utilisateur implements Serializable{
 	}
 	
 	public void modifAdmin() throws NoSuchElementException,IOException{
-		String s = "Administrateur";
+		String s = "Utilisateur/Administrateur/Administrateur";
 		AllAdmin newAdmin = new AllAdmin();
 		newAdmin = (AllAdmin) newAdmin.relecture(s);
-		Etudiant a = (Etudiant)choix();
+		Administrateur a = (Administrateur)choix(newAdmin.administrateurs);
 		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+a);
 		Scanner sc2 = new Scanner(System.in);
 		String rep = sc2.next();
@@ -156,18 +156,29 @@ public class Administrateur extends Utilisateur implements Serializable{
 	}
 	
 	public void modifEleve() throws NoSuchElementException,IOException{
+		String s = "";
 		Scanner sc2 = new Scanner(System.in);
-		System.out.println("A quelle promo appartient-il ?");
-		System.out.println("1 / ING1");
-		System.out.println("2 / ING2");
-		System.out.println("3 / ING3");
-//		newAdmin = (AllAdmin) newAdmin.relecture(s);
-//		Administrateur a = choixAdmin(newAdmin);
-		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+a);
+		int num = 0;
+		while(num<1 || num>3){
+			System.out.println("A quelle promo appartient-il ?");
+			System.out.println("1 / ING1");
+			System.out.println("2 / ING2");
+			System.out.println("3 / ING3");
+			num = sc2.nextInt();
+		}
+		switch(num){
+		case 1 : s +="Utilisateur/Etudiant/ING1";break;
+		case 2 : s +="Utilisateur/Etudiant/ING2";break;
+		case 3 : s +="Utilisateur/Etudiant/ING3";break;
+		}
+		Promotion promo = new Promotion();
+		promo = (Promotion) promo.relecture(s);
+		Etudiant etu = (Etudiant) choix(promo.getSetEtudiant());
+		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+etu);
 		String rep = sc2.next();
 		switch(rep){
 			case "oui" : 
-				newAdmin.administrateurs.remove(a);
+				promo.setEtudiant.remove(etu);
 				int rep2 = 0;
 				System.out.println("Que voulez-vous modifier ?");
 				System.out.println("1 / Nom");
@@ -179,10 +190,10 @@ public class Administrateur extends Utilisateur implements Serializable{
 				rep2 = sc2.nextInt();
 				switch(rep2){
 					case 1 : 
-						a.setNom(sc2.nextLine());
+						etu.setNom(sc2.nextLine());
 						break;
 					case 2 : 
-						a.setPrenom(sc2.nextLine());
+						etu.setPrenom(sc2.nextLine());
 						break;
 					case 3 : 
 						System.out.println(" jour : ");
@@ -192,21 +203,21 @@ public class Administrateur extends Utilisateur implements Serializable{
 						System.out.println("Année : ");
 						int annee = sc2.nextInt();
 						Date naissance = new Date(annee,moi-1,jour);
-						a.setDateNaissance(naissance);
+						etu.setDateNaissance(naissance);
 						break;
 					case 4 : 
-						a.setAdresse(sc2.nextLine());
+						etu.setAdresse(sc2.nextLine());
 						break;
 					case 5 : 
-						a.setTel(sc2.nextInt());
+						etu.setTel(sc2.nextInt());
 						break;
 					case 6 : 
-						a.setMotDePasse(sc2.nextLine());
+						etu.setMotDePasse(sc2.nextLine());
 						break;
 				}
-				newAdmin.administrateurs.add(a);
+				promo.setEtudiant.add(etu);
 				System.out.println("Well done");
-				newAdmin.sauvegarder(s);
+				promo.sauvegarder(s);
 				break;
 			default : System.out.println("tant pis");break;
 		}

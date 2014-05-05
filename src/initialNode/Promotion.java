@@ -8,7 +8,7 @@ import serializable.Serialiser;
 
 public class Promotion extends Serialiser implements Serializable{
 
-	private Set<Etudiant> setEtudiant;
+	protected Set<Etudiant> setEtudiant;
 	private String promo;
 	
 	public Promotion(Set<Etudiant> setEtudiant, String promo) {
