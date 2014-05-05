@@ -3,6 +3,8 @@ package initialNode;
 import java.io.Serializable;
 import java.util.Date;
 
+import serializable.Serialiser;
+
 public class Utilisateur implements Serializable{
 	private String nom;
 	private String prenom;
