@@ -3,8 +3,6 @@ package initialNode;
 import java.io.Serializable;
 import java.util.Date;
 
-import serializable.Serialiser;
-
 public class Utilisateur implements Serializable{
 	private String nom;
 	private String prenom;
@@ -71,6 +69,19 @@ public class Utilisateur implements Serializable{
 	}
 	public void setDateNaissance(Date dateNaissance) {
 		this.dateNaissance = dateNaissance;
+	}
+	
+	@Override
+	public String toString(){
+		String s="";
+		s+=this.getNom()+" / ";
+		s+=this.getPrenom()+" / ";
+		s+=this.getDateNaissance()+" / ";
+		s+=this.getAdresse()+" / ";
+		s+=this.getTel()+" / ";
+		s+=this.getPseudo()+" / ";
+		s+=this.getMotDePasse()+" \n ";
+		return s;
 	}
 
 

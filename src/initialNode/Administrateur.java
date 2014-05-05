@@ -146,19 +146,6 @@ public class Administrateur extends Utilisateur implements Serializable{
 				break;
 		}
 	}
-
-	@Override
-	public String toString(){
-		String s="";
-		s+=this.getNom()+" / ";
-		s+=this.getPrenom()+" / ";
-		s+=this.getDateNaissance()+" / ";
-		s+=this.getAdresse()+" / ";
-		s+=this.getTel()+" / ";
-		s+=this.getPseudo()+" / ";
-		s+=this.getMotDePasse()+" \n ";
-		return s;
-	}
  
 
 
