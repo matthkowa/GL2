@@ -9,23 +9,29 @@ public class Menu {
 	
 	private void authentification(){
 		/*A ecrire */
-		boolean b = true;
-		while(b)
-		{
-			System.out.println("_______MENU 1______\n 1- Administrateur \n 2- Professeur \n 3- Etudiant \n 4- Quitter \n \n Choix :");
-			Scanner sc = new Scanner(System.in);
-			String str = sc.nextLine();
-			char carac = str.charAt(0);
-			switch (carac){
-			case '1' : administrateur();break;
-			case '2' : professeur();break;
-			case '3' : etudiant();break;
-			case '4' : b=false; break;
-	
-			
-			default : break;
+		Authentification aut = new Authentification();
+		if (aut.getAutReussi()){
+			boolean b = true;
+			while(b)
+			{
+				System.out.println("_______MENU 1______\n 1- Administrateur \n 2- Professeur \n 3- Etudiant \n 4- Quitter \n \n Choix :");
+				Scanner sc = new Scanner(System.in);
+				String str = sc.nextLine();
+				char carac = str.charAt(0);
+				switch (carac){
+				case '1' : administrateur();break;
+				case '2' : professeur();break;
+				case '3' : etudiant();break;
+				case '4' : b=false; break;
+		
+				
+				default : break;
+			}
 		}
-	}
+		}else{
+			System.out.println("Retour au menu");
+		}
+		
 	}
 	
 	private void administrateur2(char choix){
@@ -106,9 +112,7 @@ public class Menu {
 			AllAdmin admin = new AllAdmin();
 			admin = (AllAdmin) admin.relecture("Administrateur");
 			for (Administrateur A : admin.administrateurs){
-				System.out.println(A.getNom()+" / "+A.getPrenom());
-			}
-			Jean.supAdmin();
+				System.out.println(A.getPseudo()+" / "+A.getMin();
 		}
 		catch (NoSuchElementException e){
 			System.err.println("mauvaise entrée");
