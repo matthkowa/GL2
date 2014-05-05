@@ -28,8 +28,9 @@ public class Etudiant extends Utilisateur{
 	public void consulterResultat(Etudiant etu, Session sess){
 		Date currentDate = new Date();
 		if (currentDate.compareTo(sess.getDateFin())==1){
-			Resulat res = new Resultat();
+			Resultat res = new Resultat();
 			res = (Resultat) res.relecture("QCM/" + sess.getIdSession() + "/" + etu.idEtudiant);
+			
 		}
 		else {
 			System.out.println("Vous n'êtes pas autorisé à consulter les résultats. Veuillez réessayer une fois la session terminée.");

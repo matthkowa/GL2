@@ -1,9 +1,12 @@
 package QCM;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Resultat {
+import serializable.Serialiser;
+
+public class Resultat extends Serialiser implements Serializable{
 
 	private Set<Reponse> tableauDeReponse;
 
@@ -13,6 +16,11 @@ public class Resultat {
 		this.tableauDeReponse = tableauDeReponse;
 	}
 
+	public Resultat() {
+		super();
+		this.tableauDeReponse = new HashSet<Reponse>();
+	}
+	
 	public Set<Reponse> getTableauDeReponse() {
 		return tableauDeReponse;
 	}
