@@ -16,3 +16,9 @@ En cas d'erreur "non fast-forward" ou ajouter quelque chose pour la première foi
 	- Merge Tool
 	- Sur les fichiers en conflit : Add to Index
 	- Commit & Push
+	
+Pour ajouter une fichier :
+	
+	-Add to intex
+	-Commit & Push
+	
