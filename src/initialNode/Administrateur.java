@@ -64,11 +64,8 @@ public class Administrateur extends Utilisateur implements Serializable{
 		newAdmin.sauvegarder(s);
 	}
 	
-
-	public void supAdmin() throws NoSuchElementException{
-		String s = "Administrateur";
-		AllAdmin newAdmin = new AllAdmin();
-		newAdmin = (AllAdmin) newAdmin.relecture(s);
+	
+	public Administrateur choixAdmin(AllAdmin newAdmin){
 		int i=1;
 		List<Administrateur> listeAdmin = new ArrayList<Administrateur>();
 		for (Administrateur A : newAdmin.administrateurs){
@@ -79,16 +76,139 @@ public class Administrateur extends Utilisateur implements Serializable{
 			i++;			
 		}
 		Scanner sc2 = new Scanner(System.in);
-		System.out.println("Entrer le numéro de l'Administrateur a supprimer : ");
-		int num = sc2.nextInt();
-		System.out.println("choisi : "+listeAdmin.get(num-1));
-		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+listeAdmin.get(num-1));
+		int num = 0;
+		while(num<1 || num>listeAdmin.size()){
+			System.out.println("Entrer le numéro de l'Administrateur a supprimer : ");
+			num = sc2.nextInt();
+		}
+		return listeAdmin.get(num-1);
+	}
+	
+
+	public void supAdmin() throws NoSuchElementException{
+		String s = "Administrateur";
+		AllAdmin newAdmin = new AllAdmin();
+		newAdmin = (AllAdmin) newAdmin.relecture(s);
+		Administrateur a = choixAdmin(newAdmin);
+		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+a);
+		Scanner sc2 = new Scanner(System.in);
 		String rep = sc2.next();
 		switch(rep){
-			case "oui" : newAdmin.administrateurs.remove(listeAdmin.get(num-1));System.out.println("Well done");newAdmin.sauvegarder(s);break;
+			case "oui" : newAdmin.administrateurs.remove(a);System.out.println("Well done");newAdmin.sauvegarder(s);break;
 			default : System.out.println("tant pis");break;
 		}
 	}
+	
+	public void modifAdmin() throws NoSuchElementException,IOException{
+		String s = "Administrateur";
+		AllAdmin newAdmin = new AllAdmin();
+		newAdmin = (AllAdmin) newAdmin.relecture(s);
+		Administrateur a = choixAdmin(newAdmin);
+		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+a);
+		Scanner sc2 = new Scanner(System.in);
+		String rep = sc2.next();
+		switch(rep){
+			case "oui" : 
+				newAdmin.administrateurs.remove(a);
+				int rep2 = 0;
+				System.out.println("Que voulez-vous modifier ?");
+				System.out.println("1 / Nom");
+				System.out.println("2 / Prenom");
+				System.out.println("3 / Date de naissance");
+				System.out.println("4 / Adresse");
+				System.out.println("5 / Telephone");
+				System.out.println("6 / Mot de Passe");
+				rep2 = sc2.nextInt();
+				switch(rep2){
+					case 1 : 
+						a.setNom(sc2.nextLine());
+						break;
+					case 2 : 
+						a.setPrenom(sc2.nextLine());
+						break;
+					case 3 : 
+						System.out.println(" jour : ");
+						int jour = sc2.nextInt();
+						System.out.println("moi : ");
+						int moi = sc2.nextInt();
+						System.out.println("Année : ");
+						int annee = sc2.nextInt();
+						Date naissance = new Date(annee,moi-1,jour);
+						a.setDateNaissance(naissance);
+						break;
+					case 4 : 
+						a.setAdresse(sc2.nextLine());
+						break;
+					case 5 : 
+						a.setTel(sc2.nextInt());
+						break;
+					case 6 : 
+						a.setMotDePasse(sc2.nextLine());
+						break;
+				}
+				newAdmin.administrateurs.add(a);
+				System.out.println("Well done");
+				newAdmin.sauvegarder(s);
+				break;
+			default : System.out.println("tant pis");break;
+		}
+	}
+	
+	public void modifEleve() throws NoSuchElementException,IOException{
+		String s = "Administrateur";
+		AllAdmin newAdmin = new AllAdmin();
+		newAdmin = (AllAdmin) newAdmin.relecture(s);
+		Administrateur a = choixAdmin(newAdmin);
+		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+a);
+		Scanner sc2 = new Scanner(System.in);
+		String rep = sc2.next();
+		switch(rep){
+			case "oui" : 
+				newAdmin.administrateurs.remove(a);
+				int rep2 = 0;
+				System.out.println("Que voulez-vous modifier ?");
+				System.out.println("1 / Nom");
+				System.out.println("2 / Prenom");
+				System.out.println("3 / Date de naissance");
+				System.out.println("4 / Adresse");
+				System.out.println("5 / Telephone");
+				System.out.println("6 / Mot de Passe");
+				rep2 = sc2.nextInt();
+				switch(rep2){
+					case 1 : 
+						a.setNom(sc2.nextLine());
+						break;
+					case 2 : 
+						a.setPrenom(sc2.nextLine());
+						break;
+					case 3 : 
+						System.out.println(" jour : ");
+						int jour = sc2.nextInt();
+						System.out.println("mois : ");
+						int moi = sc2.nextInt();
+						System.out.println("Année : ");
+						int annee = sc2.nextInt();
+						Date naissance = new Date(annee,moi-1,jour);
+						a.setDateNaissance(naissance);
+						break;
+					case 4 : 
+						a.setAdresse(sc2.nextLine());
+						break;
+					case 5 : 
+						a.setTel(sc2.nextInt());
+						break;
+					case 6 : 
+						a.setMotDePasse(sc2.nextLine());
+						break;
+				}
+				newAdmin.administrateurs.add(a);
+				System.out.println("Well done");
+				newAdmin.sauvegarder(s);
+				break;
+			default : System.out.println("tant pis");break;
+		}
+	}
+	
 	
 	public void addEleve() throws IOException{
 		Scanner sc = new Scanner(System.in);
@@ -125,7 +245,6 @@ public class Administrateur extends Utilisateur implements Serializable{
 		int promo = 0;
 		while (promo<1 || promo>3){
 			promo = sc.nextInt();
-			
 		}
 		Promotion promoInit = new Promotion();
 		switch(promo){
