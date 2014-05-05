@@ -1,19 +1,28 @@
 package initialNode;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-public class Promotion {
+import serializable.Serialiser;
+
+public class Promotion extends Serialiser implements Serializable{
 
 	private Set<Etudiant> setEtudiant;
 	private String promo;
 	
 	public Promotion(Set<Etudiant> setEtudiant, String promo) {
 		super();
+		this.setEtudiant = new HashSet<Etudiant>();
 		this.setEtudiant = setEtudiant;
 		this.promo = promo;
 	}
 
+	public Promotion() {
+		super();
+		this.setEtudiant = new HashSet<Etudiant>();
+	}
+	
 	public Set<Etudiant> getSetEtudiant() {
 		return setEtudiant;
 	}
