@@ -13,7 +13,9 @@ public class Main {
 	
 	
 	@SuppressWarnings("deprecation")
-	public static void main(String[] args) throws NoSuchAlgorithmException{
+	public static void main(String[] args) throws NoSuchAlgorithmException, IOException{
+		Administrateur a = new Administrateur();
+		a.addAdmin();
 		Menu m=new Menu();
 	}
 }
