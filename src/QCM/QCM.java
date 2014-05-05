@@ -1,20 +1,28 @@
 package QCM;
 
+import initialNode.*;
+import java.util.*;
+
 public class QCM {
 	
 	private int id;
 	private String libelle;
 	private Boolean estPrive;
+	private Professeur createur;
+	private Set<Question> questions;
 	
 	/**
 	 * @param id
 	 * @param libelle
 	 * @param estPrive
 	 */
-	public QCM(int id, String libelle, Boolean estPrive) {
+	public QCM(int id, String libelle, Boolean estPrive, Professeur createur, Set<Question> questions) {
 		this.id = id;
 		this.libelle = libelle;
 		this.estPrive = estPrive;
+		this.createur = createur;
+		this.questions = new HashSet<Question>();
+		this.questions = questions;		
 	}
 
 	/**
@@ -45,7 +53,13 @@ public class QCM {
 		return estPrive;
 	}
 	
+	public Professeur getCreateur() {
+		return createur;
+	}
 	
+	public Set<Question> getQuestions() {
+		return questions;
+	}
 	
 	
 

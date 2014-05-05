@@ -5,18 +5,16 @@ public class Reponse {
 	private int id;
 	private String libelle;
 	private Boolean estVraie;
-	private Question intitule;
 	
 	/**
 	 * @param id
 	 * @param libelle
 	 * @param estVraie
 	 */
-	public Reponse(int id, String libelle, Boolean estVraie, Question intitule) {
+	public Reponse(int id, String libelle, Boolean estVraie) {
 		this.id = id;
 		this.libelle = libelle;
 		this.estVraie = estVraie;
-		this.intitule = intitule;
 	}
 
 	/**
@@ -46,10 +44,5 @@ public class Reponse {
 	public Boolean getEstVraie() {
 		return estVraie;
 	}
-	
-	public Question getIntitule() {
-		return intitule;
-	}
-	
 
 }
