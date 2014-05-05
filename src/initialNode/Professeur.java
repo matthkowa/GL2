@@ -1,20 +1,13 @@
 package initialNode;
 
-import java.util.Date;
+import java.util.*;
 
 public class Professeur extends Utilisateur {
 	private int idProf;
+	private Set<Module> modules;
 	
 	public Professeur() {
-		super();
-	}
-
-	public int getIdProf() {
-		return idProf;
-	}
-
-	public void setIdProf(int idProf) {
-		this.idProf = idProf;
+		super();	
 	}
 	
 	/**
@@ -27,10 +20,19 @@ public class Professeur extends Utilisateur {
 	 * @param motDePasse
 	 */
 	public Professeur(String nom, String prenom, Date dateNaissance,
-			String adresse, int tel, String pseudo, String motDePasse,int id) {
+			String adresse, int tel, String pseudo, String motDePasse,int id, Set<Module> modules) {
 		super(nom, prenom, dateNaissance, adresse, tel, pseudo, motDePasse);
 		this.idProf = id;
+		this.modules = new HashSet<Module>();
+		this.modules = modules;
 	}
 
+	public int getIdProf() {
+		return idProf;
+	}
 
+	public void setIdProf(int idProf) {
+		this.idProf = idProf;
+	}
+	
 }
