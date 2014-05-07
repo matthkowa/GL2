@@ -223,6 +223,37 @@ public class Administrateur extends Utilisateur implements Serializable{
 		}
 	}
 	
+	public void supEleve() throws NoSuchElementException,IOException{
+		String s = "";
+		Scanner sc2 = new Scanner(System.in);
+		int num = 0;
+		while(num<1 || num>3){
+			System.out.println("A quelle promo appartient-il ?");
+			System.out.println("1 / ING1");
+			System.out.println("2 / ING2");
+			System.out.println("3 / ING3");
+			num = sc2.nextInt();
+		}
+		switch(num){
+		case 1 : s +="Utilisateur/Etudiant/ING1";break;
+		case 2 : s +="Utilisateur/Etudiant/ING2";break;
+		case 3 : s +="Utilisateur/Etudiant/ING3";break;
+		}
+		Promotion promo = new Promotion();
+		promo = (Promotion) promo.relecture(s);
+		Etudiant etu = (Etudiant) choix(promo.getSetEtudiant());
+		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+etu);
+		String rep = sc2.next();
+		switch(rep){
+			case "oui" : 
+				promo.setEtudiant.remove(etu);
+				break;
+			default : 
+				System.out.println("tant pis");
+				break;
+		}
+	}
+	
 	
 	public void addEleve() throws NoSuchElementException,IOException{
 		Scanner sc = new Scanner(System.in);
