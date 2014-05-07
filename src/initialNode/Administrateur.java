@@ -261,11 +261,11 @@ public class Administrateur extends Utilisateur implements Serializable{
 			promo = sc.nextInt();
 		}
 		Promotion promoInit = new Promotion();
-		String path = "";
+		String path = "Utilisateur/Etudiant/";
 		switch(promo){
-			case 1 : path+="Utilisateur/Etudiant/ING1";break;
-			case 2 : path+="Utilisateur/Etudiant/ING2";break;
-			case 3 : path+="Utilisateur/Etudiant/ING3";break;
+			case 1 : path+="ING1";break;
+			case 2 : path+="ING2";break;
+			case 3 : path+="ING3";break;
 		}
 		promoInit = (Promotion) promoInit.relecture(s);
 		promoInit.getSetEtudiant().add(new Etudiant(nom, prenom, naissance, adresse, tel, pseudoA, mdp, promoInit.getSetEtudiant().size()));
