@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class Authentification {
 	private Boolean autReussi;
+	
 	public Authentification(){
 		System.out.println("Entrez votre pseudo :");
 		Scanner sc = new Scanner(System.in);
