@@ -11,9 +11,20 @@ import java.util.Scanner;
 
 
 public class Administrateur extends Utilisateur implements Serializable{
+	/* Attributs*/
 	private static final long serialVersionUID = 1160533610734006110L;
 	private int id;
 
+	/**
+	 * @param nom chaine de caractères
+	 * @param prenom chaine de caractères
+	 * @param dateNaissance date de naissance sous forme d'objet de type date
+	 * @param adresse chaine de caractères
+	 * @param tel numéro de teléphone sous forme d'entier
+	 * @param pseudo chaine de caractères
+	 * @param motDePasse mot de passe sous forme de chaine de caractères
+	 * @param id identifiant spécifique de l'administrateur (entier)
+	 */
 	public Administrateur(String nom, String prenom, Date dateNaissance, String adresse, int tel, String pseudo, String motDePasse,int id) {
 		super(nom, prenom, dateNaissance, adresse, tel, pseudo, motDePasse);
 		this.id=id;
@@ -22,15 +33,27 @@ public class Administrateur extends Utilisateur implements Serializable{
 	public Administrateur() {
 		super();
 	}
+	
+	
 
+	 /**
+	  * @return id entier spécifique à chaque administrateur
+	  */
 	public int getId() {
 		return id;
 	}
-
+	
+	/**
+	  * @param id
+	  */
 	public void setId(int id) {
 		this.id = id;
 	}
 	
+	/**
+	 * Demande d'entrer des données au clavier et créé un objet Administrateur et l'enregistre dans un fichier
+	 * @throws IOExectpion
+	 */
 	public void addAdmin() throws IOException{
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Entrer le nom du nouvel Administrateur : ");
@@ -65,8 +88,13 @@ public class Administrateur extends Utilisateur implements Serializable{
 		newAdmin.sauvegarder(s);
 	}
 	
-	
-	public <T> Object choix(Set<T> set){
+	/**
+	 * choisi un objet parmi un set d'objets du même type.
+	 * @param  set un set d'objet de type T
+	 * @return Object un objet de type T
+	 * @throws IOException
+	 */
+	public <T> Object choix(Set<T> set) throws IOException{
 		int i=1;
 		List<Object> liste = new ArrayList<Object>();
 		for (Object A : set){
@@ -85,8 +113,12 @@ public class Administrateur extends Utilisateur implements Serializable{
 		return liste.get(num-1);
 	}
 	
-
-	public void supAdmin() throws NoSuchElementException{
+	/**
+	 * Supprime un administrateur parmi un set d'administrateurs.
+	 * @throws NoSuchElementException
+	 * @throws IOException
+	 */
+	public void supAdmin() throws NoSuchElementException,IOException{
 		String s = "Utilisateur/Administrateur/Administrateur";
 		AllAdmin newAdmin = new AllAdmin();
 		newAdmin = (AllAdmin) newAdmin.relecture(s);
@@ -100,6 +132,11 @@ public class Administrateur extends Utilisateur implements Serializable{
 		}
 	}
 	
+	/**
+	 * Modifie un administrateur parmi un set d'administrateurs.
+	 * @throws NoSuchElementException
+	 * @throws IOException
+	 */
 	public void modifAdmin() throws NoSuchElementException,IOException{
 		String s = "Utilisateur/Administrateur/Administrateur";
 		AllAdmin newAdmin = new AllAdmin();
@@ -122,12 +159,15 @@ public class Administrateur extends Utilisateur implements Serializable{
 				rep2 = sc2.nextInt();
 				switch(rep2){
 					case 1 : 
+						System.out.println("Nom : ");
 						a.setNom(sc2.nextLine());
 						break;
 					case 2 : 
+						System.out.println("Prenom : ");
 						a.setPrenom(sc2.nextLine());
 						break;
 					case 3 : 
+						System.out.println("Date de naissance : ");
 						System.out.println(" jour : ");
 						int jour = sc2.nextInt();
 						System.out.println("moi : ");
@@ -138,12 +178,15 @@ public class Administrateur extends Utilisateur implements Serializable{
 						a.setDateNaissance(naissance);
 						break;
 					case 4 : 
+						System.out.println("Adresse : ");
 						a.setAdresse(sc2.nextLine());
 						break;
 					case 5 : 
+						System.out.println("Telephone : ");
 						a.setTel(sc2.nextInt());
 						break;
 					case 6 : 
+						System.out.println("Mot de Passe : ");
 						a.setMotDePasse(sc2.nextLine());
 						break;
 				}
@@ -155,6 +198,100 @@ public class Administrateur extends Utilisateur implements Serializable{
 		}
 	}
 	
+	/**
+	 * Demande d'entrer des données au clavier et créé un objet étudiant et l'enregistre dans un fichier
+	 * @throws IOException
+	 */
+	public void addEleve() throws NoSuchElementException,IOException{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Entrer le nom du nouvel élève : ");
+		String nom = sc.nextLine();
+		System.out.println("Entrer le prenom du nouvel élève : ");
+		String prenom = sc.nextLine();
+		System.out.println("Entrer la date de naissance du nouvel élève (en chiffre) : ");
+		System.out.println(" jour : ");
+		int jour = sc.nextInt();
+		System.out.println("moi : ");
+		int moi = sc.nextInt();
+		System.out.println("Année : ");
+		int annee = sc.nextInt();
+		System.out.println("Entrer l'adresse du nouvel élève : ");
+		String adresse = sc.next();
+		System.out.println("Entrer le tel du nouvel élève : ");
+		String telS = sc.next();
+		int tel = Integer.parseInt(telS);
+
+		@SuppressWarnings("deprecation")
+		Date naissance = new Date(annee,moi-1,jour);
+		String pseudoA=(nom+prenom).toLowerCase();
+		if (pseudoA.length()>10){
+			pseudoA = pseudoA.substring(0,9);
+		}
+		String mdp = "EISTI";
+		String s = "Administrateur";
+
+		System.out.println("Entrer la promo du nouvel élève : ");
+		System.out.println("1 / ING1");
+		System.out.println("2 / ING2");
+		System.out.println("3 / ING3");
+		int promo = 0;
+		while (promo<1 || promo>3){
+			promo = sc.nextInt();
+		}
+		Promotion promoInit = new Promotion();
+		String path = "Utilisateur/Etudiant/";
+		switch(promo){
+			case 1 : path+="ING1";break;
+			case 2 : path+="ING2";break;
+			case 3 : path+="ING3";break;
+		}
+		promoInit = (Promotion) promoInit.relecture(s);
+		promoInit.getSetEtudiant().add(new Etudiant(nom, prenom, naissance, adresse, tel, pseudoA, mdp, promoInit.getSetEtudiant().size()));
+		promoInit.sauvegarder(s);
+	}
+	
+	/**
+	 * Supprime un étudiant parmi un set d'étudiants.
+	 * @throws NoSuchElementException
+	 * @throws IOException
+	 */
+	public void supEleve() throws NoSuchElementException,IOException{
+		String s = "";
+		Scanner sc2 = new Scanner(System.in);
+		int num = 0;
+		while(num<1 || num>3){
+			System.out.println("A quelle promo appartient-il ?");
+			System.out.println("1 / ING1");
+			System.out.println("2 / ING2");
+			System.out.println("3 / ING3");
+			num = sc2.nextInt();
+		}
+		switch(num){
+		case 1 : s +="Utilisateur/Etudiant/ING1";break;
+		case 2 : s +="Utilisateur/Etudiant/ING2";break;
+		case 3 : s +="Utilisateur/Etudiant/ING3";break;
+		}
+		Promotion promo = new Promotion();
+		promo = (Promotion) promo.relecture(s);
+		Etudiant etu = (Etudiant) choix(promo.getSetEtudiant());
+		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+etu);
+		String rep = sc2.next();
+		switch(rep){
+			case "oui" : 
+				promo.setEtudiant.remove(etu);
+				break;
+			default : 
+				System.out.println("tant pis");
+				break;
+		}
+	}
+ 
+	
+	/**
+	 * Modifie un étudiant parmi un set d'étudiants.
+	 * @throws NoSuchElementException
+	 * @throws IOException
+	 */
 	public void modifEleve() throws NoSuchElementException,IOException{
 		String s = "";
 		Scanner sc2 = new Scanner(System.in);
@@ -223,89 +360,4 @@ public class Administrateur extends Utilisateur implements Serializable{
 		}
 	}
 	
-	public void supEleve() throws NoSuchElementException,IOException{
-		String s = "";
-		Scanner sc2 = new Scanner(System.in);
-		int num = 0;
-		while(num<1 || num>3){
-			System.out.println("A quelle promo appartient-il ?");
-			System.out.println("1 / ING1");
-			System.out.println("2 / ING2");
-			System.out.println("3 / ING3");
-			num = sc2.nextInt();
-		}
-		switch(num){
-		case 1 : s +="Utilisateur/Etudiant/ING1";break;
-		case 2 : s +="Utilisateur/Etudiant/ING2";break;
-		case 3 : s +="Utilisateur/Etudiant/ING3";break;
-		}
-		Promotion promo = new Promotion();
-		promo = (Promotion) promo.relecture(s);
-		Etudiant etu = (Etudiant) choix(promo.getSetEtudiant());
-		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+etu);
-		String rep = sc2.next();
-		switch(rep){
-			case "oui" : 
-				promo.setEtudiant.remove(etu);
-				break;
-			default : 
-				System.out.println("tant pis");
-				break;
-		}
-	}
-	
-	
-	public void addEleve() throws NoSuchElementException,IOException{
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Entrer le nom du nouvel élève : ");
-		String nom = sc.nextLine();
-		System.out.println("Entrer le prenom du nouvel élève : ");
-		String prenom = sc.nextLine();
-		System.out.println("Entrer la date de naissance du nouvel élève (en chiffre) : ");
-		System.out.println(" jour : ");
-		int jour = sc.nextInt();
-		System.out.println("moi : ");
-		int moi = sc.nextInt();
-		System.out.println("Année : ");
-		int annee = sc.nextInt();
-		System.out.println("Entrer l'adresse du nouvel élève : ");
-		String adresse = sc.next();
-		System.out.println("Entrer le tel du nouvel élève : ");
-		String telS = sc.next();
-		int tel = Integer.parseInt(telS);
-
-		@SuppressWarnings("deprecation")
-		Date naissance = new Date(annee,moi-1,jour);
-		String pseudoA=(nom+prenom).toLowerCase();
-		if (pseudoA.length()>10){
-			pseudoA = pseudoA.substring(0,9);
-		}
-		String mdp = "EISTI";
-		String s = "Administrateur";
-
-		System.out.println("Entrer la promo du nouvel élève : ");
-		System.out.println("1 / ING1");
-		System.out.println("2 / ING2");
-		System.out.println("3 / ING3");
-		int promo = 0;
-		while (promo<1 || promo>3){
-			promo = sc.nextInt();
-		}
-		Promotion promoInit = new Promotion();
-		String path = "Utilisateur/Etudiant/";
-		switch(promo){
-			case 1 : path+="ING1";break;
-			case 2 : path+="ING2";break;
-			case 3 : path+="ING3";break;
-		}
-		promoInit = (Promotion) promoInit.relecture(s);
-		promoInit.getSetEtudiant().add(new Etudiant(nom, prenom, naissance, adresse, tel, pseudoA, mdp, promoInit.getSetEtudiant().size()));
-		promoInit.sauvegarder(s);
-	}
- 
-
-
-
-	
-
 }
