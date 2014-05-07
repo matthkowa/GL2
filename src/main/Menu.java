@@ -9,7 +9,7 @@ public class Menu {
 	
 	private void authentification(){
 		/*A ecrire */
-		Authentification aut = new Authentification();
+		Authentification aut = new Authentification();/*Creer un constructeur dans authentification */
 		if (aut.getAutReussi()){
 			boolean b = true;
 			while(b)
