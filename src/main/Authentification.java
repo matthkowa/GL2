@@ -11,55 +11,59 @@ public class Authentification {
 	private Boolean autReussi;
 	
 	public Authentification(){
+	}
+	
+	public Boolean getAutReussi() {
+		return autReussi;
+	}
+	/*public Professeur authentificationProf(){
 		System.out.println("Entrez votre pseudo :");
 		Scanner sc = new Scanner(System.in);
 		String pseudo = sc.next();
 		System.out.println("Entrez votre mot de passe :");
 		String mdp = sc.next();
-		ArrayList<String[]> liste = recherchePseudo();
-		this.autReussi = verifier(liste,pseudo,mdp);
-		}
+		AllProf liste = recherchePseudoProf();
+		return verifierAdmin(liste,pseudo,mdp);
+	}*/
 	
-	public Boolean getAutReussi() {
-		return autReussi;
+	public Administrateur authentificationAdmin(){
+		System.out.println("Entrez votre pseudo :");
+		Scanner sc = new Scanner(System.in);
+		String pseudo = sc.next();
+		System.out.println("Entrez votre mot de passe :");
+		String mdp = sc.next();
+		AllAdmin liste = recherchePseudoAdmin();
+		return verifierAdmin(liste,pseudo,mdp);
 	}
-
-	private ArrayList<String[]> recherchePseudo(){
-		
-		ArrayList<String[]> liste = new ArrayList<String[]>();
-		String path = "Administrateur";
+	
+	private AllAdmin recherchePseudoAdmin(){
+		String path = "Utilisateur/Administrateur/Administrateur";
 		AllAdmin newAdmin = new AllAdmin();
-		newAdmin = (AllAdmin) newAdmin.relecture(path);
-		String str[] = new String[2];
-		for(Administrateur a : newAdmin.getAdministrateurs()){
-			str[0]=a.getPseudo();
-			str[1]=a.getMotDePasse();
-			System.out.println(str[0]+" mdp :"+str[1]);
-			liste.add(str);
-		}
-		return liste;
+		return (AllAdmin) newAdmin.relecture(path);
 	}
 	
-	private Boolean verifier(ArrayList<String[]> liste,String pseudo,String mdp){
+	private Administrateur verifierAdmin(AllAdmin liste,String pseudo,String mdp){
 		int i =0;
-		Boolean b = true;
 		
-		while(i<liste.size() && b ){
-			if(liste.get(i)[0].compareTo(pseudo) == 0){
-				b=false;
+		Boolean b = true;
+		for(Administrateur a : liste.getAdministrateurs()){
+			if(a.getPseudo().compareTo(pseudo) == 0){
 				
-				if (liste.get(i)[1].compareTo(mdp)==0){
+				
+				if (a.getMotDePasse().compareTo(mdp)==0){
 					System.out.println("Authentification réalisé");
-					return true;
+					this.autReussi=true;
+					return a;
+					
 				}
 			}
 			i++;
 		}
 		if(b){
 			System.out.println("Echec Essayez Encore");
-			
+			this.autReussi=false;
 		}
-		return false;
+		return new Administrateur();
 		
 			
 		
