@@ -12,13 +12,15 @@ import javax.crypto.SecretKey;
 public class Serialiser implements Serializable{
 	private static final long serialVersionUID = 7112754214151288557L;
 
-
-	public Serialiser(){}//constructor
+	/**
+	 * Consructeur vide
+	 */
+	public Serialiser(){}
 	
-	/*public T lecture(String path){
-		return (this.getClass()) "String";
-	}*/
-	
+	/**
+	 * Crypte et Sauvegarde un Objet d'une classe fille de Serializer dans un fichier
+	 * @param s chemin vers le fichier de sauvegarde
+	 */
 	public void sauvegarder(String s){
 		try	{
 			Cipher cipher = Cipher.getInstance("DES");
@@ -47,7 +49,10 @@ public class Serialiser implements Serializable{
 			}
 	}
 	
-	
+	/**
+	 * Charge et décrypte un Objet d'une classe fille de Serializer dans un fichier
+	 * @param s chemin vers le fichier de chargement
+	 */
 	public Object relecture(String s) {
 		try	{
 

@@ -16,6 +16,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	private int id;
 
 	/**
+	 * Constructeur complet utilisant le super-constructeur de Utilisateur
 	 * @param nom chaine de caractères
 	 * @param prenom chaine de caractères
 	 * @param dateNaissance date de naissance sous forme d'objet de type date
@@ -30,6 +31,9 @@ public class Administrateur extends Utilisateur implements Serializable{
 		this.id=id;
 	}
 	
+	/**
+	 * Constructeur vide
+	 */
 	public Administrateur() {
 		super();
 	}
@@ -37,6 +41,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	
 
 	 /**
+	  * Getter pour id
 	  * @return id entier spécifique à chaque administrateur
 	  */
 	public int getId() {
@@ -44,7 +49,8 @@ public class Administrateur extends Utilisateur implements Serializable{
 	}
 	
 	/**
-	  * @param id
+	 * Setter pour id
+	  * @param id entier spécifique à chaque administrateur
 	  */
 	public void setId(int id) {
 		this.id = id;
@@ -82,10 +88,10 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String mdp = "EISTI";
 		String s = "Utilisateur/Administrateur/Administrateur";
 
-		AllAdmin newAdmin = new AllAdmin();
-		//newAdmin = (AllAdmin) newAdmin.relecture(s);
-		newAdmin.addAdmin(new Administrateur(nom, prenom, naissance, adresse, tel, pseudoA, mdp, newAdmin.administrateurs.size()));
-		newAdmin.sauvegarder(s);
+		All<Administrateur> newSet = new All<Administrateur>();
+		//newSet = (All) newSet.relecture(s);
+		newSet.add(new Administrateur(nom, prenom, naissance, adresse, tel, pseudoA, mdp, newSet.set.size()));
+		newSet.sauvegarder(s);
 	}
 	
 	/**
@@ -120,14 +126,14 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 */
 	public void supAdmin() throws NoSuchElementException,IOException{
 		String s = "Utilisateur/Administrateur/Administrateur";
-		AllAdmin newAdmin = new AllAdmin();
-		newAdmin = (AllAdmin) newAdmin.relecture(s);
-		Administrateur a = (Administrateur)choix(newAdmin.administrateurs);
+		All<Administrateur> newSet = new All<Administrateur>();
+		newSet = (All<Administrateur>) newSet.relecture(s);
+		Administrateur a = (Administrateur)choix(newSet.set);
 		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+a);
 		Scanner sc2 = new Scanner(System.in);
 		String rep = sc2.next();
 		switch(rep){
-			case "oui" : newAdmin.administrateurs.remove(a);System.out.println("Well done");newAdmin.sauvegarder(s);break;
+			case "oui" : newSet.set.remove(a);System.out.println("Well done");newSet.sauvegarder(s);break;
 			default : System.out.println("tant pis");break;
 		}
 	}
@@ -139,15 +145,15 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 */
 	public void modifAdmin() throws NoSuchElementException,IOException{
 		String s = "Utilisateur/Administrateur/Administrateur";
-		AllAdmin newAdmin = new AllAdmin();
-		newAdmin = (AllAdmin) newAdmin.relecture(s);
-		Administrateur a = (Administrateur)choix(newAdmin.administrateurs);
+		All<Administrateur> newSet = new All<Administrateur>();
+		newSet = (All<Administrateur>) newSet.relecture(s);
+		Administrateur a = (Administrateur)choix(newSet.set);
 		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+a);
 		Scanner sc2 = new Scanner(System.in);
 		String rep = sc2.next();
 		switch(rep){
 			case "oui" : 
-				newAdmin.administrateurs.remove(a);
+				newSet.set.remove(a);
 				int rep2 = 0;
 				System.out.println("Que voulez-vous modifier ?");
 				System.out.println("1 / Nom");
@@ -190,9 +196,133 @@ public class Administrateur extends Utilisateur implements Serializable{
 						a.setMotDePasse(sc2.nextLine());
 						break;
 				}
-				newAdmin.administrateurs.add(a);
+				newSet.set.add(a);
 				System.out.println("Well done");
-				newAdmin.sauvegarder(s);
+				newSet.sauvegarder(s);
+				break;
+			default : System.out.println("tant pis");break;
+		}
+	}
+	
+	
+	/**
+	 * Demande d'entrer des données au clavier et créé un objet Professeur et l'enregistre dans un fichier
+	 * @throws IOExectpion
+	 */
+	public void addProf() throws IOException{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Entrer le nom du nouvel Administrateur : ");
+		String nom = sc.nextLine();
+		System.out.println("Entrer le prenom du nouvel Administrateur : ");
+		String prenom = sc.nextLine();
+		System.out.println("Entrer la date de naissance du nouvel Administrateur (en chiffre) : ");
+		System.out.println(" jour : ");
+		int jour = sc.nextInt();
+		System.out.println("moi : ");
+		int moi = sc.nextInt();
+		System.out.println("Année : ");
+		int annee = sc.nextInt();
+		System.out.println("Entrer l'adresse du nouvel Administrateur : ");
+		String adresse = sc.next();
+		System.out.println("Entrer le tel du nouvel Administrateur : ");
+		String telS = sc.next();
+		int tel = Integer.parseInt(telS);
+
+		@SuppressWarnings("deprecation")
+		Date naissance = new Date(annee,moi-1,jour);
+		String pseudoA=(nom+prenom).toLowerCase();
+		if (pseudoA.length()>10){
+			pseudoA = pseudoA.substring(0,9);
+		}
+		String mdp = "EISTI";
+		String s = "Utilisateur/Professeur/Professeur";
+
+		All<Professeur> newSet = new All<Professeur>();
+		//newSet = (All<Professeur>) newSet.relecture(s);
+		newSet.add(new Professeur(nom, prenom, naissance, adresse, tel, pseudoA, mdp, newSet.set.size(), null));
+		newSet.sauvegarder(s);
+	}
+	
+	/**
+	 * Supprime un professeur parmi un set de professeurs.
+	 * @throws NoSuchElementException
+	 * @throws IOException
+	 */
+	public void supProf() throws NoSuchElementException,IOException{
+		String s = "Utilisateur/Professeur/Professeur";
+		All<Professeur> newSet = new All<Professeur>();
+		newSet = (All<Professeur>) newSet.relecture(s);
+		Professeur a = (Professeur)choix(newSet.set);
+		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+a);
+		Scanner sc2 = new Scanner(System.in);
+		String rep = sc2.next();
+		switch(rep){
+			case "oui" : newSet.set.remove(a);System.out.println("Well done");newSet.sauvegarder(s);break;
+			default : System.out.println("tant pis");break;
+		}
+	}
+	
+	/**
+	 * Modifie un professeur parmi un set de professeurs.
+	 * @throws NoSuchElementException
+	 * @throws IOException
+	 */
+	public void modifProf() throws NoSuchElementException,IOException{
+		String s = "Utilisateur/Professeur/Professeur";
+		All<Professeur> newSet = new All<Professeur>();
+		newSet = (All<Professeur>) newSet.relecture(s);
+		Professeur a = (Professeur)choix(newSet.set);
+		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+a);
+		Scanner sc2 = new Scanner(System.in);
+		String rep = sc2.next();
+		switch(rep){
+			case "oui" : 
+				newSet.set.remove(a);
+				int rep2 = 0;
+				System.out.println("Que voulez-vous modifier ?");
+				System.out.println("1 / Nom");
+				System.out.println("2 / Prenom");
+				System.out.println("3 / Date de naissance");
+				System.out.println("4 / Adresse");
+				System.out.println("5 / Telephone");
+				System.out.println("6 / Mot de Passe");
+				rep2 = sc2.nextInt();
+				switch(rep2){
+					case 1 : 
+						System.out.println("Nom : ");
+						a.setNom(sc2.nextLine());
+						break;
+					case 2 : 
+						System.out.println("Prenom : ");
+						a.setPrenom(sc2.nextLine());
+						break;
+					case 3 : 
+						System.out.println("Date de naissance : ");
+						System.out.println(" jour : ");
+						int jour = sc2.nextInt();
+						System.out.println("moi : ");
+						int moi = sc2.nextInt();
+						System.out.println("Année : ");
+						int annee = sc2.nextInt();
+						Date naissance = new Date(annee,moi-1,jour);
+						a.setDateNaissance(naissance);
+						break;
+					case 4 : 
+						System.out.println("Adresse : ");
+						a.setAdresse(sc2.nextLine());
+						break;
+					case 5 : 
+						System.out.println("Telephone : ");
+						a.setTel(sc2.nextInt());
+						break;
+					case 6 : 
+						System.out.println("Mot de Passe : ");
+						a.setMotDePasse(sc2.nextLine());
+						break;
+				}
+				newSet.set.add(a);
+				System.out.println("Well done");
+				newSet.sauvegarder(s);
 				break;
 			default : System.out.println("tant pis");break;
 		}
