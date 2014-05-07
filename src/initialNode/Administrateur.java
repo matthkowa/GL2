@@ -224,7 +224,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	}
 	
 	
-	public void addEleve() throws IOException{
+	public void addEleve() throws NoSuchElementException,IOException{
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Entrer le nom du nouvel élève : ");
 		String nom = sc.nextLine();
@@ -261,23 +261,15 @@ public class Administrateur extends Utilisateur implements Serializable{
 			promo = sc.nextInt();
 		}
 		Promotion promoInit = new Promotion();
+		String path = "";
 		switch(promo){
-			case 1 :
-				promoInit = (Promotion) promoInit.relecture("ING1");
-				promoInit.getSetEtudiant().add(new Etudiant(nom, prenom, naissance, adresse, tel, pseudoA, mdp, promoInit.getSetEtudiant().size()));
-				promoInit.sauvegarder("ING1");
-				break;
-			case 2 :
-				promoInit = (Promotion) promoInit.relecture("ING2");
-				promoInit.getSetEtudiant().add(new Etudiant(nom, prenom, naissance, adresse, tel, pseudoA, mdp, promoInit.getSetEtudiant().size()));
-				promoInit.sauvegarder("ING2");
-				break;
-			case 3 :
-				promoInit = (Promotion) promoInit.relecture("ING3");
-				promoInit.getSetEtudiant().add(new Etudiant(nom, prenom, naissance, adresse, tel, pseudoA, mdp, promoInit.getSetEtudiant().size()));
-				promoInit.sauvegarder("ING3");
-				break;
+			case 1 : path+="Utilisateur/Etudiant/ING1";break;
+			case 2 : path+="Utilisateur/Etudiant/ING2";break;
+			case 3 : path+="Utilisateur/Etudiant/ING3";break;
 		}
+		promoInit = (Promotion) promoInit.relecture(s);
+		promoInit.getSetEtudiant().add(new Etudiant(nom, prenom, naissance, adresse, tel, pseudoA, mdp, promoInit.getSetEtudiant().size()));
+		promoInit.sauvegarder(s);
 	}
  
 
