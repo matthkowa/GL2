@@ -10,7 +10,8 @@ public class Menu {
 	private void authentification(){
 		/*A ecrire */
 		Authentification aut = new Authentification();/*Creer un constructeur dans authentification */
-		if (aut.getAutReussi()){
+		
+		
 			boolean b = true;
 			while(b)
 			{
@@ -19,19 +20,28 @@ public class Menu {
 				String str = sc.nextLine();
 				char carac = str.charAt(0);
 				switch (carac){
-				case '1' : administrateur();break;
-				case '2' : professeur();break;
-				case '3' : etudiant();break;
+				case '1' :	
+					Administrateur a =aut.authentificationAdmin(); 
+					if (aut.getAutReussi()){
+						administrateur();
+					}else{
+						System.out.println("Retour");
+						
+					}
+					b=false;
+				break;
+				case '2' :
+					/*Professeur p = aut.authentificationProf(); if (aut.getAutReussi()){}else{
+			System.out.println("Retour");b=false;
+		}*/professeur();b=false;break;
+				case '3' :/* Etudiant e = aut.authentificationEtudiant(); if(aut.getAutReussi()){}else{	System.out.println("Retour ");b=false;}
+		}*/ etudiant();b=false;break;
 				case '4' : b=false; break;
 		
 				
 				default : break;
 			}
 		}
-		}else{
-			System.out.println("Retour au menu");
-		}
-		
 	}
 	
 	private void administrateur2(char choix){
