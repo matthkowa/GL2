@@ -29,5 +29,12 @@ public class Resultat extends Serialiser implements Serializable{
 		this.tableauDeReponse = tableauDeReponse;
 	}
 	
+	public String toString(){
+		String temp="";
+		for (Reponse R : tableauDeReponse){
+			temp = temp + R;
+		}
+		return temp;
+	}
 
 }

@@ -45,4 +45,7 @@ public class Reponse {
 		return estVraie;
 	}
 
+	public String toString(){
+		return id + " " + libelle + " " + estVraie;
+	}
 }
