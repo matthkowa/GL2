@@ -40,12 +40,10 @@ public class Professeur extends Utilisateur {
 		this.idProf = idProf;
 	}
 	
-	@SuppressWarnings({ "deprecation", "static-access" })
 	public Session CreerSession(){
 		Scanner sc = new Scanner(System.in);
 		int id=0;
 		int repetition=1;
-		Boolean temp;
 		Date dateDebut = DonneeUtil.DemandeDate("Veuillez entrer une date de début de session (MM/DD/YYYY)");
 		Date dateFin = DonneeUtil.DemandeDate("Veuillez entrer une date de début de session (MM/DD/YYYY)");
 		repetition = DonneeUtil.DemandeInt("Combien de fois autorisez vous les étudiants à répondre à ce QCM?");
