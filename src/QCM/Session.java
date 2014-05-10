@@ -49,5 +49,8 @@ public class Session {
 		this.repetition = repetition;
 	}
 	
+	public String toString(){
+		return this.idSession + " " + this.dateDebut + " " + this.dateFin + " " + this.repetition;
+	}
 	
 }

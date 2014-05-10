@@ -1,5 +1,6 @@
 package helpClass;
 
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -17,7 +18,7 @@ public class DonneeUtil {
 	//méthode à utiliser lors de l'utilisation d'un scanner pour récupérer un int
 	public static int DemandeInt(String s){
 		int res=1;
-		Boolean test=true;
+		Boolean test;
 		do{
 			test=true;
 			Scanner sc = new Scanner(System.in);
@@ -32,6 +33,24 @@ public class DonneeUtil {
 		}
 		while(!test);
 		return res;
+	}
+	
+	public static Date DemandeDate(String s){
+		Boolean temp;
+		String s2;
+		Date d = new Date();
+		do{
+			temp=true;
+			try{
+				s2 = DonneeUtil.DemandeString(s);
+				d = new Date(s2);
+			}
+			catch(IllegalArgumentException e){
+				System.out.println("Erreur, veuillez entrer la date correctement!");
+				temp=false;
+			}
+		}while(!temp);
+		return d;
 	}
 	
 }

@@ -40,19 +40,20 @@ public class Professeur extends Utilisateur {
 		this.idProf = idProf;
 	}
 	
+	@SuppressWarnings({ "deprecation", "static-access" })
 	public Session CreerSession(){
 		Scanner sc = new Scanner(System.in);
-		String debutSess="";
-		String finSess="";
-		int i=0;
+		int id=0;
 		int repetition=1;
-		debutSess = DonneeUtil.DemandeString("Veuillez entrer une date de début de session (MM/DD/YYYY)");
-		Date dateDebut = new Date(debutSess);
-		finSess = DonneeUtil.DemandeString("Veuillez entrer une date de fin de session (MM/DD/YYYY)");
-		Date dateFin = new Date(finSess);
+		Boolean temp;
+		Date dateDebut = DonneeUtil.DemandeDate("Veuillez entrer une date de début de session (MM/DD/YYYY)");
+		Date dateFin = DonneeUtil.DemandeDate("Veuillez entrer une date de début de session (MM/DD/YYYY)");
 		repetition = DonneeUtil.DemandeInt("Combien de fois autorisez vous les étudiants à répondre à ce QCM?");
-		Session sess = new Session(i, dateDebut, dateFin, repetition);
+		System.out.println(dateDebut);
+		Session sess = new Session(id, dateDebut, dateFin, repetition);
+		System.out.println(sess);
 		return sess;
+
 		/*File maSession = new File("QCM/");
 		String name = maSession.getName();
 		maSession.mkdir();*/
@@ -60,11 +61,4 @@ public class Professeur extends Utilisateur {
 		
 	}
 	
-	public String DonnéeUtil(String s){
-		String res="";
-		Scanner sc = new Scanner(System.in);
-		System.out.println(s);
-		res = sc.nextLine();
-		return res;
-	}
 }
