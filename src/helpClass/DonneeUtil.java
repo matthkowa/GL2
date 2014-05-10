@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class DonneeUtil {
 
+	//méthode à utiliser lors de l'utilisation d'un scanner pour récupérer un String
 	public static String DemandeString(String s){
 		String res="";
 		Scanner sc = new Scanner(System.in);
@@ -13,6 +14,7 @@ public class DonneeUtil {
 		return res;
 	}
 	
+	//méthode à utiliser lors de l'utilisation d'un scanner pour récupérer un int
 	public static int DemandeInt(String s){
 		int res=1;
 		Boolean test=true;
