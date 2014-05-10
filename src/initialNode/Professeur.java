@@ -1,5 +1,7 @@
 package initialNode;
 
+import helpClass.DonneeUtil;
+
 import java.io.File;
 import java.util.*;
 
@@ -44,14 +46,11 @@ public class Professeur extends Utilisateur {
 		String finSess="";
 		int i=0;
 		int repetition=1;
-		System.out.println("Veuillez entrer une date de début de session (MM/DD/YYYY)");
-		debutSess = sc.nextLine();
+		debutSess = DonneeUtil.DemandeString("Veuillez entrer une date de début de session (MM/DD/YYYY)");
 		Date dateDebut = new Date(debutSess);
-		System.out.println("Veuillez entrer une date de fin de session (MM/DD/YYYY)");
-		finSess = sc.nextLine();
+		finSess = DonneeUtil.DemandeString("Veuillez entrer une date de fin de session (MM/DD/YYYY)");
 		Date dateFin = new Date(finSess);
-		System.out.println("Combien de fois autorisez vous les étudiants à répondre à ce QCM?");
-		repetition = sc.nextInt();
+		repetition = DonneeUtil.DemandeInt("Combien de fois autorisez vous les étudiants à répondre à ce QCM?");
 		Session sess = new Session(i, dateDebut, dateFin, repetition);
 		return sess;
 		/*File maSession = new File("QCM/");
@@ -59,5 +58,13 @@ public class Professeur extends Utilisateur {
 		maSession.mkdir();*/
 		
 		
+	}
+	
+	public String DonnéeUtil(String s){
+		String res="";
+		Scanner sc = new Scanner(System.in);
+		System.out.println(s);
+		res = sc.nextLine();
+		return res;
 	}
 }
