@@ -1,8 +1,7 @@
 package helpClass;
 
-import java.util.Date;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
+
 
 public class DonneeUtil {
 
@@ -36,20 +35,20 @@ public class DonneeUtil {
 	}
 	
 	public static Date DemandeDate(String s){
-		Boolean temp;
+		Boolean test;
 		String s2;
 		Date d = new Date();
 		do{
-			temp=true;
+			test=true;
 			try{
 				s2 = DonneeUtil.DemandeString(s);
 				d = new Date(s2);
 			}
 			catch(IllegalArgumentException e){
 				System.out.println("Erreur, veuillez entrer la date correctement!");
-				temp=false;
+				test=false;
 			}
-		}while(!temp);
+		}while(!test);
 		return d;
 	}
 	
