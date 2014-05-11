@@ -100,7 +100,7 @@ public class Menu {
 		Administrateur a = new Administrateur();
 		boolean b = true;
 		while(b){
-			System.out.println("_______MENU 1______\n 1- Gérer les administrateur \n 2- Gérer les professeurs \n 3- Gérer les étudiants \n 4- Gérer les promotions \n 5- Gérer les modules \n 6- Quitter \n \n Choix :");
+			System.out.println("_______MENU 1______\n 1- Gérer les administrateur \n 2- Gérer les professeurs \n 3- Gérer les étudiants \n 4- Gérer les promotions \n 5- Gérer les modules \n 6- Deconnexion \n \n Choix :");
 			Scanner sc = new Scanner(System.in);
 			String str = sc.nextLine();
 			char carac = str.charAt(0);
@@ -137,7 +137,7 @@ public class Menu {
 		boolean b = true;
 		while(b)
 		{
-			System.out.println("_______MENU 1______\n 1- Gérer les QCM \n 2- Visualiser les résultats \n 3- Quitter \n \n Choix :");
+			System.out.println("_______MENU 1______\n 1- Gérer les QCM \n 2- Visualiser les résultats \n 3- Deconnexion \n \n Choix :");
 			Scanner sc = new Scanner(System.in);
 			String str = sc.nextLine();
 			char carac = str.charAt(0);
@@ -155,7 +155,7 @@ public class Menu {
 		boolean b = true;
 		while(b)
 		{
-			System.out.println("_______MENU 1______\n 1- Répondre aux QCM \n 2- Visualiser les résultats \n 3- Quitter \n \n Choix :");
+			System.out.println("_______MENU 1______\n 1- Répondre aux QCM \n 2- Visualiser les résultats \n 3- Deconnexion \n \n Choix :");
 			Scanner sc = new Scanner(System.in);
 			String str = sc.nextLine();
 			char carac = str.charAt(0);
