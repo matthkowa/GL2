@@ -45,7 +45,7 @@ public class View {
 		return res;
 	}
 	
-	public static Date demandeDate(String s) throws IOException{
+	public static Date demandeDate(String s){
 		Boolean test;
 		String s2,s3;
 		int day,month,year;
@@ -56,48 +56,47 @@ public class View {
 			day=0;
 			month=0;
 			year=0;
-			
 			try{
-				s2 = View.demandeString(s);
-				while (day==0 || month==0 || year==0){	
-					if (s2!="")
+				s2 = DonneeUtil.demandeString(s);
+				while ( day==0 || month==0 || year==0){	
+					try
 					{
 						if (s2.charAt(0)=='/')
 						{
 							s2 = s2.substring(1, s2.length());
-							while ((s2.charAt(0)!='/')){
-								s3 += s2.charAt(0);
-								s2 = s2.substring(1, s2.length());
-							}
 						}
-					}
-					System.out.println("coucou2");
+							while ((s2.charAt(0)!='/')){
+									s3 += s2.charAt(0);
+									s2 = s2.substring(1, s2.length());
+							}
+						}catch(StringIndexOutOfBoundsException e){}
 					if ((day!=0) && (month!=0) && (year==0))
 					{
 						year = Integer.parseInt(s3);
+						if (year>100){
+							year = year-1900;
+						}
+						
 						s3="";
 					}
 					else
 					{
-						System.out.println("coucou4");
 						if ((day!=0) && (month==0) && (year==0))
 						{
-							month = Integer.parseInt(s3);
+							month = Integer.parseInt(s3)-1;
 							s3="";
 						}
 						else
 						{
-							System.out.println("coucou6");
 							if ((day==0) && (month==0) && (year==0))
 							{
-								System.out.println(s3+s2);
 								day = Integer.parseInt(s3);
 								s3="";
 							}
 						}
 					}
 				}
-				d = new Date(day,month,year);
+				d = new Date(year,month,day);
 			}
 			catch(IllegalArgumentException e){
 				System.out.println("Erreur, veuillez entrer la date correctement!");
@@ -124,11 +123,9 @@ public class View {
 			System.out.println(" - "+i+" => "+A);
 			i++;			
 		}
-		Scanner sc2 = new Scanner(System.in);
 		int num = 0;
 		while(num<1 || num>liste.size()){
-			System.out.println("Entrer le numéro d'un des objet ci-dessus : ");
-			num = sc2.nextInt();
+			num = DonneeUtil.demandeInt("Entrer le numéro d'un des objet ci-dessus : ");
 		}
 		return liste.get(num-1);
 	}
