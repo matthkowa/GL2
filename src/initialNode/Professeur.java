@@ -1,6 +1,7 @@
 package initialNode;
 
 import helpClass.DonneeUtil;
+import view.menu.*;
 
 import java.io.File;
 import java.util.*;
@@ -47,6 +48,14 @@ public class Professeur extends Utilisateur {
 	
 	public void setModules(Set<Module> modulesInit){
 		this.modules=modulesInit;
+	}
+	
+	public QCM creerQCM(){
+		
+		String titre = View.demandeString("Bienvenue dans l'assistant de création de QCM !\nVeuillez entrer le titre du QCM :\n");
+		
+		
+		
 	}
 	
 	public Session CreerSession(){
