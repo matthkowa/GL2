@@ -24,7 +24,13 @@ public class QCM {
 		this.questions = new HashSet<Question>();
 		this.questions = questions;		
 	}
-
+	
+	public QCM(String libelle, Professeur createur) {
+		this.libelle = libelle;
+		this.createur = createur;
+		this.questions = new HashSet<Question>();		
+	}	
+	
 	/**
 	 * @return the libelle
 	 */
