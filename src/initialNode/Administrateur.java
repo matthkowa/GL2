@@ -4,6 +4,7 @@ import helpClass.DonneeUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -84,8 +85,9 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @param newSet set d'administrateur, de professeur ou d'étudiants
 	 * @param util administrateur, professeur ou étudiant
 	 * @param path chemin vers le fichier de sauvegarde
+	 * @throws IOException 
 	 */
-	public <T extends Utilisateur> Set<T> modifdonnees(Set<T> newSet,T util,String path){
+	public <T extends Utilisateur> Set<T> modifdonnees(Set<T> newSet,T util,String path) throws IOException{
 		Scanner sc2 =  new Scanner(System.in);
 		newSet.remove(util);
 		int rep2 = 0;
@@ -96,7 +98,10 @@ public class Administrateur extends Utilisateur implements Serializable{
 		System.out.println("4 / Adresse");
 		System.out.println("5 / Telephone");
 		System.out.println("6 / Mot de Passe");
-		while ((rep2<1) ||(rep2>6)){
+		if (util instanceof Professeur){
+			System.out.println("7 / Module");
+		}
+		while ((rep2<1) ||(rep2>7)){
 			rep2 = sc2.nextInt();
 		}
 		switch(rep2){
@@ -118,6 +123,26 @@ public class Administrateur extends Utilisateur implements Serializable{
 			case 6 : 
 				util.setMotDePasse(DonneeUtil.DemandeString("Mot de passe : "));
 				break;
+			case 7 :
+				if (util instanceof Professeur){
+					Set<Module> modprof = new HashSet<Module>();
+					Module mod = new Module();
+					String rep = "oui";
+					while (rep=="oui"){
+						System.out.println("Entrer un module pour le professeur");
+						All<Module> modules = new All<Module>();
+						modules = (All<Module>) modules.relecture("Module/Module");
+						mod = (Module)DonneeUtil.choix(modules.getSet());
+						modprof.add(mod);
+						System.out.println("Voulez vous-entrer d'autres modules (oui/non)");
+						rep = (new Scanner(System.in)).nextLine();
+					}
+					((Professeur) util).setModules(modprof);
+				}
+				else{
+					newSet.add(util);
+					newSet = this.modifdonnees(newSet, util, path);
+				}
 		}
 		newSet.add(util);
 		System.out.println("Well done");
@@ -186,11 +211,22 @@ public class Administrateur extends Utilisateur implements Serializable{
 			pseudoA = pseudoA.substring(0,10);
 		}
 		String mdp = "EISTI";
+		String rep = "oui";
+		Set<Module> modprof = new HashSet();
+		Module mod = new Module();
+		while (rep=="oui"){
+			System.out.println("Entrer un module pour le professeur");
+			All<Module> modules = new All<Module>();
+			modules = (All<Module>) modules.relecture("Module/Module");
+			mod = (Module)DonneeUtil.choix(modules.getSet());
+			modprof.add(mod);
+			System.out.println("Voulez vous-entrer d'autres modules");
+		}
 		String s = "Utilisateur/Professeur/Professeur";
 
 		All<Professeur> newSet = new All<Professeur>();
 		newSet = (All<Professeur>) newSet.relecture(s);
-		newSet.add(new Professeur(nom, prenom, naissance, adresse, telS, pseudoA, mdp, newSet.set.size(), null));
+		newSet.add(new Professeur(nom, prenom, naissance, adresse, telS, pseudoA, mdp, newSet.set.size(), modprof));
 		newSet.sauvegarder(s);
 	}
 	

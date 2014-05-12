@@ -8,6 +8,7 @@ import java.util.*;
 import QCM.Session;
 
 public class Professeur extends Utilisateur {
+	private static final long serialVersionUID = -5845845607959841888L;
 	private int idProf;
 	private Set<Module> modules;
 	
@@ -38,6 +39,14 @@ public class Professeur extends Utilisateur {
 
 	public void setIdProf(int idProf) {
 		this.idProf = idProf;
+	}
+	
+	public Set<Module> getModules(){
+		return this.modules;
+	}
+	
+	public void setModules(Set<Module> modulesInit){
+		this.modules=modulesInit;
 	}
 	
 	public Session CreerSession(){
