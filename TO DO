@@ -9,7 +9,7 @@
 	- Harmoniser tous les diagrammes.
     - Faire attention à la place des méthodes.// manquer
 	- Sauvegarde !!!!
-	- Quels boutons doit on ouvrir ou fermer.
+	- Quels boutons doit on ouvrir ou fermer ?
 	
 
 ================================================
@@ -19,7 +19,15 @@
  	 -Faire diagrammes d'activité
  	 -Faire diagrammes d'etats transition
  	 -Faire Rapport livrable 3 avec tout ça
- 	 -Et enfin pour le fun : IMPLEMENTER !!
+ 	 -Et enfin pour le fun : IMPLEMENTER 
+ 	 
+ 	 
+================================================
+
+				12/05/14 
+	Ne serait-il pas mieux de sauvegarder les élèves dans un set de promo ?
+	De même pour les réponses dans des sets de reponses avec des attributs propre ( session par exemple)
+	
  	 
  	 				
  
