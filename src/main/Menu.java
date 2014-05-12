@@ -1,9 +1,10 @@
 package main;
 
+import initialNode.Administrateur;
+
 import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import initialNode.*;
 
 public class Menu {
 	
@@ -44,55 +45,59 @@ public class Menu {
 		}
 	}
 	
-	private void administrateur2(char choix){
-		boolean b = true;
-		while(b){
-			System.out.println("_______MENU ______\n 1- Ajouter \n 2- Modifier \n 3- Supprimer \n 4- Quitter \n \n Choix :");
-			Scanner sc = new Scanner(System.in);
-			String str = sc.nextLine();
-			char carac = str.charAt(0);
-			if(carac=='4') b= false; 
-			else{
-				switch(choix) {
-					case '1' : /*Administrateur*/
-						switch(carac) { 
-						case '1' : /*Ajouter admin*/ 	break;
-						case '2' : /*Modifier admin*/  	break;
-						case '3' : /*Supprimer admin*/  break;
-						}
-					break;
-					
-					case '2' : /*Professeur*/
-						switch(carac) { 
-						case '1' : /*Ajouter Prof*/ 	break;
-						case '2' : /*Modifier Prof*/  	break;
-						case '3' : /*Supprimer Prof*/ 	break;
-						}
-					break;
-					case '3' :/*Etudiant*/
-						switch(carac) { 
-						case '1' : /*Ajouter Etudiant*/ 	break;
-						case '2' : /*Modifier Etudiant*/  	break;
-						case '3' : /*Supprimer Etudiant*/  	break;
-						}
-					break;
-					case '4' :/*Promotion*/
-						switch(carac) { 
-						case '1' : /*Ajouter Promo*/ 		break;
-						case '2' : /*Modifier Promo*/  		break;
-						case '3' : /*Supprimer Promo*/  	break;
-						}
-					break;
-					case '5' :/*Modules*/
-						switch(carac) { 
-						case '1' : /*Ajouter Modules*/ 		break;
-						case '2' : /*Modifier Modules*/  	break;
-						case '3' : /*Supprimer Modules*/  	break;
-						}
-					break;
-					default : System.out.println("Erreur veuillez contacter le support"); break;
+	private void administrateur2(char choix,Administrateur a){
+		try{
+			boolean b = true;
+			while(b){
+				System.out.println("_______MENU ______\n 1- Ajouter \n 2- Modifier \n 3- Supprimer \n 4- Quitter \n \n Choix :");
+				Scanner sc = new Scanner(System.in);
+				String str = sc.nextLine();
+				char carac = str.charAt(0);
+				if(carac=='4') b= false; 
+				else{
+					switch(choix) {
+						case '1' : /*Administrateur*/
+							switch(carac) { 
+							case '1' : a.addAdmin(); 	break;
+							case '2' : a.modifAdmin();  	break;
+							case '3' : a.supAdmin();  break;
+							}
+						break;
+						
+						case '2' : /*Professeur*/
+							switch(carac) { 
+							case '1' : a.addProf(); 	break;
+							case '2' : a.modifProf();  	break;
+							case '3' : a.supProf(); 	break;
+							}
+						break;
+						case '3' :/*Etudiant*/
+							switch(carac) { 
+							case '1' : a.addEleve(); 	break;
+							case '2' : a.modifEleve();  	break;
+							case '3' : a.supEleve();  	break;
+							}
+						break;
+						case '4' :/*Promotion*/
+							switch(carac) { 
+							case '1' : /*Ajouter Promo*/ 		break;
+							case '2' : /*Modifier Promo*/  		break;
+							case '3' : /*Supprimer Promo*/  	break;
+							}
+						break;
+						case '5' :/*Modules*/
+							switch(carac) { 
+							case '1' : /*Ajouter Modules*/ 		break;
+							case '2' : /*Modifier Modules*/  	break;
+							case '3' : /*Supprimer Modules*/  	break;
+							}
+						break;
+						default : System.out.println("Erreur veuillez contacter le support"); break;
+					}
 				}
 			}
+	}catch(IOException e){
+			System.err.println("Problème : " + e);
 		}
 	}
 	
@@ -105,7 +110,7 @@ public class Menu {
 			String str = sc.nextLine();
 			char carac = str.charAt(0);
 			if(carac == '1' || carac == '2' || carac == '3' || carac == '4' || carac == '5'){
-				administrateur2(carac);
+				administrateur2(carac,a);
 			}
 			else{ 
 				if(carac == '6') b=false;
@@ -114,22 +119,6 @@ public class Menu {
 			
 		}
 	}
-		
-		/*Administrateur Jean = new Administrateur();
-		try {
-//			Jean.addAdmin();
-			System.out.println("----Relecture----");
-			AllAdmin admin = new AllAdmin();
-			admin = (AllAdmin) admin.relecture("Administrateur");
-			for (Administrateur A : admin.administrateurs){
-				System.out.println(A.getPseudo()+" / "+A.getMin();
-		}
-		catch (NoSuchElementException e){
-			System.err.println("mauvaise entrée");
-		}*/
-//		catch (IOException e){
-//			System.err.println("mauvaise entrée");
-//		}
 		
 		
 	

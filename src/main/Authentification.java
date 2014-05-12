@@ -1,8 +1,7 @@
 package main;
 
 import initialNode.Administrateur;
-import initialNode.AllAdmin;
-
+import initialNode.All;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -32,21 +31,21 @@ public class Authentification {
 		String pseudo = sc.next();
 		System.out.println("Entrez votre mot de passe :");
 		String mdp = sc.next();
-		AllAdmin liste = recherchePseudoAdmin();
+		All<Administrateur> liste = recherchePseudoAdmin();
 		return verifierAdmin(liste,pseudo,mdp);
 	}
 	
-	private AllAdmin recherchePseudoAdmin(){
+	private All<Administrateur> recherchePseudoAdmin(){
 		String path = "Utilisateur/Administrateur/Administrateur";
-		AllAdmin newAdmin = new AllAdmin();
-		return (AllAdmin) newAdmin.relecture(path);
+		All<Administrateur> newAdmin = new All<Administrateur>();
+		return (All<Administrateur>) newAdmin.relecture(path);
 	}
 	
-	private Administrateur verifierAdmin(AllAdmin liste,String pseudo,String mdp){
+	private Administrateur verifierAdmin(All<Administrateur> liste,String pseudo,String mdp){
 		int i =0;
 		
 		Boolean b = true;
-		for(Administrateur a : liste.getAdministrateurs()){
+		for(Administrateur a : liste.getSet()){
 			if(a.getPseudo().compareTo(pseudo) == 0){
 				
 				

@@ -1,5 +1,7 @@
 package initialNode;
 
+import helpClass.DonneeUtil;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -61,36 +63,22 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOExectpion
 	 */
 	public void addAdmin() throws IOException{
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Entrer le nom du nouvel Administrateur : ");
-		String nom = sc.nextLine();
-		System.out.println("Entrer le prenom du nouvel Administrateur : ");
-		String prenom = sc.nextLine();
-		System.out.println("Entrer la date de naissance du nouvel Administrateur (en chiffre) : ");
-		System.out.println(" jour : ");
-		int jour = sc.nextInt();
-		System.out.println("moi : ");
-		int moi = sc.nextInt();
-		System.out.println("Année : ");
-		int annee = sc.nextInt();
-		System.out.println("Entrer l'adresse du nouvel Administrateur : ");
-		String adresse = sc.next();
-		System.out.println("Entrer le tel du nouvel Administrateur : ");
-		String telS = sc.next();
-		int tel = Integer.parseInt(telS);
-
-		@SuppressWarnings("deprecation")
-		Date naissance = new Date(annee,moi-1,jour);
+		String nom = DonneeUtil.DemandeString("Entrer le nom du nouvel Administrateur : ");
+		String prenom = DonneeUtil.DemandeString("Entrer le prenom du nouvel Administrateur : ");
+		Date naissance = DonneeUtil.DemandeDate("Entrer la date de naissance du nouvel Administrateur (JJ/MM/YY) : ");
+		String adresse = DonneeUtil.DemandeString("Entrer l'adresse du nouvel Administrateur : ");
+		int telS = DonneeUtil.DemandeInt("Entrer le tel du nouvel Administrateur : ");
 		String pseudoA=(nom+prenom).toLowerCase();
 		if (pseudoA.length()>10){
-			pseudoA = pseudoA.substring(0,9);
+			pseudoA = pseudoA.substring(0,10);
 		}
 		String mdp = "EISTI";
+		
+		
 		String s = "Utilisateur/Administrateur/Administrateur";
-
 		All<Administrateur> newSet = new All<Administrateur>();
-		//newSet = (All) newSet.relecture(s);
-		newSet.add(new Administrateur(nom, prenom, naissance, adresse, tel, pseudoA, mdp, newSet.set.size()));
+		newSet = (All<Administrateur>) newSet.relecture(s);
+		newSet.add(new Administrateur(nom, prenom, naissance, adresse, telS, pseudoA, mdp, newSet.set.size()));
 		newSet.sauvegarder(s);
 	}
 	
@@ -139,6 +127,51 @@ public class Administrateur extends Utilisateur implements Serializable{
 	}
 	
 	/**
+	 * Fonction qui demande ce qui doit être modifier chez un utilisateur quelconque
+	 * @param newSet set d'administrateur, de professeur ou d'étudiants
+	 * @param util administrateur, professeur ou étudiant
+	 * @param path chemin vers le fichier de sauvegarde
+	 */
+	public <T extends Utilisateur> Set<T> modifdonnees(Set<T> newSet,T util,String path){
+		Scanner sc2 =  new Scanner(System.in);
+		newSet.remove(util);
+		int rep2 = 0;
+		System.out.println("Que voulez-vous modifier ?");
+		System.out.println("1 / Nom");
+		System.out.println("2 / Prenom");
+		System.out.println("3 / Date de naissance");
+		System.out.println("4 / Adresse");
+		System.out.println("5 / Telephone");
+		System.out.println("6 / Mot de Passe");
+		while ((rep2<1) ||(rep2>6)){
+			rep2 = sc2.nextInt();
+		}
+		switch(rep2){
+			case 1 : 
+				util.setNom(DonneeUtil.DemandeString("Nom : "));
+				break;
+			case 2 : 
+				util.setPrenom(DonneeUtil.DemandeString("Prenom : "));
+				break;
+			case 3 : 
+				util.setDateNaissance(DonneeUtil.DemandeDate("Date de naissance : "));
+				break;
+			case 4 : 
+				util.setAdresse(DonneeUtil.DemandeString("Adresse : "));
+				break;
+			case 5 : 
+				util.setTel(DonneeUtil.DemandeInt("Telephone : "));
+				break;
+			case 6 : 
+				util.setMotDePasse(DonneeUtil.DemandeString("Mot de passe : "));
+				break;
+		}
+		newSet.add(util);
+		System.out.println("Well done");
+		return newSet;
+	}
+	
+	/**
 	 * Modifie un administrateur parmi un set d'administrateurs.
 	 * @throws NoSuchElementException
 	 * @throws IOException
@@ -153,51 +186,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String rep = sc2.next();
 		switch(rep){
 			case "oui" : 
-				newSet.set.remove(a);
-				int rep2 = 0;
-				System.out.println("Que voulez-vous modifier ?");
-				System.out.println("1 / Nom");
-				System.out.println("2 / Prenom");
-				System.out.println("3 / Date de naissance");
-				System.out.println("4 / Adresse");
-				System.out.println("5 / Telephone");
-				System.out.println("6 / Mot de Passe");
-				rep2 = sc2.nextInt();
-				switch(rep2){
-					case 1 : 
-						System.out.println("Nom : ");
-						a.setNom(sc2.nextLine());
-						break;
-					case 2 : 
-						System.out.println("Prenom : ");
-						a.setPrenom(sc2.nextLine());
-						break;
-					case 3 : 
-						System.out.println("Date de naissance : ");
-						System.out.println(" jour : ");
-						int jour = sc2.nextInt();
-						System.out.println("moi : ");
-						int moi = sc2.nextInt();
-						System.out.println("Année : ");
-						int annee = sc2.nextInt();
-						Date naissance = new Date(annee,moi-1,jour);
-						a.setDateNaissance(naissance);
-						break;
-					case 4 : 
-						System.out.println("Adresse : ");
-						a.setAdresse(sc2.nextLine());
-						break;
-					case 5 : 
-						System.out.println("Telephone : ");
-						a.setTel(sc2.nextInt());
-						break;
-					case 6 : 
-						System.out.println("Mot de Passe : ");
-						a.setMotDePasse(sc2.nextLine());
-						break;
-				}
-				newSet.set.add(a);
-				System.out.println("Well done");
+				newSet.set = this.modifdonnees(newSet.set, a, s);
 				newSet.sauvegarder(s);
 				break;
 			default : System.out.println("tant pis");break;
@@ -210,36 +199,21 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOExectpion
 	 */
 	public void addProf() throws IOException{
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Entrer le nom du nouvel Administrateur : ");
-		String nom = sc.nextLine();
-		System.out.println("Entrer le prenom du nouvel Administrateur : ");
-		String prenom = sc.nextLine();
-		System.out.println("Entrer la date de naissance du nouvel Administrateur (en chiffre) : ");
-		System.out.println(" jour : ");
-		int jour = sc.nextInt();
-		System.out.println("moi : ");
-		int moi = sc.nextInt();
-		System.out.println("Année : ");
-		int annee = sc.nextInt();
-		System.out.println("Entrer l'adresse du nouvel Administrateur : ");
-		String adresse = sc.next();
-		System.out.println("Entrer le tel du nouvel Administrateur : ");
-		String telS = sc.next();
-		int tel = Integer.parseInt(telS);
-
-		@SuppressWarnings("deprecation")
-		Date naissance = new Date(annee,moi-1,jour);
+		String nom = DonneeUtil.DemandeString("Entrer le nom du nouveau professeur : ");
+		String prenom = DonneeUtil.DemandeString("Entrer le prenom du nouveau professeur : ");
+		Date naissance = DonneeUtil.DemandeDate("Entrer la date de naissance du nouveau professeur (JJ/MM/YY) : ");
+		String adresse = DonneeUtil.DemandeString("Entrer l'adresse du nouveau professeur : ");
+		int telS = DonneeUtil.DemandeInt("Entrer le tel du nouveau professeur : ");
 		String pseudoA=(nom+prenom).toLowerCase();
 		if (pseudoA.length()>10){
-			pseudoA = pseudoA.substring(0,9);
+			pseudoA = pseudoA.substring(0,10);
 		}
 		String mdp = "EISTI";
 		String s = "Utilisateur/Professeur/Professeur";
 
 		All<Professeur> newSet = new All<Professeur>();
 		//newSet = (All<Professeur>) newSet.relecture(s);
-		newSet.add(new Professeur(nom, prenom, naissance, adresse, tel, pseudoA, mdp, newSet.set.size(), null));
+		newSet.add(new Professeur(nom, prenom, naissance, adresse, telS, pseudoA, mdp, newSet.set.size(), null));
 		newSet.sauvegarder(s);
 	}
 	
@@ -271,57 +245,13 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String s = "Utilisateur/Professeur/Professeur";
 		All<Professeur> newSet = new All<Professeur>();
 		newSet = (All<Professeur>) newSet.relecture(s);
-		Professeur a = (Professeur)choix(newSet.set);
-		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+a);
+		Professeur p = (Professeur)choix(newSet.set);
+		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+p);
 		Scanner sc2 = new Scanner(System.in);
 		String rep = sc2.next();
 		switch(rep){
 			case "oui" : 
-				newSet.set.remove(a);
-				int rep2 = 0;
-				System.out.println("Que voulez-vous modifier ?");
-				System.out.println("1 / Nom");
-				System.out.println("2 / Prenom");
-				System.out.println("3 / Date de naissance");
-				System.out.println("4 / Adresse");
-				System.out.println("5 / Telephone");
-				System.out.println("6 / Mot de Passe");
-				rep2 = sc2.nextInt();
-				switch(rep2){
-					case 1 : 
-						System.out.println("Nom : ");
-						a.setNom(sc2.nextLine());
-						break;
-					case 2 : 
-						System.out.println("Prenom : ");
-						a.setPrenom(sc2.nextLine());
-						break;
-					case 3 : 
-						System.out.println("Date de naissance : ");
-						System.out.println(" jour : ");
-						int jour = sc2.nextInt();
-						System.out.println("moi : ");
-						int moi = sc2.nextInt();
-						System.out.println("Année : ");
-						int annee = sc2.nextInt();
-						Date naissance = new Date(annee,moi-1,jour);
-						a.setDateNaissance(naissance);
-						break;
-					case 4 : 
-						System.out.println("Adresse : ");
-						a.setAdresse(sc2.nextLine());
-						break;
-					case 5 : 
-						System.out.println("Telephone : ");
-						a.setTel(sc2.nextInt());
-						break;
-					case 6 : 
-						System.out.println("Mot de Passe : ");
-						a.setMotDePasse(sc2.nextLine());
-						break;
-				}
-				newSet.set.add(a);
-				System.out.println("Well done");
+				newSet.set = this.modifdonnees(newSet.set, p, s);
 				newSet.sauvegarder(s);
 				break;
 			default : System.out.println("tant pis");break;
@@ -333,33 +263,18 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException
 	 */
 	public void addEleve() throws NoSuchElementException,IOException{
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Entrer le nom du nouvel élève : ");
-		String nom = sc.nextLine();
-		System.out.println("Entrer le prenom du nouvel élève : ");
-		String prenom = sc.nextLine();
-		System.out.println("Entrer la date de naissance du nouvel élève (en chiffre) : ");
-		System.out.println(" jour : ");
-		int jour = sc.nextInt();
-		System.out.println("moi : ");
-		int moi = sc.nextInt();
-		System.out.println("Année : ");
-		int annee = sc.nextInt();
-		System.out.println("Entrer l'adresse du nouvel élève : ");
-		String adresse = sc.next();
-		System.out.println("Entrer le tel du nouvel élève : ");
-		String telS = sc.next();
-		int tel = Integer.parseInt(telS);
-
-		@SuppressWarnings("deprecation")
-		Date naissance = new Date(annee,moi-1,jour);
+		String nom = DonneeUtil.DemandeString("Entrer le nom du nouvel étudiant : ");
+		String prenom = DonneeUtil.DemandeString("Entrer le prenom du nouvel étudiant : ");
+		Date naissance = DonneeUtil.DemandeDate("Entrer la date de naissance du nouvel étudiant (JJ/MM/YY) : ");
+		String adresse = DonneeUtil.DemandeString("Entrer l'adresse du nouvel étudiant : ");
+		int telS = DonneeUtil.DemandeInt("Entrer le tel du nouvel étudiant : ");
 		String pseudoA=(nom+prenom).toLowerCase();
 		if (pseudoA.length()>10){
-			pseudoA = pseudoA.substring(0,9);
+			pseudoA = pseudoA.substring(0,10);
 		}
 		String mdp = "EISTI";
-		String s = "Administrateur";
 
+		Scanner sc = new Scanner(System.in);
 		System.out.println("Entrer la promo du nouvel élève : ");
 		System.out.println("1 / ING1");
 		System.out.println("2 / ING2");
@@ -375,9 +290,9 @@ public class Administrateur extends Utilisateur implements Serializable{
 			case 2 : path+="ING2";break;
 			case 3 : path+="ING3";break;
 		}
-		promoInit = (Promotion) promoInit.relecture(s);
-		promoInit.getSetEtudiant().add(new Etudiant(nom, prenom, naissance, adresse, tel, pseudoA, mdp, promoInit.getSetEtudiant().size()));
-		promoInit.sauvegarder(s);
+		promoInit = (Promotion) promoInit.relecture(path);
+		promoInit.getSetEtudiant().add(new Etudiant(nom, prenom, naissance, adresse, telS, pseudoA, mdp, promoInit.getSetEtudiant().size()));
+		promoInit.sauvegarder(path);
 	}
 	
 	/**
@@ -445,45 +360,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String rep = sc2.next();
 		switch(rep){
 			case "oui" : 
-				promo.setEtudiant.remove(etu);
-				int rep2 = 0;
-				System.out.println("Que voulez-vous modifier ?");
-				System.out.println("1 / Nom");
-				System.out.println("2 / Prenom");
-				System.out.println("3 / Date de naissance");
-				System.out.println("4 / Adresse");
-				System.out.println("5 / Telephone");
-				System.out.println("6 / Mot de Passe");
-				rep2 = sc2.nextInt();
-				switch(rep2){
-					case 1 : 
-						etu.setNom(sc2.nextLine());
-						break;
-					case 2 : 
-						etu.setPrenom(sc2.nextLine());
-						break;
-					case 3 : 
-						System.out.println(" jour : ");
-						int jour = sc2.nextInt();
-						System.out.println("mois : ");
-						int moi = sc2.nextInt();
-						System.out.println("Année : ");
-						int annee = sc2.nextInt();
-						Date naissance = new Date(annee,moi-1,jour);
-						etu.setDateNaissance(naissance);
-						break;
-					case 4 : 
-						etu.setAdresse(sc2.nextLine());
-						break;
-					case 5 : 
-						etu.setTel(sc2.nextInt());
-						break;
-					case 6 : 
-						etu.setMotDePasse(sc2.nextLine());
-						break;
-				}
-				promo.setEtudiant.add(etu);
-				System.out.println("Well done");
+				promo.setSetEtudiant(this.modifdonnees(promo.getSetEtudiant(), etu, s));
 				promo.sauvegarder(s);
 				break;
 			default : System.out.println("tant pis");break;
