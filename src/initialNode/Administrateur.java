@@ -449,7 +449,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	}
 	
 	/**
-	 * Fonction qui supprime une promotion parmi une liste de promotion
+	 * Fonction qui supprime une promotion parmi une liste de promotion.
 	 * @throws IOException
 	 */
 	public void supPromo() throws IOException{
