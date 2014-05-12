@@ -54,7 +54,7 @@ public class Professeur extends Utilisateur {
 		int id=0;
 		int repetition=1;
 		Date dateDebut = DonneeUtil.DemandeDate("Veuillez entrer une date de début de session (MM/DD/YYYY)");
-		Date dateFin = DonneeUtil.DemandeDate("Veuillez entrer une date de début de session (MM/DD/YYYY)");
+		Date dateFin = DonneeUtil.DemandeDate("Veuillez entrer une date de fin de session (MM/DD/YYYY)");
 		repetition = DonneeUtil.DemandeInt("Combien de fois autorisez vous les étudiants à répondre à ce QCM?");
 		System.out.println(dateDebut);
 		Session sess = new Session(id, dateDebut, dateFin, repetition);

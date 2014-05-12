@@ -50,18 +50,17 @@ public class DonneeUtil {
 			try{
 				s2 = DonneeUtil.DemandeString(s);
 				while (day==0 || month==0 || year==0){	
-					if (s2!="")
-					{
 						if (s2.charAt(0)=='/')
 						{
 							s2 = s2.substring(1, s2.length());
-							while ((s2.charAt(0)!='/')){
-								s3 += s2.charAt(0);
-								s2 = s2.substring(1, s2.length());
-							}
 						}
-					}
-					System.out.println("coucou2");
+						try
+						{
+							while ((s2.charAt(0)!='/')){
+									s3 += s2.charAt(0);
+									s2 = s2.substring(1, s2.length());
+							}
+						}catch(StringIndexOutOfBoundsException e){}
 					if ((day!=0) && (month!=0) && (year==0))
 					{
 						year = Integer.parseInt(s3);
@@ -69,7 +68,6 @@ public class DonneeUtil {
 					}
 					else
 					{
-						System.out.println("coucou4");
 						if ((day!=0) && (month==0) && (year==0))
 						{
 							month = Integer.parseInt(s3);
@@ -77,10 +75,9 @@ public class DonneeUtil {
 						}
 						else
 						{
-							System.out.println("coucou6");
 							if ((day==0) && (month==0) && (year==0))
 							{
-								System.out.println(s3+s2);
+								System.out.println(s3 + "---" + s2);
 								day = Integer.parseInt(s3);
 								s3="";
 							}
