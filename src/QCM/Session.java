@@ -120,19 +120,7 @@ public class Session {
 			month = "Decembre";
 			break;
 		}
-		if (d.getYear()<100){
-			if (d.getYear()<10){
-				year = "190"+ d.getYear();
-			}
-			else
-			{
-				year = "19" + d.getYear();
-			}
-		}
-		else
-		{
-			year = String.valueOf(d.getYear());
-		}
+		year = String.valueOf(1900 + d.getYear());
 		
 		return day + " " + d.getDate() + " " + month + " " + year;
 	}

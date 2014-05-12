@@ -92,7 +92,7 @@ public class View {
 					{
 						if ((day!=0) && (month==0) && (year==0))
 						{
-							month = Integer.parseInt(s3)-1;
+							month = Integer.parseInt(s3);
 							s3="";
 						}
 						else
@@ -105,7 +105,7 @@ public class View {
 						}
 					}
 				}
-				d = new Date(year,month,day);
+				d = new Date(year,month-1,day);
 			}
 			catch(IllegalArgumentException e){
 				System.out.println("Erreur, veuillez entrer la date correctement!");

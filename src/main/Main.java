@@ -16,8 +16,8 @@ public class Main {
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException{
 		/*Administrateur a = new Administrateur();
 		a.addAdmin();*/
-		//Professeur p = new Professeur();
-		//p.CreerSession();
+		Professeur p = new Professeur();
+		p.creerSession();
 		Menu m=new Menu();
 		//new IHMMenu();
 	}
