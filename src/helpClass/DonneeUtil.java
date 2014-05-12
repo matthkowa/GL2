@@ -49,7 +49,7 @@ public class DonneeUtil {
 			year=0;
 			i=0;
 			try{
-				s2 = donneeUtil.demandeString(s);
+				s2 = DonneeUtil.demandeString(s);
 				while ( day==0 || month==0 || year==0){	
 					try
 					{

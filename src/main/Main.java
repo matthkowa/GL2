@@ -16,7 +16,12 @@ public class Main {
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException{
 		/*Administrateur a = new Administrateur();
 		a.addAdmin();*/
+<<<<<<< HEAD
 		
+=======
+		//Professeur p = new Professeur();
+		//p.CreerSession();
+>>>>>>> branch 'master' of https://github.com/matthkowa/GL2.git
 		Menu m=new Menu();
 		//new IHMMenu();
 	}

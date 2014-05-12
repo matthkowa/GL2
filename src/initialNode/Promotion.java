@@ -7,7 +7,7 @@ import java.util.Set;
 import serializable.Serialiser;
 
 public class Promotion extends Serialiser implements Serializable{
-
+	private static final long serialVersionUID = 383244048373251545L;
 	protected Set<Etudiant> setEtudiant;
 	private String promo;
 	
@@ -41,7 +41,7 @@ public class Promotion extends Serialiser implements Serializable{
 	
 	@Override
 	public String toString(){
-		return setEtudiant.toString() + " " + promo;
+		return promo + " : \n" + setEtudiant.toString();
 	}
 	
 
