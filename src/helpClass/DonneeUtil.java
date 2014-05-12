@@ -37,13 +37,45 @@ public class DonneeUtil {
 	
 	public static Date DemandeDate(String s){
 		Boolean test;
-		String s2;
+		String s2,s3;
+		int day,month,year;
 		Date d = new Date();
 		do{
 			test=true;
+			s3="";
+			day=0;
+			month=0;
+			year=0;
 			try{
 				s2 = DonneeUtil.DemandeString(s);
-				d = new Date(s2);
+				while (day==0 || month==0 || year==0){				
+					while ((s2.charAt(0)!='/') || (s2!="")){
+						s3 += s2.charAt(0);
+						s2 = s2.substring(1, s2.length()-1);
+					}
+					if (day==0 && month==0 && year==0)
+					{
+						day = Integer.parseInt(s3);
+					}
+					else
+					{
+						if (day!=0 && month==0 && year==0)
+						{
+							month = Integer.parseInt(s3);
+						}
+						else
+						{
+							if (day!=0 && month!=0 && year==0)
+							{
+								year = Integer.parseInt(s3);
+							}
+						}
+					}
+					if (s2!=""){
+					s2 = s2.substring(1, s2.length()-1);
+					}
+				}
+				d = new Date(day,month,year);
 			}
 			catch(IllegalArgumentException e){
 				System.out.println("Erreur, veuillez entrer la date correctement!");
