@@ -6,7 +6,7 @@ import java.util.*;
 
 public class DonneeUtil {
 
-	//méthode à utiliser lors de l'utilisation d'un scanner pour récupérer un String
+	//méthode à utiliser lors de l'utilisation d'un scanner pour récupérer un String.
 	public static String demandeString(String s){
 		String res="";
 		Scanner sc = new Scanner(System.in);
