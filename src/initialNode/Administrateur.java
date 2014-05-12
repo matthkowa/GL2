@@ -106,22 +106,22 @@ public class Administrateur extends Utilisateur implements Serializable{
 		}
 		switch(rep2){
 			case 1 : 
-				util.setNom(DonneeUtil.DemandeString("Nom : "));
+				util.setNom(DonneeUtil.demandeString("Nom : "));
 				break;
 			case 2 : 
-				util.setPrenom(DonneeUtil.DemandeString("Prenom : "));
+				util.setPrenom(DonneeUtil.demandeString("Prenom : "));
 				break;
 			case 3 : 
-				util.setDateNaissance(DonneeUtil.DemandeDate("Date de naissance : "));
+				util.setDateNaissance(DonneeUtil.demandeDate("Date de naissance : "));
 				break;
 			case 4 : 
-				util.setAdresse(DonneeUtil.DemandeString("Adresse : "));
+				util.setAdresse(DonneeUtil.demandeString("Adresse : "));
 				break;
 			case 5 : 
-				util.setTel(DonneeUtil.DemandeInt("Telephone : "));
+				util.setTel(DonneeUtil.demandeInt("Telephone : "));
 				break;
 			case 6 : 
-				util.setMotDePasse(DonneeUtil.DemandeString("Mot de passe : "));
+				util.setMotDePasse(DonneeUtil.demandeString("Mot de passe : "));
 				break;
 			case 7 :
 				if (util instanceof Professeur){
@@ -154,11 +154,11 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOExectpion
 	 */
 	public void addAdmin() throws IOException{
-		String nom = DonneeUtil.DemandeString("Entrer le nom du nouvel Administrateur : ");
-		String prenom = DonneeUtil.DemandeString("Entrer le prenom du nouvel Administrateur : ");
-		Date naissance = DonneeUtil.DemandeDate("Entrer la date de naissance du nouvel Administrateur (JJ/MM/YY) : ");
-		String adresse = DonneeUtil.DemandeString("Entrer l'adresse du nouvel Administrateur : ");
-		int telS = DonneeUtil.DemandeInt("Entrer le tel du nouvel Administrateur : ");
+		String nom = DonneeUtil.demandeString("Entrer le nom du nouvel Administrateur : ");
+		String prenom = DonneeUtil.demandeString("Entrer le prenom du nouvel Administrateur : ");
+		Date naissance = DonneeUtil.demandeDate("Entrer la date de naissance du nouvel Administrateur (JJ/MM/YY) : ");
+		String adresse = DonneeUtil.demandeString("Entrer l'adresse du nouvel Administrateur : ");
+		int telS = DonneeUtil.demandeInt("Entrer le tel du nouvel Administrateur : ");
 		String pseudoA=(nom+prenom).toLowerCase();
 		if (pseudoA.length()>10){
 			pseudoA = pseudoA.substring(0,10);
@@ -201,11 +201,11 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOExectpion
 	 */
 	public void addProf() throws IOException{
-		String nom = DonneeUtil.DemandeString("Entrer le nom du nouveau professeur : ");
-		String prenom = DonneeUtil.DemandeString("Entrer le prenom du nouveau professeur : ");
-		Date naissance = DonneeUtil.DemandeDate("Entrer la date de naissance du nouveau professeur (JJ/MM/YY) : ");
-		String adresse = DonneeUtil.DemandeString("Entrer l'adresse du nouveau professeur : ");
-		int telS = DonneeUtil.DemandeInt("Entrer le tel du nouveau professeur : ");
+		String nom = DonneeUtil.demandeString("Entrer le nom du nouveau professeur : ");
+		String prenom = DonneeUtil.demandeString("Entrer le prenom du nouveau professeur : ");
+		Date naissance = DonneeUtil.demandeDate("Entrer la date de naissance du nouveau professeur (JJ/MM/YY) : ");
+		String adresse = DonneeUtil.demandeString("Entrer l'adresse du nouveau professeur : ");
+		int telS = DonneeUtil.demandeInt("Entrer le tel du nouveau professeur : ");
 		String pseudoA=(nom+prenom).toLowerCase();
 		if (pseudoA.length()>10){
 			pseudoA = pseudoA.substring(0,10);
@@ -276,11 +276,11 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException
 	 */
 	public void addEleve() throws NoSuchElementException,IOException{
-		String nom = DonneeUtil.DemandeString("Entrer le nom du nouvel étudiant : ");
-		String prenom = DonneeUtil.DemandeString("Entrer le prenom du nouvel étudiant : ");
-		Date naissance = DonneeUtil.DemandeDate("Entrer la date de naissance du nouvel étudiant (JJ/MM/YY) : ");
-		String adresse = DonneeUtil.DemandeString("Entrer l'adresse du nouvel étudiant : ");
-		int telS = DonneeUtil.DemandeInt("Entrer le tel du nouvel étudiant : ");
+		String nom = DonneeUtil.demandeString("Entrer le nom du nouvel étudiant : ");
+		String prenom = DonneeUtil.demandeString("Entrer le prenom du nouvel étudiant : ");
+		Date naissance = DonneeUtil.demandeDate("Entrer la date de naissance du nouvel étudiant (JJ/MM/YY) : ");
+		String adresse = DonneeUtil.demandeString("Entrer l'adresse du nouvel étudiant : ");
+		int telS = DonneeUtil.demandeInt("Entrer le tel du nouvel étudiant : ");
 		String pseudoA=(nom+prenom).toLowerCase();
 		if (pseudoA.length()>10){
 			pseudoA = pseudoA.substring(0,10);
@@ -383,7 +383,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * Fonction qui demande à l'utilisateur de rentrer les données d'un module et l'enregistre dans un fichier
 	 */
 	public void addModule(){
-		String nom = DonneeUtil.DemandeString("Entrer le nom du nouveau module : ");
+		String nom = DonneeUtil.demandeString("Entrer le nom du nouveau module : ");
 		String path = "Module/Module";
 		All<Module> modules = new All<Module>();
 		//modules = (All<Module>) modules.relecture(path);
@@ -401,7 +401,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		All<Module> modules = new All<Module>();
 		modules = (All<Module>) modules.relecture(path);
 		Module mod = (Module) DonneeUtil.choix(modules.getSet());
-		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+mod);
+		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+mod);
 		String rep = sc2.next();
 		switch(rep){
 			case "oui" : 
@@ -427,13 +427,46 @@ public class Administrateur extends Utilisateur implements Serializable{
 		switch(rep){
 			case "oui" :
 				modules.set.remove(mod);
-				mod.setNom(DonneeUtil.DemandeString("Entrer le nouveau nom du module : "+mod.getNom()));
-				modules.set.add(mod);
+				mod.setNom(DonneeUtil.demandeString("Entrer le nouveau nom du module : "+mod.getNom()));
+				modules.add(mod);
 				modules.sauvegarder(path);
 				break;
 			default : System.out.println("tant pis");break;
 		}
 	}
 	
+	/**
+	 * Fonction qui demande à l'utilisateur d'entrer des données pour créer et enregistrer une promotion
+	 */
+	public void addPromo(){
+		String nomPromo = DonneeUtil.demandeString("Entrer le nom de la nouvelle promo : ");
+		String path = "Utilisateur/promotion";
+		Promotion promoInit = new Promotion(new HashSet<Etudiant>(),nomPromo);
+		All<Promotion> newPromo = new All<Promotion>();
+		newPromo = (All<Promotion>) newPromo.relecture(path);
+		newPromo.add(promoInit);
+		newPromo.sauvegarder(path);
+	}
+	
+	/**
+	 * Fonction qui supprime une promotion parmi une liste de promotion
+	 * @throws IOException
+	 */
+	public void supPromo() throws IOException{
+		String path = "Utilisateur/promotion";
+		All<Promotion> newPromo = new All<Promotion>();
+		newPromo = (All<Promotion>) newPromo.relecture(path);
+		Promotion promo = (Promotion)DonneeUtil.choix(newPromo.getSet());
+		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+promo);
+		String rep = (new Scanner(System.in)).next();
+		switch(rep){
+			case "oui" : 
+				newPromo.set.remove(promo);
+				newPromo.sauvegarder(path);
+				System.out.println("Well Done!");
+				break;
+			default : System.out.println("tant pis");break;
+		}
+	}
 	
 }

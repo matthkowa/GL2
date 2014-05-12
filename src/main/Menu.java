@@ -80,9 +80,9 @@ public class Menu {
 						break;
 						case '4' :/*Promotion*/
 							switch(carac) { 
-							case '1' : /*Ajouter Promo*/ 		break;
+							case '1' : a.addPromo(); 		break;
 							case '2' : /*Modifier Promo*/  		break;
-							case '3' : /*Supprimer Promo*/  	break;
+							case '3' : a.supPromo();  	break;
 							}
 						break;
 						case '5' :/*Modules*/
