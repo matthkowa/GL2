@@ -58,30 +58,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		this.id = id;
 	}
 	
-	/**
-	 * choisi un objet parmi un set d'objets du même type.
-	 * @param  set un set d'objet de type T
-	 * @return Object un objet de type T
-	 * @throws IOException
-	 */
-	public <T> Object choix(Set<T> set) throws IOException{
-		int i=1;
-		List<Object> liste = new ArrayList<Object>();
-		for (Object A : set){
-			liste.add(A);
-		};
-		for (Object A : liste){
-			System.out.println(" - "+i+" => "+A);
-			i++;			
-		}
-		Scanner sc2 = new Scanner(System.in);
-		int num = 0;
-		while(num<1 || num>liste.size()){
-			System.out.println("Entrer le numéro de l'Administrateur a supprimer : ");
-			num = sc2.nextInt();
-		}
-		return liste.get(num-1);
-	}
+	
 	
 	/**
 	 * Supprime un administrateur parmi un set d'administrateurs.
@@ -92,7 +69,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String s = "Utilisateur/Administrateur/Administrateur";
 		All<Administrateur> newSet = new All<Administrateur>();
 		newSet = (All<Administrateur>) newSet.relecture(s);
-		Administrateur a = (Administrateur)choix(newSet.set);
+		Administrateur a = (Administrateur)DonneeUtil.choix(newSet.set);
 		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+a);
 		Scanner sc2 = new Scanner(System.in);
 		String rep = sc2.next();
@@ -180,7 +157,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String s = "Utilisateur/Administrateur/Administrateur";
 		All<Administrateur> newSet = new All<Administrateur>();
 		newSet = (All<Administrateur>) newSet.relecture(s);
-		Administrateur a = (Administrateur)choix(newSet.set);
+		Administrateur a = (Administrateur)DonneeUtil.choix(newSet.set);
 		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+a);
 		Scanner sc2 = new Scanner(System.in);
 		String rep = sc2.next();
@@ -212,7 +189,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String s = "Utilisateur/Professeur/Professeur";
 
 		All<Professeur> newSet = new All<Professeur>();
-		//newSet = (All<Professeur>) newSet.relecture(s);
+		newSet = (All<Professeur>) newSet.relecture(s);
 		newSet.add(new Professeur(nom, prenom, naissance, adresse, telS, pseudoA, mdp, newSet.set.size(), null));
 		newSet.sauvegarder(s);
 	}
@@ -226,7 +203,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String s = "Utilisateur/Professeur/Professeur";
 		All<Professeur> newSet = new All<Professeur>();
 		newSet = (All<Professeur>) newSet.relecture(s);
-		Professeur a = (Professeur)choix(newSet.set);
+		Professeur a = (Professeur)DonneeUtil.choix(newSet.set);
 		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+a);
 		Scanner sc2 = new Scanner(System.in);
 		String rep = sc2.next();
@@ -245,7 +222,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String s = "Utilisateur/Professeur/Professeur";
 		All<Professeur> newSet = new All<Professeur>();
 		newSet = (All<Professeur>) newSet.relecture(s);
-		Professeur p = (Professeur)choix(newSet.set);
+		Professeur p = (Professeur)DonneeUtil.choix(newSet.set);
 		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+p);
 		Scanner sc2 = new Scanner(System.in);
 		String rep = sc2.next();
@@ -318,7 +295,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		}
 		Promotion promo = new Promotion();
 		promo = (Promotion) promo.relecture(s);
-		Etudiant etu = (Etudiant) choix(promo.getSetEtudiant());
+		Etudiant etu = (Etudiant) DonneeUtil.choix(promo.getSetEtudiant());
 		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+etu);
 		String rep = sc2.next();
 		switch(rep){
@@ -334,10 +311,9 @@ public class Administrateur extends Utilisateur implements Serializable{
 	
 	/**
 	 * Modifie un étudiant parmi un set d'étudiants.
-	 * @throws NoSuchElementException
 	 * @throws IOException
 	 */
-	public void modifEleve() throws NoSuchElementException,IOException{
+	public void modifEleve() throws IOException{
 		String s = "";
 		Scanner sc2 = new Scanner(System.in);
 		int num = 0;
@@ -355,7 +331,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		}
 		Promotion promo = new Promotion();
 		promo = (Promotion) promo.relecture(s);
-		Etudiant etu = (Etudiant) choix(promo.getSetEtudiant());
+		Etudiant etu = (Etudiant) DonneeUtil.choix(promo.getSetEtudiant());
 		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+etu);
 		String rep = sc2.next();
 		switch(rep){
@@ -374,23 +350,49 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String nom = DonneeUtil.DemandeString("Entrer le nom du nouveau module : ");
 		String path = "Module/Module";
 		All<Module> modules = new All<Module>();
-		modules = (All<Module>) modules.relecture(path);
-		modules.getSet().add(new Module(modules.getSet().size(), nom));
+		//modules = (All<Module>) modules.relecture(path);
+		modules.set.add(new Module(modules.getSet().size(), nom));
 		modules.sauvegarder(path);
 	}
 	
-	
+	/**
+	 * Supprime un module parmi un set de modules.
+	 * @throws IOException
+	 */
 	public void supModule() throws IOException{
 		Scanner sc2 = new Scanner(System.in);
 		String path = "Module/Module";
 		All<Module> modules = new All<Module>();
 		modules = (All<Module>) modules.relecture(path);
-		Module mod = (Module) choix(modules.getSet());
+		Module mod = (Module) DonneeUtil.choix(modules.getSet());
 		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+mod);
 		String rep = sc2.next();
 		switch(rep){
 			case "oui" : 
 				modules.set.remove(mod);
+				modules.sauvegarder(path);
+				break;
+			default : System.out.println("tant pis");break;
+		}
+	}
+	
+	/**
+	 * Modifie un module parmi un set de modules.
+	 * @throws IOException
+	 */
+	public void modifModule() throws IOException{
+		Scanner sc2 = new Scanner(System.in);
+		String path = "Module/Module";
+		All<Module> modules = new All<Module>();
+		modules = (All<Module>) modules.relecture(path);
+		Module mod = (Module) DonneeUtil.choix(modules.getSet());
+		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+mod);
+		String rep = sc2.next();
+		switch(rep){
+			case "oui" :
+				modules.set.remove(mod);
+				mod.setNom(DonneeUtil.DemandeString("Entrer le nouveau nom du module : "+mod.getNom()));
+				modules.set.add(mod);
 				modules.sauvegarder(path);
 				break;
 			default : System.out.println("tant pis");break;

@@ -88,7 +88,7 @@ public class Menu {
 						case '5' :/*Modules*/
 							switch(carac) { 
 							case '1' : a.addModule(); 		break;
-							case '2' : /*Modifier Modules*/  	break;
+							case '2' : a.modifModule();  	break;
 							case '3' : a.supModule();  	break;
 							}
 						break;

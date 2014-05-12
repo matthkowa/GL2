@@ -1,6 +1,8 @@
 package initialNode;
 
-public class Module {
+import java.io.Serializable;
+
+public class Module implements Serializable{
 	private int id;
 	private String nom;
 	/**

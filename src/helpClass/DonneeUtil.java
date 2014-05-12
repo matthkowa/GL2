@@ -1,5 +1,6 @@
 package helpClass;
 
+import java.io.IOException;
 import java.util.*;
 
 
@@ -50,6 +51,32 @@ public class DonneeUtil {
 			}
 		}while(!test);
 		return d;
+	}
+	
+	
+	/**
+	 * choisi un objet parmi un set d'objets du même type.
+	 * @param  set un set d'objet de type T
+	 * @return Object un objet de type T
+	 * @throws IOException
+	 */
+	public static <T> Object choix(Set<T> set) throws IOException{
+		int i=1;
+		List<Object> liste = new ArrayList<Object>();
+		for (Object A : set){
+			liste.add(A);
+		};
+		for (Object A : liste){
+			System.out.println(" - "+i+" => "+A);
+			i++;			
+		}
+		Scanner sc2 = new Scanner(System.in);
+		int num = 0;
+		while(num<1 || num>liste.size()){
+			System.out.println("Entrer le numéro d'un des objet ci-dessus : ");
+			num = sc2.nextInt();
+		}
+		return liste.get(num-1);
 	}
 	
 }
