@@ -39,5 +39,10 @@ public class Promotion extends Serialiser implements Serializable{
 		this.promo = promo;
 	}
 	
+	@Override
+	public String toString(){
+		return setEtudiant.toString() + " " + promo;
+	}
+	
 
 }
