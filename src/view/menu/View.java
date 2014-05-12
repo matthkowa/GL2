@@ -48,7 +48,7 @@ public class View {
 	public static Date demandeDate(String s) throws IOException{
 		Boolean test;
 		String s2,s3;
-		int day,month,year,i;
+		int day,month,year;
 		Date d = new Date();
 		do{
 			test=true;
@@ -56,7 +56,7 @@ public class View {
 			day=0;
 			month=0;
 			year=0;
-			i=0;
+			
 			try{
 				s2 = View.demandeString(s);
 				while (day==0 || month==0 || year==0){	
