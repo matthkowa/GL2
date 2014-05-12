@@ -7,7 +7,7 @@ import java.util.*;
 public class DonneeUtil {
 
 	//méthode à utiliser lors de l'utilisation d'un scanner pour récupérer un String
-	public static String DemandeString(String s){
+	public static String demandeString(String s){
 		String res="";
 		Scanner sc = new Scanner(System.in);
 		System.out.println(s);
@@ -16,7 +16,7 @@ public class DonneeUtil {
 	}
 	
 	//méthode à utiliser lors de l'utilisation d'un scanner pour récupérer un int
-	public static int DemandeInt(String s){
+	public static int demandeInt(String s){
 		int res=1;
 		Boolean test;
 		do{
@@ -35,7 +35,8 @@ public class DonneeUtil {
 		return res;
 	}
 	
-	public static Date DemandeDate(String s){
+	//méthode à utiliser lors de l'utilisation d'un scanner pour récupérer une Date (format DD/MM/YYYY ou DD/MM/YY)
+	public static Date demandeDate(String s){
 		Boolean test;
 		String s2,s3;
 		int day,month,year,i;
@@ -48,14 +49,14 @@ public class DonneeUtil {
 			year=0;
 			i=0;
 			try{
-				s2 = DonneeUtil.DemandeString(s);
-				while (day==0 || month==0 || year==0){	
+				s2 = donneeUtil.demandeString(s);
+				while ( day==0 || month==0 || year==0){	
+					try
+					{
 						if (s2.charAt(0)=='/')
 						{
 							s2 = s2.substring(1, s2.length());
 						}
-						try
-						{
 							while ((s2.charAt(0)!='/')){
 									s3 += s2.charAt(0);
 									s2 = s2.substring(1, s2.length());
@@ -64,27 +65,31 @@ public class DonneeUtil {
 					if ((day!=0) && (month!=0) && (year==0))
 					{
 						year = Integer.parseInt(s3);
+						if (year>100){
+							year = year-1900;
+						}
+						
 						s3="";
 					}
 					else
 					{
 						if ((day!=0) && (month==0) && (year==0))
 						{
-							month = Integer.parseInt(s3);
+							month = Integer.parseInt(s3)-1;
 							s3="";
 						}
 						else
 						{
 							if ((day==0) && (month==0) && (year==0))
 							{
-								System.out.println(s3 + "---" + s2);
 								day = Integer.parseInt(s3);
 								s3="";
+								
 							}
 						}
 					}
 				}
-				d = new Date(day,month,year);
+				d = new Date(year,month,day);
 			}
 			catch(IllegalArgumentException e){
 				System.out.println("Erreur, veuillez entrer la date correctement!");
