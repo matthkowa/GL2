@@ -16,6 +16,15 @@ public class View {
 		System.out.println("---  "+s+"  ---");
 	}
 	
+	public static Boolean demandeBoolean(String s) throws IOException{
+		String res ="";
+		Scanner sc = new Scanner(System.in);
+		System.out.println(s);
+		res = sc.nextLine();
+		
+		return ((res.toLowerCase()=="o")||(res.toLowerCase()=="oui"));
+	}
+	
 	public static String demandeString(String s) throws IOException{
 		String res="";
 		Scanner sc = new Scanner(System.in);
