@@ -75,7 +75,7 @@ public class DonneeUtil {
 					{
 						if ((day!=0) && (month==0) && (year==0))
 						{
-							month = Integer.parseInt(s3)-1;
+							month = Integer.parseInt(s3);
 							s3="";
 						}
 						else
@@ -89,7 +89,7 @@ public class DonneeUtil {
 						}
 					}
 				}
-				d = new Date(year,month,day);
+				d = new Date(year,month-1,day);
 			}
 			catch(IllegalArgumentException e){
 				System.out.println("Erreur, veuillez entrer la date correctement!");
@@ -116,14 +116,14 @@ public class DonneeUtil {
 			System.out.println(" - "+i+" => "+A);
 			i++;			
 		}
-		Scanner sc2 = new Scanner(System.in);
 		int num = 0;
 		while(num<1 || num>liste.size()){
-			System.out.println("Entrer le numéro d'un des objet ci-dessus : ");
-			num = sc2.nextInt();
+			num = DonneeUtil.demandeInt("Entrer le numéro d'un des objet ci-dessus : ");
 		}
 		return liste.get(num-1);
 	}
+	
+	
 	
 }
 
