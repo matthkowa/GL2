@@ -59,30 +59,6 @@ public class Administrateur extends Utilisateur implements Serializable{
 	}
 	
 	/**
-	 * Demande d'entrer des données au clavier et créé un objet Administrateur et l'enregistre dans un fichier
-	 * @throws IOExectpion
-	 */
-	public void addAdmin() throws IOException{
-		String nom = DonneeUtil.DemandeString("Entrer le nom du nouvel Administrateur : ");
-		String prenom = DonneeUtil.DemandeString("Entrer le prenom du nouvel Administrateur : ");
-		Date naissance = DonneeUtil.DemandeDate("Entrer la date de naissance du nouvel Administrateur (JJ/MM/YY) : ");
-		String adresse = DonneeUtil.DemandeString("Entrer l'adresse du nouvel Administrateur : ");
-		int telS = DonneeUtil.DemandeInt("Entrer le tel du nouvel Administrateur : ");
-		String pseudoA=(nom+prenom).toLowerCase();
-		if (pseudoA.length()>10){
-			pseudoA = pseudoA.substring(0,10);
-		}
-		String mdp = "EISTI";
-		
-		
-		String s = "Utilisateur/Administrateur/Administrateur";
-		All<Administrateur> newSet = new All<Administrateur>();
-		newSet = (All<Administrateur>) newSet.relecture(s);
-		newSet.add(new Administrateur(nom, prenom, naissance, adresse, telS, pseudoA, mdp, newSet.set.size()));
-		newSet.sauvegarder(s);
-	}
-	
-	/**
 	 * choisi un objet parmi un set d'objets du même type.
 	 * @param  set un set d'objet de type T
 	 * @return Object un objet de type T
@@ -171,6 +147,30 @@ public class Administrateur extends Utilisateur implements Serializable{
 		return newSet;
 	}
 	
+	/**
+	 * Demande d'entrer des données au clavier et créé un objet Administrateur et l'enregistre dans un fichier
+	 * @throws IOExectpion
+	 */
+	public void addAdmin() throws IOException{
+		String nom = DonneeUtil.DemandeString("Entrer le nom du nouvel Administrateur : ");
+		String prenom = DonneeUtil.DemandeString("Entrer le prenom du nouvel Administrateur : ");
+		Date naissance = DonneeUtil.DemandeDate("Entrer la date de naissance du nouvel Administrateur (JJ/MM/YY) : ");
+		String adresse = DonneeUtil.DemandeString("Entrer l'adresse du nouvel Administrateur : ");
+		int telS = DonneeUtil.DemandeInt("Entrer le tel du nouvel Administrateur : ");
+		String pseudoA=(nom+prenom).toLowerCase();
+		if (pseudoA.length()>10){
+			pseudoA = pseudoA.substring(0,10);
+		}
+		String mdp = "EISTI";
+		
+		
+		String s = "Utilisateur/Administrateur/Administrateur";
+		All<Administrateur> newSet = new All<Administrateur>();
+		newSet = (All<Administrateur>) newSet.relecture(s);
+		newSet.add(new Administrateur(nom, prenom, naissance, adresse, telS, pseudoA, mdp, newSet.set.size()));
+		newSet.sauvegarder(s);
+	}	
+		
 	/**
 	 * Modifie un administrateur parmi un set d'administrateurs.
 	 * @throws NoSuchElementException
@@ -366,5 +366,36 @@ public class Administrateur extends Utilisateur implements Serializable{
 			default : System.out.println("tant pis");break;
 		}
 	}
+	
+	/**
+	 * Fonction qui demande à l'utilisateur de rentrer les données d'un module et l'enregistre dans un fichier
+	 */
+	public void addModule(){
+		String nom = DonneeUtil.DemandeString("Entrer le nom du nouveau module : ");
+		String path = "Module/Module";
+		All<Module> modules = new All<Module>();
+		modules = (All<Module>) modules.relecture(path);
+		modules.getSet().add(new Module(modules.getSet().size(), nom));
+		modules.sauvegarder(path);
+	}
+	
+	
+	public void supModule() throws IOException{
+		Scanner sc2 = new Scanner(System.in);
+		String path = "Module/Module";
+		All<Module> modules = new All<Module>();
+		modules = (All<Module>) modules.relecture(path);
+		Module mod = (Module) choix(modules.getSet());
+		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+mod);
+		String rep = sc2.next();
+		switch(rep){
+			case "oui" : 
+				modules.set.remove(mod);
+				modules.sauvegarder(path);
+				break;
+			default : System.out.println("tant pis");break;
+		}
+	}
+	
 	
 }

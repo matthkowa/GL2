@@ -87,9 +87,9 @@ public class Menu {
 						break;
 						case '5' :/*Modules*/
 							switch(carac) { 
-							case '1' : /*Ajouter Modules*/ 		break;
+							case '1' : a.addModule(); 		break;
 							case '2' : /*Modifier Modules*/  	break;
-							case '3' : /*Supprimer Modules*/  	break;
+							case '3' : a.supModule();  	break;
 							}
 						break;
 						default : System.out.println("Erreur veuillez contacter le support"); break;
