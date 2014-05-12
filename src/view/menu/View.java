@@ -12,6 +12,9 @@ import java.util.Set;
 
 public class View {
 	
+	public static void affichageEnteteMenu(String s){
+		System.out.println("---  "+s+"  ---");
+	}
 	
 	public static String demandeString(String s) throws IOException{
 		String res="";
@@ -55,7 +58,7 @@ public class View {
 			year=0;
 			i=0;
 			try{
-				s2 = DonneeUtil.DemandeString(s);
+				s2 = View.demandeString(s);
 				while (day==0 || month==0 || year==0){	
 					if (s2!="")
 					{
