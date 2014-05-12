@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 
 public class Main {
 	
-	
+	//.
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException{
 		/*Administrateur a = new Administrateur();
