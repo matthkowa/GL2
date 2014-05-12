@@ -176,6 +176,7 @@ public class MenuController {
 				}
 				catch(IOException e){
 					System.out.println("Erreur");
+					
 				}
 				
 			}
