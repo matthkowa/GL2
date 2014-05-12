@@ -7,6 +7,7 @@ import java.util.*;
 import serializable.Serialiser;
 
 public class All<T> extends Serialiser implements Serializable{
+	private static final long serialVersionUID = -4255886924773838605L;
 	public Set<T> set;
 	
 	/**
@@ -49,6 +50,14 @@ public class All<T> extends Serialiser implements Serializable{
 	 */
 	public void add(T objet){
 		this.set.add(objet);
+	}
+	
+	/**
+	 * supprime un objet T à l'attribut set (set d'objet T)
+	 * @param objet objet de type T
+	 */
+	public void remove(T objet){
+		this.set.remove(objet);
 	}
 	
 }

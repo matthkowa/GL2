@@ -287,25 +287,14 @@ public class Administrateur extends Utilisateur implements Serializable{
 		}
 		String mdp = "EISTI";
 
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Entrer la promo du nouvel élève : ");
-		System.out.println("1 / ING1");
-		System.out.println("2 / ING2");
-		System.out.println("3 / ING3");
-		int promo = 0;
-		while (promo<1 || promo>3){
-			promo = sc.nextInt();
-		}
-		Promotion promoInit = new Promotion();
-		String path = "Utilisateur/Etudiant/";
-		switch(promo){
-			case 1 : path+="ING1";break;
-			case 2 : path+="ING2";break;
-			case 3 : path+="ING3";break;
-		}
-		promoInit = (Promotion) promoInit.relecture(path);
-		promoInit.getSetEtudiant().add(new Etudiant(nom, prenom, naissance, adresse, telS, pseudoA, mdp, promoInit.getSetEtudiant().size()));
-		promoInit.sauvegarder(path);
+		String path = "Utilisateur/Etudiant/promotion";
+		All<Promotion> newPromo = new All<Promotion>();
+		newPromo = (All<Promotion>) newPromo.relecture(path);
+		Promotion promo = (Promotion)DonneeUtil.choix(newPromo.getSet());
+		newPromo.remove(promo);
+		promo.getSetEtudiant().add(new Etudiant(nom, prenom, naissance, adresse, telS, pseudoA, mdp, promo.getSetEtudiant().size()));
+		newPromo.add(promo);
+		newPromo.sauvegarder(path);
 	}
 	
 	/**
@@ -315,28 +304,19 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 */
 	public void supEleve() throws NoSuchElementException,IOException{
 		String s = "";
-		Scanner sc2 = new Scanner(System.in);
-		int num = 0;
-		while(num<1 || num>3){
-			System.out.println("A quelle promo appartient-il ?");
-			System.out.println("1 / ING1");
-			System.out.println("2 / ING2");
-			System.out.println("3 / ING3");
-			num = sc2.nextInt();
-		}
-		switch(num){
-		case 1 : s +="Utilisateur/Etudiant/ING1";break;
-		case 2 : s +="Utilisateur/Etudiant/ING2";break;
-		case 3 : s +="Utilisateur/Etudiant/ING3";break;
-		}
-		Promotion promo = new Promotion();
-		promo = (Promotion) promo.relecture(s);
+		String path = "Utilisateur/Etudiant/promotion";
+		All<Promotion> newPromo = new All<Promotion>();
+		newPromo = (All<Promotion>) newPromo.relecture(path);
+		Promotion promo = (Promotion)DonneeUtil.choix(newPromo.getSet());
 		Etudiant etu = (Etudiant) DonneeUtil.choix(promo.getSetEtudiant());
-		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+etu);
-		String rep = sc2.next();
+		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+etu);
+		String rep = (new Scanner(System.in)).next();
 		switch(rep){
 			case "oui" : 
-				promo.setEtudiant.remove(etu);
+				newPromo.remove(promo);
+				promo.getSetEtudiant().remove(etu);
+				newPromo.add(promo);
+				newPromo.sauvegarder(s);
 				break;
 			default : 
 				System.out.println("tant pis");
@@ -440,7 +420,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 */
 	public void addPromo(){
 		String nomPromo = DonneeUtil.demandeString("Entrer le nom de la nouvelle promo : ");
-		String path = "Utilisateur/promotion";
+		String path = "Utilisateur/Etudiant/promotion";
 		Promotion promoInit = new Promotion(new HashSet<Etudiant>(),nomPromo);
 		All<Promotion> newPromo = new All<Promotion>();
 		newPromo = (All<Promotion>) newPromo.relecture(path);
@@ -453,7 +433,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException
 	 */
 	public void supPromo() throws IOException{
-		String path = "Utilisateur/promotion";
+		String path = "Utilisateur/Etudiant/promotion";
 		All<Promotion> newPromo = new All<Promotion>();
 		newPromo = (All<Promotion>) newPromo.relecture(path);
 		Promotion promo = (Promotion)DonneeUtil.choix(newPromo.getSet());
