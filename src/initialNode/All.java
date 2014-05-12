@@ -53,6 +53,14 @@ public class All<T> extends Serialiser implements Serializable{
 	}
 	
 	/**
+	 * Ajoute un set d'objets T à l'attribut set (set d'objet T)
+	 * @param Collection objet de type T
+	 */
+	public void addAll(Collection<T> c){
+		this.set.addAll(c);
+	}
+	
+	/**
 	 * supprime un objet T à l'attribut set (set d'objet T)
 	 * @param objet objet de type T
 	 */
