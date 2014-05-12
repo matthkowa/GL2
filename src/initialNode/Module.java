@@ -37,7 +37,10 @@ public class Module implements Serializable{
 		return id;
 	}
 	
-	
+	@Override
+	public String toString(){
+		return id + " " + nom;
+	}
 
 
 }

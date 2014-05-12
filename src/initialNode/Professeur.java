@@ -2,9 +2,11 @@ package initialNode;
 
 import helpClass.DonneeUtil;
 import view.menu.*;
+import QCM.*;
 
-import java.io.File;
+import java.io.*;
 import java.util.*;
+
 
 import QCM.Session;
 
@@ -50,15 +52,18 @@ public class Professeur extends Utilisateur {
 		this.modules=modulesInit;
 	}
 	
-	public QCM creerQCM(){
+	public void creerQCM(){
 		
-		String titre = View.demandeString("Bienvenue dans l'assistant de création de QCM !\nVeuillez entrer le titre du QCM :\n");
-		
-		
+		try{
+			String titre = View.demandeString("Bienvenue dans l'assistant de création de QCM !\nVeuillez entrer le titre du QCM :\n");
+			QCM qcm = new QCM(titre,this);
+		}catch(IOException e){
+			System.out.println("Terror 404");
+		}
 		
 	}
 	
-	public Session CreerSession(){
+	public void creerSession(){
 		Scanner sc = new Scanner(System.in);
 		int id=0;
 		int repetition=1;
@@ -68,7 +73,6 @@ public class Professeur extends Utilisateur {
 		System.out.println(dateDebut);
 		Session sess = new Session(id, dateDebut, dateFin, repetition);
 		System.out.println(sess);
-		return sess;
 
 		/*File maSession = new File("QCM/");
 		String name = maSession.getName();
