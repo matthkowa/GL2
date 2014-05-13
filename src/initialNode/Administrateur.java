@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Scanner;
 
+import model.RechercheDonnees;
+
 
 public class Administrateur extends Utilisateur implements Serializable{
 	/* Attributs*/
@@ -58,26 +60,6 @@ public class Administrateur extends Utilisateur implements Serializable{
 		this.id = id;
 	}
 	
-	
-	
-	/**
-	 * Supprime un administrateur parmi un set d'administrateurs.
-	 * @throws NoSuchElementException
-	 * @throws IOException
-	 */
-	public void supAdmin() throws NoSuchElementException,IOException{
-		String s = "Utilisateur/Administrateur/Administrateur";
-		All<Administrateur> newSet = new All<Administrateur>();
-		newSet = (All<Administrateur>) newSet.relecture(s);
-		Administrateur a = (Administrateur)DonneeUtil.choix(newSet.set);
-		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+a);
-		Scanner sc2 = new Scanner(System.in);
-		String rep = sc2.next();
-		switch(rep){
-			case "oui" : newSet.set.remove(a);System.out.println("Well done");newSet.sauvegarder(s);break;
-			default : System.out.println("tant pis");break;
-		}
-	}
 	
 	/**
 	 * Fonction qui demande ce qui doit être modifier chez un utilisateur quelconque
@@ -148,6 +130,27 @@ public class Administrateur extends Utilisateur implements Serializable{
 		return newSet;
 	}
 	
+	
+	
+	/**
+	 * Supprime un administrateur parmi un set d'administrateurs.
+	 * @throws NoSuchElementException
+	 * @throws IOException
+	 */
+	public void supAdmin() throws NoSuchElementException,IOException{
+		String s = "Utilisateur/Administrateur/Administrateur";
+		All<Administrateur> newSet = RechercheDonnees.rechercheAdmin();
+		Administrateur a = (Administrateur)DonneeUtil.choix(newSet.set);
+		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+a);
+		Scanner sc2 = new Scanner(System.in);
+		String rep = sc2.next();
+		switch(rep){
+			case "oui" : newSet.set.remove(a);System.out.println("Well done");newSet.sauvegarder(s);break;
+			default : System.out.println("tant pis");break;
+		}
+	}
+	
+	
 	/**
 	 * Demande d'entrer des données au clavier et créé un objet Administrateur et l'enregistre dans un fichier
 	 * @throws IOExectpion
@@ -166,8 +169,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		
 		
 		String s = "Utilisateur/Administrateur/Administrateur";
-		All<Administrateur> newSet = new All<Administrateur>();
-		newSet = (All<Administrateur>) newSet.relecture(s);
+		All<Administrateur> newSet = RechercheDonnees.rechercheAdmin();
 		newSet.add(new Administrateur(nom, prenom, naissance, adresse, telS, pseudoA, mdp, newSet.set.size()));
 		newSet.sauvegarder(s);
 	}	
@@ -179,8 +181,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 */
 	public void modifAdmin() throws NoSuchElementException,IOException{
 		String s = "Utilisateur/Administrateur/Administrateur";
-		All<Administrateur> newSet = new All<Administrateur>();
-		newSet = (All<Administrateur>) newSet.relecture(s);
+		All<Administrateur> newSet = RechercheDonnees.rechercheAdmin();
 		Administrateur a = (Administrateur)DonneeUtil.choix(newSet.set);
 		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+a);
 		Scanner sc2 = new Scanner(System.in);
@@ -223,8 +224,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		}
 		String s = "Utilisateur/Professeur/Professeur";
 
-		All<Professeur> newSet = new All<Professeur>();
-		newSet = (All<Professeur>) newSet.relecture(s);
+		All<Professeur> newSet = RechercheDonnees.rechercheProf();
 		newSet.add(new Professeur(nom, prenom, naissance, adresse, telS, pseudoA, mdp, newSet.set.size(), modprof));
 		newSet.sauvegarder(s);
 	}
@@ -236,8 +236,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 */
 	public void supProf() throws NoSuchElementException,IOException{
 		String s = "Utilisateur/Professeur/Professeur";
-		All<Professeur> newSet = new All<Professeur>();
-		newSet = (All<Professeur>) newSet.relecture(s);
+		All<Professeur> newSet = RechercheDonnees.rechercheProf();
 		Professeur a = (Professeur)DonneeUtil.choix(newSet.set);
 		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+a);
 		Scanner sc2 = new Scanner(System.in);
@@ -255,8 +254,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 */
 	public void modifProf() throws NoSuchElementException,IOException{
 		String s = "Utilisateur/Professeur/Professeur";
-		All<Professeur> newSet = new All<Professeur>();
-		newSet = (All<Professeur>) newSet.relecture(s);
+		All<Professeur> newSet = RechercheDonnees.rechercheProf();
 		Professeur p = (Professeur)DonneeUtil.choix(newSet.set);
 		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+p);
 		Scanner sc2 = new Scanner(System.in);
@@ -287,8 +285,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String mdp = "EISTI";
 
 		String path = "Utilisateur/Etudiant/promotion";
-		All<Promotion> newPromo = new All<Promotion>();
-		newPromo = (All<Promotion>) newPromo.relecture(path);
+		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
 		Promotion promo = (Promotion)DonneeUtil.choix(newPromo.getSet());
 		newPromo.remove(promo);
 		promo.getSetEtudiant().add(new Etudiant(nom, prenom, naissance, adresse, telS, pseudoA, mdp, promo.getSetEtudiant().size()));
@@ -304,8 +301,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	public void supEleve() throws NoSuchElementException,IOException{
 		String s = "";
 		String path = "Utilisateur/Etudiant/promotion";
-		All<Promotion> newPromo = new All<Promotion>();
-		newPromo = (All<Promotion>) newPromo.relecture(path);
+		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
 		Promotion promo = (Promotion)DonneeUtil.choix(newPromo.getSet());
 		Etudiant etu = (Etudiant) DonneeUtil.choix(promo.getSetEtudiant());
 		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+etu);
@@ -364,8 +360,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	public void addModule(){
 		String nom = DonneeUtil.demandeString("Entrer le nom du nouveau module : ");
 		String path = "Module/Module";
-		All<Module> modules = new All<Module>();
-		//modules = (All<Module>) modules.relecture(path);
+		All<Module> modules = RechercheDonnees.rechercheModule();
 		modules.set.add(new Module(modules.getSet().size(), nom));
 		modules.sauvegarder(path);
 	}
@@ -377,8 +372,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	public void supModule() throws IOException{
 		Scanner sc2 = new Scanner(System.in);
 		String path = "Module/Module";
-		All<Module> modules = new All<Module>();
-		modules = (All<Module>) modules.relecture(path);
+		All<Module> modules = RechercheDonnees.rechercheModule();
 		Module mod = (Module) DonneeUtil.choix(modules.getSet());
 		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+mod);
 		String rep = sc2.next();
@@ -398,8 +392,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	public void modifModule() throws IOException{
 		Scanner sc2 = new Scanner(System.in);
 		String path = "Module/Module";
-		All<Module> modules = new All<Module>();
-		modules = (All<Module>) modules.relecture(path);
+		All<Module> modules = RechercheDonnees.rechercheModule();
 		Module mod = (Module) DonneeUtil.choix(modules.getSet());
 		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+mod);
 		String rep = sc2.next();
@@ -421,8 +414,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String nomPromo = DonneeUtil.demandeString("Entrer le nom de la nouvelle promo : ");
 		String path = "Utilisateur/Etudiant/promotion";
 		Promotion promoInit = new Promotion(new HashSet<Etudiant>(),nomPromo);
-		All<Promotion> newPromo = new All<Promotion>();
-		newPromo = (All<Promotion>) newPromo.relecture(path);
+		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
 		newPromo.add(promoInit);
 		newPromo.sauvegarder(path);
 	}
@@ -432,16 +424,14 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException
 	 */
 	public void supPromo() throws IOException{
-		String path = "Utilisateur/Etudiant/promotion";
-		All<Promotion> newPromo = new All<Promotion>();
-		newPromo = (All<Promotion>) newPromo.relecture(path);
+		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
 		Promotion promo = (Promotion)DonneeUtil.choix(newPromo.getSet());
 		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+promo);
 		String rep = (new Scanner(System.in)).next();
 		switch(rep){
 			case "oui" : 
 				newPromo.set.remove(promo);
-				newPromo.sauvegarder(path);
+				newPromo.sauvegarder("Utilisateur/Etudiant/promotion");
 				System.out.println("Well Done!");
 				break;
 			default : System.out.println("tant pis");break;

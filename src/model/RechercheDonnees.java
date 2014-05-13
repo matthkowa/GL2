@@ -27,4 +27,16 @@ public class RechercheDonnees {
 		return (newEtudiant) ;
 	}
 	
+	public static All<Module> rechercheModule(){
+		String path = "Module/module";
+		All<Module> newModule = new All<Module>();
+		return (All<Module>) newModule.relecture(path);
+	}
+	
+
+	public static All<Promotion> recherchePromo(){
+		String path = "Utilisateur/Etudiant/promotion";
+		All<Promotion> newPromo = new All<Promotion>();
+		return (All<Promotion>) newPromo.relecture(path);
+	}
 }
