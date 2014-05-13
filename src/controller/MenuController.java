@@ -1,35 +1,40 @@
 package controller;
+
 import initialNode.*;
-
 import java.io.IOException;
-
-
 import view.menu.View;
 
 public class MenuController {
-	
-	private void authentification(){
-	
-		
-		
-					AuthentificationController aut = new AuthentificationController();
-			Utilisateur util = aut.authentification();
-			if(aut.getAutReussi()){
+	/**
+	 * Crée un objet AuthentificationController puis lance la fonction d'identification associée
+	 * Verifie ensuite si l'authentification a reussi 
+	 * Verifie si l'utilisateur est un administrateur ou professeur ou etudiant et lance les fonctions associées 
+	 */
+	private void authentification(){		
+		AuthentificationController aut = new AuthentificationController();
+		Utilisateur util = aut.authentification();
+		if(aut.getAutReussi()){
 			if(util instanceof Administrateur){
 				administrateur();}
-			else { if (util instanceof Professeur ){
-				professeur();}
-			else { if (util instanceof Etudiant ){
-				etudiant();}
 			else { 
-				System.out.println("Erreur");}
+				if (util instanceof Professeur ){
+					professeur();}
+				else { 
+					if (util instanceof Etudiant ){
+						etudiant();}
+					else { 
+						System.out.println("Erreur");
+					}
 				}
-			}
-			}
-										
-			}
+			}		
+		}
+	}
 		
-	
+	/**
+	 * Deuxieme sous menu de l'administrateur
+	 * @param choix int Précédent choix de l'utilisateur ( administrateur,professeur ou etudiant)
+	 * @param a Administrateur administrateur etant connecté
+	 */
 		
 	private void administrateur2(int choix,Administrateur a){		
 		boolean b = true;
@@ -83,7 +88,10 @@ public class MenuController {
 			}
 		}			
 	}
-	
+
+	/**
+	 * Premier menu d'administrateur 
+	 */
 	private void administrateur(){
 		Administrateur a = new Administrateur();
 		boolean b = true;
@@ -104,6 +112,10 @@ public class MenuController {
 		}
 	}		
 	
+	/**
+	 * Premier menu du professeur
+	 */
+	
 	private void professeur(){
 		boolean b = true;
 		while(b)
@@ -123,6 +135,10 @@ public class MenuController {
 		}
 	}
 	
+	/**
+	 * Premier menu de l'etudiant
+	 */
+	
 	private void etudiant(){
 		boolean b = true;
 		while(b)
@@ -141,6 +157,10 @@ public class MenuController {
 			}				
 		}
 	}
+	
+	/**
+	 * Constructeur du menu lançant l'authentification ou la fermeture du programme
+	 */
 	
 	public MenuController(){
 		boolean b = true;

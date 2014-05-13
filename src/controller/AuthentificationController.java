@@ -1,20 +1,25 @@
 package controller;
 
 import java.io.IOException;
-
 import initialNode.*;
-
 import model.RechercheDonnees;
-
 import view.menu.View;
 
 public class AuthentificationController {
 	private Boolean autReussi;
 
+	/**
+	 * Retourne la valeur de l'authentification : True Authentification reussie; False Echec.
+	 * @return Boolean pour verifier si l'authentification est correcte
+	 */
 	public Boolean getAutReussi() {
 		return autReussi;
 	}
 	
+	/**
+	 * Recuperer tous les utilisateurs pour verifier leur authentification et change les valeurs de autReussi en cas d'echec (false) ou de reussite (True)
+	 * @return Utilisateur dont le pseudo correspond ou vide si aucune identification
+	 */
 	public Utilisateur authentification(){
 		try{
 		String pseudo = View.demandeString("Entrez votre pseudo :");
@@ -44,6 +49,14 @@ public class AuthentificationController {
 		return (new Administrateur());
 	}
 	
+	
+	/**
+	 * Trouve une correspondance entre un couple pseudo/mdp dans une liste d'utilisateur
+	 * @param liste All<Utilisateur> Liste des utilisateurs
+	 * @param pseudo String pseudo de connexion
+	 * @param mdp String mot de passe 
+	 * @return utilisateur correspondant aux identifiants ou utilisateur vide
+	 */
 	private Utilisateur verifierPseudoMdp(All<Utilisateur> liste,String pseudo,String mdp){
 		int i =0;		
 		Boolean b = true;
