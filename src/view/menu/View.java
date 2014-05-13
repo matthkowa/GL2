@@ -1,7 +1,5 @@
 package view.menu;
 
-import helpClass.DonneeUtil;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,7 +52,7 @@ public class View {
 		return res;
 	}
 	
-	public static Date demandeDate(String s){
+	public static Date demandeDate(String s) throws IOException{
 		Boolean test;
 		String s2,s3;
 		int day,month,year;
@@ -66,7 +64,7 @@ public class View {
 			month=0;
 			year=0;
 			try{
-				s2 = DonneeUtil.demandeString(s);
+				s2 = demandeString(s);
 				while ( day==0 || month==0 || year==0){	
 					try
 					{
@@ -134,7 +132,7 @@ public class View {
 		}
 		int num = 0;
 		while(num<1 || num>liste.size()){
-			num = DonneeUtil.demandeInt("Entrer le numéro d'un des objet ci-dessus : ");
+			num = demandeInt("Entrer le numéro d'un des objet ci-dessus : ");
 		}
 		return liste.get(num-1);
 	}
