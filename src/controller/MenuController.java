@@ -1,5 +1,5 @@
 package controller;
-import initialNode.Administrateur;
+import initialNode.*;
 
 import java.io.IOException;
 
@@ -9,47 +9,33 @@ import view.menu.View;
 public class MenuController {
 	
 	private void authentification(){
-		boolean b = true;
-		while(b)
-		{
-			try{
-				int carac = View.demandeInt("_______MENU 1______\n 1- Administrateur \n 2- Professeur \n 3- Etudiant \n 4- Quitter \n \n Choix :");
-				switch (carac){
-					case 1 :	
-						//	Administrateur a =aut.authentificationAdmin(); 
-						//	if (aut.getAutReussi()){
-								administrateur();
-						//	}else{
-							//	System.out.println("Retour");
-								
-						//	}
-							b=false;
-					break;
-					case 2 :
-							/*Professeur p = aut.authentificationProf(); if (aut.getAutReussi()){}else{
-					System.out.println("Retour");b=false;
-						}*/professeur();b=false;break;
-					case 3 :/* Etudiant e = aut.authentificationEtudiant(); if(aut.getAutReussi()){}else{	System.out.println("Retour ");b=false;}
-					}*/ etudiant();b=false;
-					break;
-					case 4 :
-						b=false; 
-					break;
-					default :
-					break;
+	
+		
+		
+					AuthentificationController aut = new AuthentificationController();
+			Utilisateur util = aut.authentification();
+			if(aut.getAutReussi()){
+			if(util instanceof Administrateur){
+				administrateur();}
+			else { if (util instanceof Professeur ){
+				professeur();}
+			else { if (util instanceof Etudiant ){
+				etudiant();}
+			else { 
+				System.out.println("Erreur");}
 				}
 			}
-			catch(IOException e){
-				System.out.println("Erreur");						
 			}
-		}
-	}
+										
+			}
+		
+	
 		
 	private void administrateur2(int choix,Administrateur a){		
 		boolean b = true;
 		while(b){
 			try{
-				int carac = View.demandeInt("_______MENU 1______\n 1- Gérer les administrateur \n 2- Gérer les professeurs \n 3- Gérer les étudiants \n 4- Gérer les promotions \n 5- Gérer les modules \n 6- Deconnexion \n \n Choix :");
+				int carac = View.demandeInt("_______MENU 1______\n 1- Ajouter \n 2- Modifier \n 3- Supprimer \n 4- Retour au menu \n \n Choix :");
 				if(carac==4) b= false; 
 				else{
 					switch(choix) {

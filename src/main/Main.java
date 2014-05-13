@@ -8,6 +8,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.NoSuchElementException;
 
+import controller.MenuController;
+
 
 public class Main {
 	
@@ -16,9 +18,9 @@ public class Main {
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException{
 		/*Administrateur a = new Administrateur();
 		a.addAdmin();*/
-		Professeur p = new Professeur();
-		p.creerSession();
-		Menu m=new Menu();
+		/*Professeur p = new Professeur();
+		p.creerSession();*/
+		MenuController m=new MenuController();
 		//new IHMMenu();
 	}
 }
