@@ -33,7 +33,7 @@ public class Etudiant extends Utilisateur{
 			System.out.println(res);
 		}
 		else {
-			System.out.println("Vous n'êtes pas autorisé à consulter les résultats. Veuillez réessayer une fois la session terminée.");
+			System.out.println("Vous n'êtes pas autorisé à consulter les résultats. Veuillez réessayer une fois la session terminée. ");
 		}
 		
 	}
