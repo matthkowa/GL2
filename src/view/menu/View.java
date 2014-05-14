@@ -9,11 +9,20 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class View {
-	
+	/**
+	 * Met en forme les menus
+	 * @param s String à afficher sur la console
+	 */
 	public static void affichageEnteteMenu(String s){
 		System.out.println("---  "+s+"  ---");
 	}
 	
+	/**
+	 * Permet d'obtenir un boolean pour une question ayant une réponse dichotomique 
+	 * @param s String à afficher sur la console
+	 * @return Boolean retourne True si l'utilisateur saisie O ou Oui et retour false sinon
+	 * @throws IOException
+	 */
 	public static Boolean demandeBoolean(String s) throws IOException{
 		String res ="";
 		Scanner sc = new Scanner(System.in);
@@ -23,6 +32,12 @@ public class View {
 		return ((res.toLowerCase()=="o")||(res.toLowerCase()=="oui"));
 	}
 	
+	/**
+	 * Permet d'obtenir une chaine de caractère entrée par l'utilisateur
+	 * @param s String à afficher sur la console
+	 * @return String saisie par l'utilisateur
+	 * @throws IOException
+	 */
 	public static String demandeString(String s) throws IOException{
 		String res="";
 		Scanner sc = new Scanner(System.in);
@@ -32,8 +47,15 @@ public class View {
 		
 	}
 	
+	/**
+	 * Permet la saisie d'un entier par l'utilisateur
+	 * @param s String à afficher sur la console
+	 * @return int Valeur entrée par l'utilisateur
+	 * @throws IOException
+	 */
 	//méthode à utiliser lors de l'utilisation d'un scanner pour récupérer un int
 	public static int demandeInt(String s) throws IOException{
+
 		int res=1;
 		Boolean test;
 		do{
@@ -52,6 +74,12 @@ public class View {
 		return res;
 	}
 	
+	/**
+	 * Permet la saisie d'une date par l'utilisateur
+	 * @param s String à afficher à l'ecran
+	 * @return Date valeur de la date entrée par l'utilisateur
+	 * @throws IOException
+	 */
 	public static Date demandeDate(String s) throws IOException{
 		Boolean test;
 		String s2,s3;
@@ -64,7 +92,7 @@ public class View {
 			month=0;
 			year=0;
 			try{
-				s2 = View.demandeString(s);
+				s2 = demandeString(s);
 				while ( day==0 || month==0 || year==0){	
 					try
 					{
@@ -132,7 +160,7 @@ public class View {
 		}
 		int num = 0;
 		while(num<1 || num>liste.size()){
-			num = View.demandeInt("Entrer le numéro d'un des objet ci-dessus : ");
+			num = demandeInt("Entrer le numéro d'un des objet ci-dessus : ");
 		}
 		return liste.get(num-1);
 	}
