@@ -1,4 +1,4 @@
-package initialNode;
+package model.utilisateur;
 
 import java.util.*;
 

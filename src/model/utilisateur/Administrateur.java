@@ -1,4 +1,4 @@
-package initialNode;
+package model.utilisateur;
 
 import view.menu.*;
 import java.util.ArrayList;
@@ -280,11 +280,15 @@ public class Administrateur extends Utilisateur implements Serializable{
 
 		String path = "Utilisateur/Etudiant/promotion";
 		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
+		if(newPromo==null){
+		System.out.println("Aucune promotion créée");
+		}else{
 		Promotion promo = (Promotion)View.choix(newPromo.getSet());
 		newPromo.remove(promo);
 		promo.getSetEtudiant().add(new Etudiant(nom, prenom, naissance, adresse, telS, pseudoA, mdp, promo.getSetEtudiant().size()));
 		newPromo.add(promo);
 		newPromo.sauvegarder(path);
+		}
 	}
 	
 	/**

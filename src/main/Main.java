@@ -1,12 +1,13 @@
 package main;
 
 
-import initialNode.Professeur;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.NoSuchElementException;
+
+import model.utilisateur.Professeur;
 
 import controller.MenuController;
 

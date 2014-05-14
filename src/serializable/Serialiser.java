@@ -65,7 +65,7 @@ public class Serialiser implements Serializable{
 				f.close();
 			}
 			catch (Exception e){
-				System.out.println("Erreur"+e);
+				System.out.println("Erreur "+e);
 			}
 			
 			FileInputStream f = new FileInputStream(new File(s));
@@ -82,7 +82,7 @@ public class Serialiser implements Serializable{
 			
 		}
 		catch (Exception e){
-			System.out.println("Erreur"+e);
+			System.out.println("Erreur h "+e);
 		}
 		return null;	
 	}

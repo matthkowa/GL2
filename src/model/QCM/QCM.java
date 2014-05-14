@@ -1,7 +1,8 @@
 package model.QCM;
 
-import initialNode.*;
 import java.util.*;
+
+import model.utilisateur.*;
 
 public class QCM {
 	

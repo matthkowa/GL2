@@ -1,8 +1,8 @@
 package controller;
 
 import java.io.IOException;
-import initialNode.*;
 import model.RechercheDonnees;
+import model.utilisateur.*;
 import view.menu.View;
 
 public class AuthentificationController {

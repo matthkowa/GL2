@@ -1,6 +1,6 @@
 package model;
 
-import initialNode.*;
+import model.utilisateur.*;
 
 
 public class RechercheDonnees {
@@ -57,6 +57,9 @@ public class RechercheDonnees {
 	public static All<Promotion> recherchePromo(){
 		String path = "Utilisateur/Etudiant/promotion";
 		All<Promotion> newPromo = new All<Promotion>();
+		if(newPromo.relecture(path)==null) {
+			return new All<Promotion>();
+		}else
 		return (All<Promotion>) newPromo.relecture(path);
 	}
 }

@@ -1,7 +1,8 @@
 package controller;
 
-import initialNode.*;
 import java.io.IOException;
+
+import model.utilisateur.*;
 import view.menu.View;
 
 public class MenuController {
@@ -12,23 +13,23 @@ public class MenuController {
 	 */
 	private void authentification(){		
 		AuthentificationController aut = new AuthentificationController();
-		Utilisateur util = aut.authentification();
-		if(aut.getAutReussi()){
-			if(util instanceof Administrateur){
+		//Utilisateur util = aut.authentification();
+	//	if(aut.getAutReussi()){
+		//	if(util instanceof Administrateur){
 				administrateur();}
-			else { 
-				if (util instanceof Professeur ){
-					professeur();}
-				else { 
-					if (util instanceof Etudiant ){
-						etudiant();}
-					else { 
-						System.out.println("Erreur");
-					}
-				}
-			}		
-		}
-	}
+//			else { 
+//				if (util instanceof Professeur ){
+//					professeur();}
+//				else { 
+//					if (util instanceof Etudiant ){
+//						etudiant();}
+//					else { 
+//						System.out.println("Erreur");
+//					}
+//				}
+//			}		
+//		}
+//	}
 		
 	/**
 	 * Deuxieme sous menu de l'administrateur
