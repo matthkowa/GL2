@@ -3,6 +3,8 @@ package initialNode;
 import java.io.Serializable;
 import java.util.Date;
 
+import view.menu.View;
+
 public class Utilisateur implements Serializable{
 	private String nom;
 	private String prenom;
@@ -76,7 +78,7 @@ public class Utilisateur implements Serializable{
 		String s="";
 		s+=this.getNom()+" / ";
 		s+=this.getPrenom()+" / ";
-		s+=this.getDateNaissance()+" / ";
+		s+=View.affichageDate(getDateNaissance())+" / ";
 		s+=this.getAdresse()+" / ";
 		s+=this.getTel()+" / ";
 		s+=this.getPseudo()+" / ";

@@ -1,7 +1,7 @@
 package QCM;
 
 import java.util.*;
-import helpClass.*;
+import view.menu.*;
 
 public class Session {
 
@@ -51,77 +51,7 @@ public class Session {
 	}
 	
 	public String toString(){
-		return this.idSession + " " + this.toString(dateDebut) + " " + this.toString(dateFin) + " " + this.repetition;
+		return this.idSession + " " + View.affichageDate(dateDebut) + " " + View.affichageDate(dateFin) + " " + this.repetition;
 	}
 	
-	public String toString(Date d){
-		String day="";
-		String month="";
-		String year="";
-		switch (d.getDay()){
-		case 0 :
-			day = "Dimanche";
-			break;
-		case 1 :
-			day = "Lundi";
-			break;
-		case 2 :
-			day = "Mardi";
-			break;
-		case 3 :
-			day = "Mercredi";
-			break;
-		case 4 :
-			day = "Jeudi";
-			break;
-		case 5 :
-			day = "Vendredi";
-			break;
-		case 6 :
-			day = "Samedi";
-			break;
-		}
-		
-		switch (d.getMonth()){
-		case 0 :
-			month = "Janvier";
-			break;
-		case 1 :
-			month = "Fevrier";
-			break;
-		case 2 :
-			month = "Mars";
-			break;
-		case 3 :
-			month = "Avril";
-			break;
-		case 4 :
-			month = "Mai";
-			break;
-		case 5 :
-			month = "Juin";
-			break;
-		case 6 :
-			month = "Juillet";
-			break;
-		case 7 :
-			month = "Août";
-			break;
-		case 8 :
-			month = "Septembre";
-			break;
-		case 9 :
-			month = "Octobre";
-			break;
-		case 10 :
-			month = "Novembre";
-			break;
-		case 11 :
-			month = "Decembre";
-			break;
-		}
-		year = String.valueOf(1900 + d.getYear());
-		
-		return day + " " + d.getDate() + " " + month + " " + year;
-	}
 }
