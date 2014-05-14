@@ -2,7 +2,8 @@ package initialNode;
 
 import java.util.*;
 
-import QCM.*;
+import model.QCM.*;
+
 
 public class Etudiant extends Utilisateur{
 	private static final long serialVersionUID = -3499573138679375552L;

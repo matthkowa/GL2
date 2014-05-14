@@ -1,13 +1,13 @@
 package initialNode;
 
 import view.menu.*;
-import QCM.*;
 
 import java.io.*;
 import java.util.*;
 
+import model.QCM.*;
 
-import QCM.Session;
+
 
 public class Professeur extends Utilisateur {
 	private static final long serialVersionUID = -5845845607959841888L;

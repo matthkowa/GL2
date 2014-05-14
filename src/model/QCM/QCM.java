@@ -1,4 +1,4 @@
-package QCM;
+package model.QCM;
 
 import initialNode.*;
 import java.util.*;
