@@ -4,7 +4,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import serializable.Serialiser;
+import model.serializable.Serialiser;
+
 
 public class Promotion extends Serialiser implements Serializable{
 	private static final long serialVersionUID = 383244048373251545L;

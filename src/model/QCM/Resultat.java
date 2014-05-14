@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import serializable.Serialiser;
+import model.serializable.Serialiser;
+
 
 public class Resultat extends Serialiser implements Serializable{
 

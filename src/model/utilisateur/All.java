@@ -4,7 +4,8 @@ package model.utilisateur;
 import java.io.Serializable;
 import java.util.*;
 
-import serializable.Serialiser;
+import model.serializable.Serialiser;
+
 
 public class All<T> extends Serialiser implements Serializable{
 	private static final long serialVersionUID = -4255886924773838605L;

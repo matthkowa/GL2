@@ -12,7 +12,9 @@ public class RechercheDonnees {
 	public static All<Administrateur> rechercheAdmin(){
 		String path = "Utilisateur/Administrateur/Administrateur";
 		All<Administrateur> newAdmin = new All<Administrateur>();
-		return (All<Administrateur>) newAdmin.relecture(path);
+		if(newAdmin.relecture(path)!=null){
+		return (All<Administrateur>) newAdmin.relecture(path);}
+		else return (new All<Administrateur>());
 	}
 	
 	/**
@@ -22,7 +24,10 @@ public class RechercheDonnees {
 	public static All<Professeur> rechercheProf(){
 		String path = "Utilisateur/Professeur/Professeur";
 		All<Professeur> newProf = new All<Professeur>();
+		if (newProf.relecture(path)!=null){
 		return (All<Professeur>) newProf.relecture(path);
+		}
+		else return (new All<Professeur>());
 	}
 	
 	/**
@@ -37,7 +42,11 @@ public class RechercheDonnees {
 		for(Promotion p1 : p.getSet()){
 			newEtudiant.addAll(p1.getSetEtudiant());
 		}
+		if (newEtudiant!=null){
 		return (newEtudiant) ;
+		}else{
+			return (new All<Etudiant>());
+		}
 	}
 	
 	/**
@@ -47,7 +56,10 @@ public class RechercheDonnees {
 	public static All<Module> rechercheModule(){
 		String path = "Module/module";
 		All<Module> newModule = new All<Module>();
+		if(newModule.relecture(path)!=null){
 		return (All<Module>) newModule.relecture(path);
+		}
+		else return (new All<Module>());
 	}
 	
 	/**
