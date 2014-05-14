@@ -165,6 +165,4 @@ public class View {
 		return liste.get(num-1);
 	}
 	
-	
-	
 }
