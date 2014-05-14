@@ -5,7 +5,7 @@ import java.util.*;
 import QCM.*;
 
 public class Etudiant extends Utilisateur{
-
+	private static final long serialVersionUID = -3499573138679375552L;
 	private int idEtudiant;
 
 	public Etudiant(String nom, String prenom, Date dateNaissance, String adresse, int tel, String pseudo, String motDePasse,int idEtudiant){
