@@ -26,6 +26,7 @@ public class QCM {
 	}
 	
 	public QCM(String libelle, Professeur createur) {
+		// GENERER ID !!
 		this.libelle = libelle;
 		this.createur = createur;
 		this.questions = new HashSet<Question>();		

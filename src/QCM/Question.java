@@ -6,16 +6,16 @@ public class Question {
 
 	private int id;
 	private String libelle;
-	private Set<Reponse> reponses;
+	private ArrayList<Reponse> reponses;
 	
 	/**
 	 * @param id
 	 * @param libelle
 	 */
-	public Question(int id, String libelle, Set<Reponse> reponses) {
+	public Question(int id, String libelle, ArrayList<Reponse> reponses) {
 		this.id = id;
 		this.libelle = libelle;
-		this.reponses = new HashSet<Reponse>();
+		this.reponses = new ArrayList<Reponse>();
 		this.reponses = reponses;
 	}
 	/**
@@ -37,7 +37,11 @@ public class Question {
 		return id;
 	}
 	
-	public Set<Reponse> getReponses() {
+	/**
+	 * @return the id
+	 */
+	
+	public ArrayList<Reponse> getReponses() {
 		return reponses;
 	}
 	
