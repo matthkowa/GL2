@@ -183,9 +183,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String s = "Utilisateur/Administrateur/Administrateur";
 		All<Administrateur> newSet = RechercheDonnees.rechercheAdmin();
 		Administrateur a = (Administrateur)DonneeUtil.choix(newSet.set);
-		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+a);
-		Scanner sc2 = new Scanner(System.in);
-		String rep = sc2.next();
+		String rep = DonneeUtil.demandeString("Voulez-vous vraiment modifier (oui/non) : "+a);
 		switch(rep){
 			case "oui" : 
 				newSet.set = this.modifdonnees(newSet.set, a, s);
@@ -216,11 +214,10 @@ public class Administrateur extends Utilisateur implements Serializable{
 		Module mod = new Module();
 		while (rep=="oui"){
 			System.out.println("Entrer un module pour le professeur");
-			All<Module> modules = new All<Module>();
-			modules = (All<Module>) modules.relecture("Module/Module");
+			All<Module> modules = RechercheDonnees.rechercheModule();
 			mod = (Module)DonneeUtil.choix(modules.getSet());
 			modprof.add(mod);
-			System.out.println("Voulez vous-entrer d'autres modules");
+			rep = DonneeUtil.demandeString("Voulez vous-entrer d'autres modules");
 		}
 		String s = "Utilisateur/Professeur/Professeur";
 
@@ -238,9 +235,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String s = "Utilisateur/Professeur/Professeur";
 		All<Professeur> newSet = RechercheDonnees.rechercheProf();
 		Professeur a = (Professeur)DonneeUtil.choix(newSet.set);
-		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+a);
-		Scanner sc2 = new Scanner(System.in);
-		String rep = sc2.next();
+		String rep = DonneeUtil.demandeString("Voulez-vous vraiment supprimer (oui/non) : "+a);
 		switch(rep){
 			case "oui" : newSet.set.remove(a);System.out.println("Well done");newSet.sauvegarder(s);break;
 			default : System.out.println("tant pis");break;
@@ -257,8 +252,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		All<Professeur> newSet = RechercheDonnees.rechercheProf();
 		Professeur p = (Professeur)DonneeUtil.choix(newSet.set);
 		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+p);
-		Scanner sc2 = new Scanner(System.in);
-		String rep = sc2.next();
+		String rep = (new Scanner(System.in)).next();
 		switch(rep){
 			case "oui" : 
 				newSet.set = this.modifdonnees(newSet.set, p, s);
@@ -325,30 +319,16 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException
 	 */
 	public void modifEleve() throws IOException{
-		String s = "";
-		Scanner sc2 = new Scanner(System.in);
-		int num = 0;
-		while(num<1 || num>3){
-			System.out.println("A quelle promo appartient-il ?");
-			System.out.println("1 / ING1");
-			System.out.println("2 / ING2");
-			System.out.println("3 / ING3");
-			num = sc2.nextInt();
-		}
-		switch(num){
-		case 1 : s +="Utilisateur/Etudiant/ING1";break;
-		case 2 : s +="Utilisateur/Etudiant/ING2";break;
-		case 3 : s +="Utilisateur/Etudiant/ING3";break;
-		}
-		Promotion promo = new Promotion();
-		promo = (Promotion) promo.relecture(s);
+		String path = "Utilisateur/Etudiant/promotion";
+		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
+		Promotion promo = (Promotion) DonneeUtil.choix(newPromo.getSet());
 		Etudiant etu = (Etudiant) DonneeUtil.choix(promo.getSetEtudiant());
 		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+etu);
-		String rep = sc2.next();
+		String rep = (new Scanner(System.in)).next();
 		switch(rep){
 			case "oui" : 
-				promo.setSetEtudiant(this.modifdonnees(promo.getSetEtudiant(), etu, s));
-				promo.sauvegarder(s);
+				promo.setSetEtudiant(this.modifdonnees(promo.getSetEtudiant(), etu, path));
+				promo.sauvegarder(path);
 				break;
 			default : System.out.println("tant pis");break;
 		}
@@ -370,12 +350,11 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException
 	 */
 	public void supModule() throws IOException{
-		Scanner sc2 = new Scanner(System.in);
 		String path = "Module/Module";
 		All<Module> modules = RechercheDonnees.rechercheModule();
 		Module mod = (Module) DonneeUtil.choix(modules.getSet());
 		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+mod);
-		String rep = sc2.next();
+		String rep = (new Scanner(System.in)).next();
 		switch(rep){
 			case "oui" : 
 				modules.set.remove(mod);
@@ -390,12 +369,11 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException
 	 */
 	public void modifModule() throws IOException{
-		Scanner sc2 = new Scanner(System.in);
 		String path = "Module/Module";
 		All<Module> modules = RechercheDonnees.rechercheModule();
 		Module mod = (Module) DonneeUtil.choix(modules.getSet());
 		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+mod);
-		String rep = sc2.next();
+		String rep = (new Scanner(System.in)).next();
 		switch(rep){
 			case "oui" :
 				modules.set.remove(mod);
