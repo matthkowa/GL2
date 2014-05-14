@@ -27,17 +27,16 @@ public class AuthentificationController {
 		All<Utilisateur> utilisateurs = new All<Utilisateur>();
 		All<Administrateur> listeA = RechercheDonnees.rechercheAdmin();
 		All<Professeur> listeP = RechercheDonnees.rechercheProf();
-		//All<Etudiant> listeE = RechercheDonnees.rechercheEtudiant();
-//		for(Etudiant e : listeE.getSet()){
-//			utilisateurs.add((Utilisateur) e);
-//		
-//		}
+		All<Etudiant> listeE = RechercheDonnees.rechercheEtudiant();
+		for(Etudiant e : listeE.getSet()){
+			utilisateurs.add((Utilisateur) e);
+	
+		}
 		for(Professeur p : listeP.getSet()){
 			utilisateurs.add((Utilisateur) p);
 		}
 		for(Administrateur a : listeA.getSet()){
-			utilisateurs.add((Utilisateur) a);
-			System.out.println(a.getPseudo());
+			utilisateurs.add((Utilisateur) a);			
 		}
 		
 		return verifierPseudoMdp(utilisateurs,pseudo,mdp);
