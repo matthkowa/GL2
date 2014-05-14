@@ -1,6 +1,6 @@
 package initialNode;
 
-import helpClass.DonneeUtil;
+import view.menu.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -87,22 +87,22 @@ public class Administrateur extends Utilisateur implements Serializable{
 		}
 		switch(rep2){
 			case 1 : 
-				util.setNom(DonneeUtil.demandeString("Nom : "));
+				util.setNom(View.demandeString("Nom : "));
 				break;
 			case 2 : 
-				util.setPrenom(DonneeUtil.demandeString("Prenom : "));
+				util.setPrenom(View.demandeString("Prenom : "));
 				break;
 			case 3 : 
-				util.setDateNaissance(DonneeUtil.demandeDate("Date de naissance : "));
+				util.setDateNaissance(View.demandeDate("Date de naissance : "));
 				break;
 			case 4 : 
-				util.setAdresse(DonneeUtil.demandeString("Adresse : "));
+				util.setAdresse(View.demandeString("Adresse : "));
 				break;
 			case 5 : 
-				util.setTel(DonneeUtil.demandeInt("Telephone : "));
+				util.setTel(View.demandeInt("Telephone : "));
 				break;
 			case 6 : 
-				util.setMotDePasse(DonneeUtil.demandeString("Mot de passe : "));
+				util.setMotDePasse(View.demandeString("Mot de passe : "));
 				break;
 			case 7 :
 				if (util instanceof Professeur){
@@ -113,7 +113,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 						System.out.println("Entrer un module pour le professeur");
 						All<Module> modules = new All<Module>();
 						modules = (All<Module>) modules.relecture("Module/Module");
-						mod = (Module)DonneeUtil.choix(modules.getSet());
+						mod = (Module)View.choix(modules.getSet());
 						modprof.add(mod);
 						System.out.println("Voulez vous-entrer d'autres modules (oui/non)");
 						rep = (new Scanner(System.in)).nextLine();
@@ -140,7 +140,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	public void supAdmin() throws NoSuchElementException,IOException{
 		String s = "Utilisateur/Administrateur/Administrateur";
 		All<Administrateur> newSet = RechercheDonnees.rechercheAdmin();
-		Administrateur a = (Administrateur)DonneeUtil.choix(newSet.set);
+		Administrateur a = (Administrateur)View.choix(newSet.set);
 		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+a);
 		Scanner sc2 = new Scanner(System.in);
 		String rep = sc2.next();
@@ -156,11 +156,11 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOExectpion
 	 */
 	public void addAdmin() throws IOException{
-		String nom = DonneeUtil.demandeString("Entrer le nom du nouvel Administrateur : ");
-		String prenom = DonneeUtil.demandeString("Entrer le prenom du nouvel Administrateur : ");
-		Date naissance = DonneeUtil.demandeDate("Entrer la date de naissance du nouvel Administrateur (JJ/MM/YY) : ");
-		String adresse = DonneeUtil.demandeString("Entrer l'adresse du nouvel Administrateur : ");
-		int telS = DonneeUtil.demandeInt("Entrer le tel du nouvel Administrateur : ");
+		String nom = View.demandeString("Entrer le nom du nouvel Administrateur : ");
+		String prenom = View.demandeString("Entrer le prenom du nouvel Administrateur : ");
+		Date naissance = View.demandeDate("Entrer la date de naissance du nouvel Administrateur (JJ/MM/YY) : ");
+		String adresse = View.demandeString("Entrer l'adresse du nouvel Administrateur : ");
+		int telS = View.demandeInt("Entrer le tel du nouvel Administrateur : ");
 		String pseudoA=(nom+prenom).toLowerCase();
 		if (pseudoA.length()>10){
 			pseudoA = pseudoA.substring(0,10);
@@ -182,10 +182,8 @@ public class Administrateur extends Utilisateur implements Serializable{
 	public void modifAdmin() throws NoSuchElementException,IOException{
 		String s = "Utilisateur/Administrateur/Administrateur";
 		All<Administrateur> newSet = RechercheDonnees.rechercheAdmin();
-		Administrateur a = (Administrateur)DonneeUtil.choix(newSet.set);
-		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+a);
-		Scanner sc2 = new Scanner(System.in);
-		String rep = sc2.next();
+		Administrateur a = (Administrateur)View.choix(newSet.set);
+		String rep = View.demandeString("Voulez-vous vraiment modifier (oui/non) : "+a);
 		switch(rep){
 			case "oui" : 
 				newSet.set = this.modifdonnees(newSet.set, a, s);
@@ -201,11 +199,11 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOExectpion
 	 */
 	public void addProf() throws IOException{
-		String nom = DonneeUtil.demandeString("Entrer le nom du nouveau professeur : ");
-		String prenom = DonneeUtil.demandeString("Entrer le prenom du nouveau professeur : ");
-		Date naissance = DonneeUtil.demandeDate("Entrer la date de naissance du nouveau professeur (JJ/MM/YY) : ");
-		String adresse = DonneeUtil.demandeString("Entrer l'adresse du nouveau professeur : ");
-		int telS = DonneeUtil.demandeInt("Entrer le tel du nouveau professeur : ");
+		String nom = View.demandeString("Entrer le nom du nouveau professeur : ");
+		String prenom = View.demandeString("Entrer le prenom du nouveau professeur : ");
+		Date naissance = View.demandeDate("Entrer la date de naissance du nouveau professeur (JJ/MM/YY) : ");
+		String adresse = View.demandeString("Entrer l'adresse du nouveau professeur : ");
+		int telS = View.demandeInt("Entrer le tel du nouveau professeur : ");
 		String pseudoA=(nom+prenom).toLowerCase();
 		if (pseudoA.length()>10){
 			pseudoA = pseudoA.substring(0,10);
@@ -216,11 +214,10 @@ public class Administrateur extends Utilisateur implements Serializable{
 		Module mod = new Module();
 		while (rep=="oui"){
 			System.out.println("Entrer un module pour le professeur");
-			All<Module> modules = new All<Module>();
-			modules = (All<Module>) modules.relecture("Module/Module");
-			mod = (Module)DonneeUtil.choix(modules.getSet());
+			All<Module> modules = RechercheDonnees.rechercheModule();
+			mod = (Module)View.choix(modules.getSet());
 			modprof.add(mod);
-			System.out.println("Voulez vous-entrer d'autres modules");
+			rep = View.demandeString("Voulez vous-entrer d'autres modules");
 		}
 		String s = "Utilisateur/Professeur/Professeur";
 
@@ -237,10 +234,8 @@ public class Administrateur extends Utilisateur implements Serializable{
 	public void supProf() throws NoSuchElementException,IOException{
 		String s = "Utilisateur/Professeur/Professeur";
 		All<Professeur> newSet = RechercheDonnees.rechercheProf();
-		Professeur a = (Professeur)DonneeUtil.choix(newSet.set);
-		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+a);
-		Scanner sc2 = new Scanner(System.in);
-		String rep = sc2.next();
+		Professeur a = (Professeur)View.choix(newSet.set);
+		String rep = View.demandeString("Voulez-vous vraiment supprimer (oui/non) : "+a);
 		switch(rep){
 			case "oui" : newSet.set.remove(a);System.out.println("Well done");newSet.sauvegarder(s);break;
 			default : System.out.println("tant pis");break;
@@ -255,10 +250,9 @@ public class Administrateur extends Utilisateur implements Serializable{
 	public void modifProf() throws NoSuchElementException,IOException{
 		String s = "Utilisateur/Professeur/Professeur";
 		All<Professeur> newSet = RechercheDonnees.rechercheProf();
-		Professeur p = (Professeur)DonneeUtil.choix(newSet.set);
+		Professeur p = (Professeur)View.choix(newSet.set);
 		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+p);
-		Scanner sc2 = new Scanner(System.in);
-		String rep = sc2.next();
+		String rep = (new Scanner(System.in)).next();
 		switch(rep){
 			case "oui" : 
 				newSet.set = this.modifdonnees(newSet.set, p, s);
@@ -273,11 +267,11 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException
 	 */
 	public void addEleve() throws NoSuchElementException,IOException{
-		String nom = DonneeUtil.demandeString("Entrer le nom du nouvel étudiant : ");
-		String prenom = DonneeUtil.demandeString("Entrer le prenom du nouvel étudiant : ");
-		Date naissance = DonneeUtil.demandeDate("Entrer la date de naissance du nouvel étudiant (JJ/MM/YY) : ");
-		String adresse = DonneeUtil.demandeString("Entrer l'adresse du nouvel étudiant : ");
-		int telS = DonneeUtil.demandeInt("Entrer le tel du nouvel étudiant : ");
+		String nom = View.demandeString("Entrer le nom du nouvel étudiant : ");
+		String prenom = View.demandeString("Entrer le prenom du nouvel étudiant : ");
+		Date naissance = View.demandeDate("Entrer la date de naissance du nouvel étudiant (JJ/MM/YY) : ");
+		String adresse = View.demandeString("Entrer l'adresse du nouvel étudiant : ");
+		int telS = View.demandeInt("Entrer le tel du nouvel étudiant : ");
 		String pseudoA=(nom+prenom).toLowerCase();
 		if (pseudoA.length()>10){
 			pseudoA = pseudoA.substring(0,10);
@@ -286,7 +280,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 
 		String path = "Utilisateur/Etudiant/promotion";
 		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
-		Promotion promo = (Promotion)DonneeUtil.choix(newPromo.getSet());
+		Promotion promo = (Promotion)View.choix(newPromo.getSet());
 		newPromo.remove(promo);
 		promo.getSetEtudiant().add(new Etudiant(nom, prenom, naissance, adresse, telS, pseudoA, mdp, promo.getSetEtudiant().size()));
 		newPromo.add(promo);
@@ -302,8 +296,8 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String s = "";
 		String path = "Utilisateur/Etudiant/promotion";
 		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
-		Promotion promo = (Promotion)DonneeUtil.choix(newPromo.getSet());
-		Etudiant etu = (Etudiant) DonneeUtil.choix(promo.getSetEtudiant());
+		Promotion promo = (Promotion)View.choix(newPromo.getSet());
+		Etudiant etu = (Etudiant) View.choix(promo.getSetEtudiant());
 		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+etu);
 		String rep = (new Scanner(System.in)).next();
 		switch(rep){
@@ -325,30 +319,16 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException
 	 */
 	public void modifEleve() throws IOException{
-		String s = "";
-		Scanner sc2 = new Scanner(System.in);
-		int num = 0;
-		while(num<1 || num>3){
-			System.out.println("A quelle promo appartient-il ?");
-			System.out.println("1 / ING1");
-			System.out.println("2 / ING2");
-			System.out.println("3 / ING3");
-			num = sc2.nextInt();
-		}
-		switch(num){
-		case 1 : s +="Utilisateur/Etudiant/ING1";break;
-		case 2 : s +="Utilisateur/Etudiant/ING2";break;
-		case 3 : s +="Utilisateur/Etudiant/ING3";break;
-		}
-		Promotion promo = new Promotion();
-		promo = (Promotion) promo.relecture(s);
-		Etudiant etu = (Etudiant) DonneeUtil.choix(promo.getSetEtudiant());
+		String path = "Utilisateur/Etudiant/promotion";
+		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
+		Promotion promo = (Promotion) View.choix(newPromo.getSet());
+		Etudiant etu = (Etudiant) View.choix(promo.getSetEtudiant());
 		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+etu);
-		String rep = sc2.next();
+		String rep = (new Scanner(System.in)).next();
 		switch(rep){
 			case "oui" : 
-				promo.setSetEtudiant(this.modifdonnees(promo.getSetEtudiant(), etu, s));
-				promo.sauvegarder(s);
+				promo.setSetEtudiant(this.modifdonnees(promo.getSetEtudiant(), etu, path));
+				promo.sauvegarder(path);
 				break;
 			default : System.out.println("tant pis");break;
 		}
@@ -358,11 +338,18 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * Fonction qui demande à l'utilisateur de rentrer les données d'un module et l'enregistre dans un fichier
 	 */
 	public void addModule(){
-		String nom = DonneeUtil.demandeString("Entrer le nom du nouveau module : ");
-		String path = "Module/Module";
-		All<Module> modules = RechercheDonnees.rechercheModule();
-		modules.set.add(new Module(modules.getSet().size(), nom));
-		modules.sauvegarder(path);
+		try
+		{
+			String nom = View.demandeString("Entrer le nom du nouveau module : ");
+			String path = "Module/Module";
+			All<Module> modules = RechercheDonnees.rechercheModule();
+			modules.set.add(new Module(modules.getSet().size(), nom));
+			modules.sauvegarder(path);
+		}
+		catch(IOException e)
+		{
+			System.out.println("Erreur lors de la création du module.");
+		}
 	}
 	
 	/**
@@ -370,12 +357,11 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException
 	 */
 	public void supModule() throws IOException{
-		Scanner sc2 = new Scanner(System.in);
 		String path = "Module/Module";
 		All<Module> modules = RechercheDonnees.rechercheModule();
-		Module mod = (Module) DonneeUtil.choix(modules.getSet());
+		Module mod = (Module) View.choix(modules.getSet());
 		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+mod);
-		String rep = sc2.next();
+		String rep = (new Scanner(System.in)).next();
 		switch(rep){
 			case "oui" : 
 				modules.set.remove(mod);
@@ -390,16 +376,15 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException
 	 */
 	public void modifModule() throws IOException{
-		Scanner sc2 = new Scanner(System.in);
 		String path = "Module/Module";
 		All<Module> modules = RechercheDonnees.rechercheModule();
-		Module mod = (Module) DonneeUtil.choix(modules.getSet());
+		Module mod = (Module) View.choix(modules.getSet());
 		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+mod);
-		String rep = sc2.next();
+		String rep = (new Scanner(System.in)).next();
 		switch(rep){
 			case "oui" :
 				modules.set.remove(mod);
-				mod.setNom(DonneeUtil.demandeString("Entrer le nouveau nom du module : "+mod.getNom()));
+				mod.setNom(View.demandeString("Entrer le nouveau nom du module : "+mod.getNom()));
 				modules.add(mod);
 				modules.sauvegarder(path);
 				break;
@@ -411,12 +396,19 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * Fonction qui demande à l'utilisateur d'entrer des données pour créer et enregistrer une promotion
 	 */
 	public void addPromo(){
-		String nomPromo = DonneeUtil.demandeString("Entrer le nom de la nouvelle promo : ");
-		String path = "Utilisateur/Etudiant/promotion";
-		Promotion promoInit = new Promotion(new HashSet<Etudiant>(),nomPromo);
-		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
-		newPromo.add(promoInit);
-		newPromo.sauvegarder(path);
+		try
+		{
+			String nomPromo = View.demandeString("Entrer le nom de la nouvelle promo : ");
+			String path = "Utilisateur/Etudiant/promotion";
+			Promotion promoInit = new Promotion(new HashSet<Etudiant>(),nomPromo);
+			All<Promotion> newPromo = RechercheDonnees.recherchePromo();
+			newPromo.add(promoInit);
+			newPromo.sauvegarder(path);
+		}
+		catch(IOException e)
+		{
+			System.out.println("Erreur lors de la création de la promotion.");
+		}
 	}
 	
 	/**
@@ -425,7 +417,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 */
 	public void supPromo() throws IOException{
 		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
-		Promotion promo = (Promotion)DonneeUtil.choix(newPromo.getSet());
+		Promotion promo = (Promotion)View.choix(newPromo.getSet());
 		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+promo);
 		String rep = (new Scanner(System.in)).next();
 		switch(rep){
