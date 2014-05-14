@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class View {
 	/**
-	 * Met en forme les menus
+	 * Met en forme les menus 
 	 * @param s String à afficher sur la console
 	 */
 	public static void affichageEnteteMenu(String s){
