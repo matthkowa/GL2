@@ -1,6 +1,5 @@
 package initialNode;
 
-import helpClass.DonneeUtil;
 import view.menu.*;
 import QCM.*;
 
@@ -64,15 +63,20 @@ public class Professeur extends Utilisateur {
 	}
 	
 	public void creerSession(){
-		Scanner sc = new Scanner(System.in);
 		int id=0;
 		int repetition=1;
-		Date dateDebut = DonneeUtil.demandeDate("Veuillez entrer une date de début de session (DD/MM/YYYY)");
-		Date dateFin = DonneeUtil.demandeDate("Veuillez entrer une date de fin de session (DD/MM/YYYY)");
-		repetition = DonneeUtil.demandeInt("Combien de fois autorisez vous les étudiants à répondre à ce QCM?");
-		System.out.println(dateDebut);
-		Session sess = new Session(id, dateDebut, dateFin, repetition);
-		System.out.println(sess);
+		try{
+			Date dateDebut = View.demandeDate("Veuillez entrer une date de début de session (DD/MM/YYYY)");
+			Date dateFin = View.demandeDate("Veuillez entrer une date de fin de session (DD/MM/YYYY)");
+			repetition = View.demandeInt("Combien de fois autorisez vous les étudiants à répondre à ce QCM?");
+			System.out.println(dateDebut);
+			Session sess = new Session(id, dateDebut, dateFin, repetition);
+			System.out.println(sess);
+		}
+		catch(IOException e)
+		{
+			System.out.println("Erreur lors de la création de la session, veuillez recommencer.");
+		}
 
 		/*File maSession = new File("QCM/");
 		String name = maSession.getName();
