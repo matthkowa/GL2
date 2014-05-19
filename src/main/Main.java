@@ -7,6 +7,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.NoSuchElementException;
 
+import view.IHM.IHMMenu;
+
 import model.utilisateur.Professeur;
 
 import controller.MenuController;
@@ -21,7 +23,7 @@ public class Main {
 		a.addAdmin();*/
 		/*Professeur p = new Professeur();
 		p.creerSession();*/
-		MenuController m=new MenuController();
-		//new IHMMenu();
+		//MenuController m=new MenuController();
+		new IHMMenu();
 	}
 }

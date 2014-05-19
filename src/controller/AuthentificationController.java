@@ -12,6 +12,7 @@ public class AuthentificationController {
 	 * Retourne la valeur de l'authentification : True Authentification reussie; False Echec.
 	 * @return Boolean pour verifier si l'authentification est correcte
 	 */
+
 	public Boolean getAutReussi() {
 		return autReussi;
 	}

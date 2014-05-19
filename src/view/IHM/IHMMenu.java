@@ -1,41 +1,30 @@
 package view.IHM;
 
 import javax.swing.*;
+
+import controller.IHMListener;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class IHMMenu extends JFrame implements ActionListener {
+public class IHMMenu extends JFrame {
 	private JPanel panneau1 = new JPanel();
+	private JPanel fond = new JPanel();
 	private JLabel texte = new JLabel("Bienvenue");
-	private JButton aut = new JButton("S'authentifier");
-	private JButton quit = new JButton("Quitter");
+	private IHMListener l = new IHMListener(fond);
 	
 	public IHMMenu(){
-		this.setPreferredSize(new Dimension(300,300));
+		this.setPreferredSize(new Dimension(800,500));
 		this.pack();
-		setLayout(new GridLayout(2,0));
-        panneau1.add(aut);
-        panneau1.add(quit);
-       
-        add(texte);
-        add(panneau1);
-        quit.addActionListener(this);
-        aut.addActionListener(this);
+		this.setLayout(new BorderLayout());
+		this.add(new IHMBarreMenu(fond),BorderLayout.NORTH);
+        add(fond,BorderLayout.CENTER);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
 		
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==aut){
-			
-			
-		}
-		if(e.getSource()==quit){
-			System.exit(0);
-		}
-		
-	}
+	
 }
