@@ -1,9 +1,11 @@
 package model.QCM;
 
+import java.io.*;
 import java.util.*;
+
 import view.menu.*;
 
-public class Session {
+public class Session implements Serializable {
 
 	int idSession;
 	Date dateDebut;
