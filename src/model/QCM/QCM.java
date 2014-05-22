@@ -1,10 +1,11 @@
 package model.QCM;
 
+import java.io.*;
 import java.util.*;
-
+import view.menu.*;
 import model.utilisateur.*;
 
-public class QCM{
+public class QCM implements Serializable{
 	
 	private String libelle;
 	private Boolean estPrive;
@@ -77,7 +78,42 @@ public class QCM{
 	}
 	
 	public void creerQuestion() {
-	
+		try{
+		String libelle = View.demandeString("Entrez l'énoncé votre question :");
+		Question question = new Question(libelle);
+		
+		Boolean finQuestion = true;
+		
+		int compteur = 0;
+		
+		while (finQuestion){
+				
+			question.creerReponse();
+							
+			compteur ++;
+			
+			Iterator it = question.getReponses().iterator();
+			boolean bonneReponse = false;
+			
+			while (it.hasNext() && !(bonneReponse)){
+				Reponse rep = (Reponse) it.next();
+				
+				bonneReponse = rep.getEstVraie();
+				
+			}
+			
+				if (compteur > 1 && bonneReponse){
+					finQuestion = View.demandeBoolean("Ajouter une autre réponse ?");
+				}
+							
+			}
+		
+		this.questions.add(question);		
+		
+		}catch (IOException e){
+			System.out.println("Erreur d'entrée sortie");
+		}
+		
 	}
 
 }

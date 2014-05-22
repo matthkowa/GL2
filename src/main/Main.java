@@ -20,15 +20,12 @@ public class Main {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException{
 		/*Administrateur a = new Administrateur();
-		a.addAdmin();*/
+		a.addMo();*/
 		Professeur p = new Professeur();
 		p.creerQCM();
-		//MenuController m=new MenuController();
+	//	MenuController m=new MenuController();
 		//new IHMMenu();
-		
-		
-		
-		
+				
 		
 	}
 }

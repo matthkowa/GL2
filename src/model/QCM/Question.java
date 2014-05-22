@@ -1,8 +1,11 @@
 package model.QCM;
 
+import java.io.*;
 import java.util.*;
 
-public class Question {
+import view.menu.View;
+
+public class Question implements Serializable{
 
 	private String libelle;
 	private ArrayList<Reponse> reponses;
@@ -14,6 +17,11 @@ public class Question {
 		this.libelle = libelle;
 		this.reponses = new ArrayList<Reponse>();
 		this.reponses = reponses;
+	}
+	
+	public Question(String libelle) {
+		this.libelle = libelle;
+		this.reponses = new ArrayList<Reponse>();
 	}
 	/**
 	 * @return the libelle
@@ -45,4 +53,19 @@ public class Question {
 		return result;
 	}	
 	
+	
+	public void creerReponse() {
+		try{
+		String libelle = View.demandeString("Entrez le libellé de votre réponse :");
+		Boolean estVrai = View.demandeBoolean("Cette réponse est-elle une bonne réponse ?");
+		
+		Reponse reponse = new Reponse(libelle, estVrai);
+		
+		this.reponses.add(reponse);	
+		
+		}catch (IOException e){
+			System.out.println("Erreur d'entrée sortie");
+		}	
+		
+	}
 }

@@ -1,6 +1,8 @@
 package model.QCM;
 
-public class Reponse {
+import java.io.*;
+
+public class Reponse implements Serializable {
 	
 	private String libelle;
 	private Boolean estVraie;

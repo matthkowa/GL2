@@ -67,9 +67,9 @@ public class Professeur extends Utilisateur {
 	public void creerQCM(){
 		
 		try{
+			int compteur = 0;
 			String titre = View.demandeString("Bienvenue dans l'assistant de création de QCM !\nVeuillez entrer le titre du QCM :\n");
 			Boolean estPrive = View.demandeBoolean("Ce questionnaire est-il privé ?");
-			if (estPrive){System.out.println("oui");}else{System.out.println("non");}
 			
 			QCM qcm = new QCM(titre, estPrive, this);
 			
@@ -77,6 +77,7 @@ public class Professeur extends Utilisateur {
 			
 			while (finQCM){
 				
+				System.out.println("Création de la question n°"+ (compteur+1));
 				qcm.creerQuestion();
 				
 				finQCM = View.demandeBoolean("Ajouter une autre question ?");
