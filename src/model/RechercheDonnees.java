@@ -93,7 +93,7 @@ public class RechercheDonnees {
 	 * @return All<Session>
 	 */
 	public static All<Session> rechercheSession(){
-		String path = "QCM/Session";
+		String path = "QCM/session";
 		All<Session> newSession = new All<Session>();
 		if(newSession.relecture(path)==null) {
 			return new All<Session>();
