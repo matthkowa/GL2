@@ -22,7 +22,8 @@ public class Main {
 		/*Administrateur a = new Administrateur();
 		a.addMo();*/
 		Professeur p = new Professeur();
-		p.creerQCM();
+	//	p.creerQCM();
+		p.creerSession();
 	//	MenuController m=new MenuController();
 		//new IHMMenu();
 				

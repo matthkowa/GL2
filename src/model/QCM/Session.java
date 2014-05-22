@@ -51,7 +51,7 @@ public class Session {
 	}
 	
 	public String toString(){
-		return this.idSession + " " + View.affichageDate(dateDebut) + " " + View.affichageDate(dateFin) + " " + this.repetition;
+		return "La session numéro " + this.idSession + " débute le " + View.affichageDate(dateDebut) + " et se termine le " + View.affichageDate(dateFin) + ".\nL'étudiant peut y répondre " + this.repetition + " fois.";
 	}
 	
 }

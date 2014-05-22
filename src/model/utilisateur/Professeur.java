@@ -108,13 +108,31 @@ public class Professeur extends Utilisateur {
 	public void creerSession(){
 		int id=0;
 		int repetition=1;
+		Date dateDebut;
+		Date dateFin;
 		try{
-			Date dateDebut = View.demandeDate("Veuillez entrer une date de début de session (DD/MM/YYYY)");
-			Date dateFin = View.demandeDate("Veuillez entrer une date de fin de session (DD/MM/YYYY)");
-			repetition = View.demandeInt("Combien de fois autorisez vous les étudiants à répondre à ce QCM?");
-			System.out.println(dateDebut);
+			dateDebut = View.demandeDate("Veuillez entrer une date de début de session (DD/MM/YYYY)");
+			
+			do{
+				dateFin = View.demandeDate("Veuillez entrer une date de fin de session (DD/MM/YYYY)");
+			}while(dateFin.getTime()<=dateDebut.getTime());
+			
+			do{
+				repetition = View.demandeInt("Combien de fois autorisez vous les étudiants à répondre à ce QCM?");
+			}while (repetition<1);
+			
 			Session sess = new Session(id, dateDebut, dateFin, repetition);
 			System.out.println(sess);
+			
+			String path = "QCM/Session";
+
+			All<Session> setSession = RechercheDonnees.rechercheSession();
+			setSession.add(sess);
+			setSession.sauvegarder(path);
+			
+			System.out.println("Votre Session a bien été enregistré. Retour au menu.");
+
+			
 		}
 		catch(IOException e)
 		{

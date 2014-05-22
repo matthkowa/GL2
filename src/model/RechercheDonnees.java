@@ -87,4 +87,17 @@ public class RechercheDonnees {
 		}else
 		return (All<QCM>) newQCM.relecture(path);
 	}
+	
+	/**
+	 * Retourne la liste des Session enregistrés sur le site
+	 * @return All<Session>
+	 */
+	public static All<Session> rechercheSession(){
+		String path = "QCM/Session";
+		All<Session> newSession = new All<Session>();
+		if(newSession.relecture(path)==null) {
+			return new All<Session>();
+		}else
+		return (All<Session>) newSession.relecture(path);
+	}
 }
