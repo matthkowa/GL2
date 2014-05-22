@@ -2,7 +2,6 @@ package model.QCM;
 
 public class Reponse {
 	
-	private int id;
 	private String libelle;
 	private Boolean estVraie;
 	
@@ -11,8 +10,7 @@ public class Reponse {
 	 * @param libelle
 	 * @param estVraie
 	 */
-	public Reponse(int id, String libelle, Boolean estVraie) {
-		this.id = id;
+	public Reponse(String libelle, Boolean estVraie) {
 		this.libelle = libelle;
 		this.estVraie = estVraie;
 	}
@@ -32,13 +30,6 @@ public class Reponse {
 	}
 
 	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-
-	/**
 	 * @return the estVraie
 	 */
 	public Boolean getEstVraie() {
@@ -46,6 +37,19 @@ public class Reponse {
 	}
 
 	public String toString(){
-		return id + " " + libelle + " " + estVraie;
+		return libelle + " " + estVraie;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((estVraie == null) ? 0 : estVraie.hashCode());
+		result = prime * result + ((libelle == null) ? 0 : libelle.hashCode());
+		return result;
 	}
 }

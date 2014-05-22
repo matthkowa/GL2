@@ -1,7 +1,7 @@
 package model;
 
 import model.utilisateur.*;
-
+import model.QCM.*;
 
 public class RechercheDonnees {
 	
@@ -73,5 +73,18 @@ public class RechercheDonnees {
 			return new All<Promotion>();
 		}else
 		return (All<Promotion>) newPromo.relecture(path);
+	}
+	
+	/**
+	 * Retourne la liste des QCM enregistrés sur le site
+	 * @return All<QCM>
+	 */
+	public static All<QCM> rechercheQCM(){
+		String path = "QCM/qcm";
+		All<QCM> newQCM = new All<QCM>();
+		if(newQCM.relecture(path)==null) {
+			return new All<QCM>();
+		}else
+		return (All<QCM>) newQCM.relecture(path);
 	}
 }

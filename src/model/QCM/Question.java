@@ -4,16 +4,13 @@ import java.util.*;
 
 public class Question {
 
-	private int id;
 	private String libelle;
 	private ArrayList<Reponse> reponses;
 	
 	/**
-	 * @param id
 	 * @param libelle
 	 */
-	public Question(int id, String libelle, ArrayList<Reponse> reponses) {
-		this.id = id;
+	public Question(String libelle, ArrayList<Reponse> reponses) {
 		this.libelle = libelle;
 		this.reponses = new ArrayList<Reponse>();
 		this.reponses = reponses;
@@ -30,20 +27,22 @@ public class Question {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-	
-	/**
-	 * @return the id
-	 */
-	
+
 	public ArrayList<Reponse> getReponses() {
 		return reponses;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((libelle == null) ? 0 : libelle.hashCode());
+		result = prime * result
+				+ ((reponses == null) ? 0 : reponses.hashCode());
+		return result;
+	}	
 	
 }

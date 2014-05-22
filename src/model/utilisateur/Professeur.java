@@ -5,6 +5,7 @@ import view.menu.*;
 import java.io.*;
 import java.util.*;
 
+import model.RechercheDonnees;
 import model.QCM.*;
 
 
@@ -51,13 +52,48 @@ public class Professeur extends Utilisateur {
 		this.modules=modulesInit;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + idProf;
+		result = prime * result + ((modules == null) ? 0 : modules.hashCode());
+		return result;
+	}
+	
 	public void creerQCM(){
 		
 		try{
 			String titre = View.demandeString("Bienvenue dans l'assistant de création de QCM !\nVeuillez entrer le titre du QCM :\n");
-			QCM qcm = new QCM(titre,this);
+			Boolean estPrive = View.demandeBoolean("Ce questionnaire est-il privé ?");
+			if (estPrive){System.out.println("oui");}else{System.out.println("non");}
+			
+			QCM qcm = new QCM(titre, estPrive, this);
+			
+			Boolean finQCM = true;
+			
+			while (finQCM){
+				
+				qcm.creerQuestion();
+				
+				finQCM = View.demandeBoolean("Ajouter une autre question ?");
+				
+			}
+			
+			String path = "QCM/qcm";
+
+			All<QCM> setQCM = RechercheDonnees.rechercheQCM();
+			setQCM.add(qcm);
+			setQCM.sauvegarder(path);
+			
+			System.out.println("Votre questionnaire a bien été enregistré. Retour au menu.");
+
+			
 		}catch(IOException e){
-			System.out.println("Terror 404");
+			System.out.println("Erreur d'entrée sortie");
 		}
 		
 	}
@@ -84,5 +120,4 @@ public class Professeur extends Utilisateur {
 		
 		
 	}
-	
 }

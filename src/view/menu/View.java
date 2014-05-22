@@ -60,7 +60,7 @@ public class View {
 		System.out.println(s);
 		res = sc.nextLine();
 		
-		return ((res.toLowerCase()=="o")||(res.toLowerCase()=="oui"));
+		return ((res.toLowerCase().equals("o"))||(res.toLowerCase().equals("oui")));
 	}
 	
 	/**

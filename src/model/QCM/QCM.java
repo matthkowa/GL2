@@ -4,21 +4,18 @@ import java.util.*;
 
 import model.utilisateur.*;
 
-public class QCM {
+public class QCM{
 	
-	private int id;
 	private String libelle;
 	private Boolean estPrive;
 	private Professeur createur;
 	private Set<Question> questions;
 	
 	/**
-	 * @param id
 	 * @param libelle
 	 * @param estPrive
 	 */
-	public QCM(int id, String libelle, Boolean estPrive, Professeur createur, Set<Question> questions) {
-		this.id = id;
+	public QCM(String libelle, Boolean estPrive, Professeur createur, Set<Question> questions) {
 		this.libelle = libelle;
 		this.estPrive = estPrive;
 		this.createur = createur;
@@ -26,9 +23,9 @@ public class QCM {
 		this.questions = questions;		
 	}
 	
-	public QCM(String libelle, Professeur createur) {
-		// GENERER ID !!
+	public QCM(String libelle, Boolean estPrive, Professeur createur) {
 		this.libelle = libelle;
+		this.estPrive = estPrive;
 		this.createur = createur;
 		this.questions = new HashSet<Question>();		
 	}	
@@ -48,13 +45,6 @@ public class QCM {
 	}
 
 	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-
-	/**
 	 * @return the estPrive
 	 */
 	public Boolean getEstPrive() {
@@ -68,7 +58,26 @@ public class QCM {
 	public Set<Question> getQuestions() {
 		return questions;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((createur == null) ? 0 : createur.hashCode());
+		result = prime * result
+				+ ((estPrive == null) ? 0 : estPrive.hashCode());
+		result = prime * result + ((libelle == null) ? 0 : libelle.hashCode());
+		result = prime * result
+				+ ((questions == null) ? 0 : questions.hashCode());
+		return result;
+	}
 	
+	public void creerQuestion() {
 	
+	}
 
 }
