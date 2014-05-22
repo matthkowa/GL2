@@ -54,18 +54,47 @@ public class Question implements Serializable{
 	}	
 	
 	
-	public void creerReponse() {
+	public boolean creerReponse() {
 		try{
 		String libelle = View.demandeString("Entrez le libellé de votre réponse :");
 		Boolean estVrai = View.demandeBoolean("Cette réponse est-elle une bonne réponse ?");
 		
 		Reponse reponse = new Reponse(libelle, estVrai);
 		
-		this.reponses.add(reponse);	
+		
+		System.out.println(reponse.toString());
+		Boolean confimation = View.demandeBoolean("Cette réponse vous convient-elle ?");
+		if (confimation){ 
+			this.reponses.add(reponse);
+			return true;
+		}else{
+			System.out.println("Reponse supprimée.");
+			return false;
+		}	
 		
 		}catch (IOException e){
 			System.out.println("Erreur d'entrée sortie");
+			return false;
 		}	
 		
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		
+		String toStr = this.libelle+"\n";
+		Iterator it = this.reponses.iterator();
+		
+		while (it.hasNext()){
+			Reponse rep = (Reponse) it.next();
+			
+			toStr = toStr +rep.toString();
+			
+		}
+		
+		return toStr;
 	}
 }

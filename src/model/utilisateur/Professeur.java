@@ -74,14 +74,20 @@ public class Professeur extends Utilisateur {
 			QCM qcm = new QCM(titre, estPrive, this);
 			
 			Boolean finQCM = true;
+			Boolean ajoutQuestion = false;
 			
 			while (finQCM){
 				
 				System.out.println("Création de la question n°"+ (compteur+1));
-				qcm.creerQuestion();
+				ajoutQuestion = qcm.creerQuestion();
 				
-				finQCM = View.demandeBoolean("Ajouter une autre question ?");
-				
+				if (ajoutQuestion){	
+					compteur ++;
+					ajoutQuestion = false;
+				}
+				if (compteur > 0){
+					finQCM = (View.demandeBoolean("Ajouter une autre question ?"));
+				}
 			}
 			
 			String path = "QCM/qcm";

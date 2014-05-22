@@ -77,20 +77,25 @@ public class QCM implements Serializable{
 		return result;
 	}
 	
-	public void creerQuestion() {
+	public boolean creerQuestion() {
 		try{
-		String libelle = View.demandeString("Entrez l'énoncé votre question :");
+		String libelle = View.demandeString("Entrez l'énoncé de votre question :");
 		Question question = new Question(libelle);
 		
 		Boolean finQuestion = true;
+		Boolean ajoutReponse = false;
 		
 		int compteur = 0;
 		
 		while (finQuestion){
 				
-			question.creerReponse();
-							
-			compteur ++;
+			System.out.println("Création de la réponse n°"+ (compteur+1));
+			ajoutReponse = question.creerReponse();
+			
+			if (ajoutReponse){	
+				compteur ++;
+				ajoutReponse = false;
+			}
 			
 			Iterator it = question.getReponses().iterator();
 			boolean bonneReponse = false;
@@ -108,10 +113,20 @@ public class QCM implements Serializable{
 							
 			}
 		
-		this.questions.add(question);		
+		System.out.println(question.toString());
+		Boolean confimation = View.demandeBoolean("Cette question vous convient-elle ?");
+		if (confimation){ 
+			this.questions.add(question);
+			return true;
+		}
+		else {
+			System.out.println("Question supprimée.");
+			return false;
+		}
 		
 		}catch (IOException e){
 			System.out.println("Erreur d'entrée sortie");
+			return false;
 		}
 		
 	}

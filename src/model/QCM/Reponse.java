@@ -38,8 +38,21 @@ public class Reponse implements Serializable {
 		return estVraie;
 	}
 
-	public String toString(){
-		return libelle + " " + estVraie;
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		
+		String toStr = this.libelle + " ";
+		
+		if (this.estVraie){
+			toStr += "Bonne réponse\n";
+		}else{
+			toStr += "Mauvaise réponse\n";
+		}
+			
+		return toStr;
 	}
 
 	/* (non-Javadoc)
