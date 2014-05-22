@@ -124,13 +124,13 @@ public class Professeur extends Utilisateur {
 			Session sess = new Session(id, dateDebut, dateFin, repetition);
 			System.out.println(sess);
 			
-			String path = "QCM/Session";
+			String path = "QCM/session";
 
 			All<Session> setSession = RechercheDonnees.rechercheSession();
 			setSession.add(sess);
 			setSession.sauvegarder(path);
 			
-			System.out.println("Votre Session a bien été enregistré. Retour au menu.");
+			System.out.println("Votre session a bien été enregistrée. Retour au menu.");
 
 			
 		}
