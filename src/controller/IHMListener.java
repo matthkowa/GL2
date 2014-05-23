@@ -15,6 +15,7 @@ public class IHMListener implements ActionListener, MouseListener, MenuListener 
 	public IHMListener(JPanel l){
 		this.l=l;
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
