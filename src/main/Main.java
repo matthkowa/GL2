@@ -21,12 +21,14 @@ public class Main {
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException{
 		/*Administrateur a = new Administrateur();
 		a.addMo();*/
-		Professeur p = new Professeur();
+		//Professeur p = new Professeur();
 	//	p.creerQCM();
-		p.creerSession();
-	//	MenuController m=new MenuController();
+		//p.creerSession();
+		MenuController m=new MenuController();
 		//new IHMMenu();
 				
-		
+		// Prof = géneeric mdp EISTI
+		// Admin vos log de l'eisti + mdp EISTI
+		// eleve : 09agent mdp EISTI
 	}
 }
