@@ -26,12 +26,42 @@ public class Etudiant extends Utilisateur{
 		return this.idEtudiant;
 	}
 	
+	
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + idEtudiant;
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Etudiant other = (Etudiant) obj;
+		if (idEtudiant != other.idEtudiant)
+			return false;
+		return true;
+	}
+
 	public void consulterResultat(Etudiant etu, Session sess){
 		Date currentDate = new Date();
 		if (currentDate.compareTo(sess.getDateFin())==1){
-			Resultat res = new Resultat();
-			res = (Resultat) res.relecture("QCM/" + sess.getIdSession() + "/" + etu.idEtudiant);
-			System.out.println(res);
+//			TODO			
+//			res = (Resultat) res.relecture("QCM/" + sess.hashCode() + "/" + etu.idEtudiant);
+//			System.out.println(res);
 		}
 		else {
 			System.out.println("Vous n'êtes pas autorisé à consulter les résultats. Veuillez réessayer une fois la session terminée. ");

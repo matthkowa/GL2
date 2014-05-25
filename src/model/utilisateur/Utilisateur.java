@@ -103,4 +103,50 @@ public class Utilisateur implements Serializable{
 		result = prime * result + tel;
 		return result;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Utilisateur other = (Utilisateur) obj;
+		if (adresse == null) {
+			if (other.adresse != null)
+				return false;
+		} else if (!adresse.equals(other.adresse))
+			return false;
+		if (dateNaissance == null) {
+			if (other.dateNaissance != null)
+				return false;
+		} else if (!dateNaissance.equals(other.dateNaissance))
+			return false;
+		if (motDePasse == null) {
+			if (other.motDePasse != null)
+				return false;
+		} else if (!motDePasse.equals(other.motDePasse))
+			return false;
+		if (nom == null) {
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
+		if (prenom == null) {
+			if (other.prenom != null)
+				return false;
+		} else if (!prenom.equals(other.prenom))
+			return false;
+		if (pseudo == null) {
+			if (other.pseudo != null)
+				return false;
+		} else if (!pseudo.equals(other.pseudo))
+			return false;
+		if (tel != other.tel)
+			return false;
+		return true;
+	}
 }

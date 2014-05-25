@@ -106,7 +106,6 @@ public class Professeur extends Utilisateur {
 	}
 	
 	public void creerSession(){
-		int id=0;
 		int repetition=1;
 		Date dateDebut;
 		Date dateFin;
@@ -121,7 +120,16 @@ public class Professeur extends Utilisateur {
 				repetition = View.demandeInt("Combien de fois autorisez vous les étudiants à répondre à ce QCM?");
 			}while (repetition<1);
 			
-			Session sess = new Session(id, dateDebut, dateFin, repetition);
+			All<QCM> qcmList = RechercheDonnees.rechercheQCM();
+			QCM qcm = (QCM) View.choix(qcmList.set);
+			
+			All<Promotion> promoList = RechercheDonnees.recherchePromo();
+			Promotion promotion = (Promotion) View.choix(promoList.set);
+			
+			All<Module> moduleList = RechercheDonnees.rechercheModule();
+			Module module = (Module) View.choix(moduleList.set);
+			
+			Session sess = new Session(dateDebut, dateFin, repetition, this, qcm, promotion, module);
 			System.out.println(sess);
 			
 			String path = "QCM/session";
@@ -129,6 +137,8 @@ public class Professeur extends Utilisateur {
 			All<Session> setSession = RechercheDonnees.rechercheSession();
 			setSession.add(sess);
 			setSession.sauvegarder(path);
+			
+			new File("Resultat/"+sess.hashCode()).mkdir();
 			
 			System.out.println("Votre session a bien été enregistrée. Retour au menu.");
 

@@ -100,4 +100,17 @@ public class RechercheDonnees {
 		}else
 		return (All<Session>) newSession.relecture(path);
 	}
+	
+	/**
+	 * Retourne la liste des Resultat de n° id enregistrés sur le site
+	 * @return All<Session>
+	 */
+	public static All<Resultat> rechercheResultat(int id){
+		String path = "Resultat/"+id+"/resultat";
+		All<Resultat> newResultat = new All<Resultat>();
+		if(newResultat.relecture(path)==null) {
+			return new All<Resultat>();
+		}else
+		return (All<Resultat>) newResultat.relecture(path);
+	}
 }

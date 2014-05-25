@@ -1,41 +1,79 @@
 package model.QCM;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import model.utilisateur.Etudiant;
 
 import model.serializable.Serialiser;
 
 
-public class Resultat extends Serialiser implements Serializable{
+public class Resultat implements Serializable{
 
-	private Set<Reponse> tableauDeReponse;
-
-	public Resultat(Set<Reponse> tableauDeReponse) {
-		super();
-		this.tableauDeReponse = new HashSet<Reponse>();
-		this.tableauDeReponse = tableauDeReponse;
+	private int note;
+	private Etudiant eleve;
+	private int iterations;
+	/**
+	 * @param note
+	 * @param eleve
+	 * @param iterations
+	 */
+	public Resultat(int note, Etudiant eleve, int iterations) {
+		this.note = note;
+		this.eleve = eleve;
+		this.iterations = iterations;
 	}
-
+	
+	/**
+	 * Constructeur vide
+	 */
+	
 	public Resultat() {
-		super();
-		this.tableauDeReponse = new HashSet<Reponse>();
-	}
-	
-	public Set<Reponse> getTableauDeReponse() {
-		return tableauDeReponse;
 	}
 
-	public void setTableauDeReponse(Set<Reponse> tableauDeReponse) {
-		this.tableauDeReponse = tableauDeReponse;
-	}
-	
-	public String toString(){
-		String temp="";
-		for (Reponse R : tableauDeReponse){
-			temp = temp + R;
-		}
-		return temp;
+	/**
+	 * @return the note
+	 */
+	public int getNote() {
+		return note;
 	}
 
+	/**
+	 * @param note the note to set
+	 */
+	public void setNote(int note) {
+		this.note = note;
+	}
+
+	/**
+	 * @return the eleve
+	 */
+	public Etudiant getEleve() {
+		return eleve;
+	}
+
+	/**
+	 * @param eleve the eleve to set
+	 */
+	public void setEleve(Etudiant eleve) {
+		this.eleve = eleve;
+	}
+
+	/**
+	 * @return the iterations
+	 */
+	public int getIterations() {
+		return iterations;
+	}
+
+	/**
+	 * @param iterations the iterations to set
+	 */
+	public void setIterations(int iterations) {
+		this.iterations = iterations;
+	}
+	
+	
+	
+	
+	
+	
 }

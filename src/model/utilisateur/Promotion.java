@@ -40,6 +40,19 @@ public class Promotion extends Serialiser implements Serializable{
 		this.promo = promo;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((promo == null) ? 0 : promo.hashCode());
+		result = prime * result
+				+ ((setEtudiant == null) ? 0 : setEtudiant.hashCode());
+		return result;
+	}
+	
 	@Override
 	public String toString(){
 		return promo + " : \n" + setEtudiant.toString();
