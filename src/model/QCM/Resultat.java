@@ -9,7 +9,7 @@ import model.serializable.Serialiser;
 
 public class Resultat implements Serializable{
 
-	private float note;
+	private double note;
 	private Etudiant eleve;
 	private int iterations;
 	private ArrayList<Reponse> listeReponse;
@@ -20,7 +20,7 @@ public class Resultat implements Serializable{
 	 * @param eleve
 	 * @param iterations
 	 */
-	public Resultat(float note, Etudiant eleve, int iterations, ArrayList<Reponse> listeReponse) {
+	public Resultat(double note, Etudiant eleve, int iterations, ArrayList<Reponse> listeReponse) {
 		this.note = note;
 		this.eleve = eleve;
 		this.iterations = iterations;
@@ -38,14 +38,14 @@ public class Resultat implements Serializable{
 	/**
 	 * @return the note
 	 */
-	public float getNote() {
+	public double getNote() {
 		return note;
 	}
 
 	/**
 	 * @param note the note to set
 	 */
-	public void setNote(float note) {
+	public void setNote(double note) {
 		this.note = note;
 	}
 

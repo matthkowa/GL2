@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Set;
 
 import model.RechercheDonnees;
 import model.QCM.Session;
@@ -121,16 +123,14 @@ public class MenuController {
 	
 	private void professeur(Professeur p){
 		boolean b = true;
-		All<Session> listeSession = RechercheDonnees.rechercheSession();
-		System.out.println("Veuillez choisir la session dont vous voulez consulter les résultats : ");
-		try {
-			Session s = (Session) View.choix(listeSession.set);			
+		try {		
 			while(b){
-				int carac = View.demandeInt("_______MENU 1______\n 1- Visualiser les résultats \n 2- Visualiser les statistiques \n 3- Quitter \n \n Choix :");
+				int carac = View.demandeInt("_______MENU 1______\n 1- Gérer les QCMs \n 2- Gérer les sessions \n 3- Visualiser les résultats \n 4- Quitter \n \n Choix :");
 				switch (carac){
-					case 1 : professeur2(p,s);
-					case 2 : break;
-					case 3 : b=false; break;				
+					case 1 : professeur2(carac,p);
+					case 2 : professeur2(carac,p);
+					case 3 : professeur3(p); break;
+					case 4 : b=false; break;				
 				default : break;
 				}
 			}	
@@ -141,18 +141,59 @@ public class MenuController {
 	}
 	
 	/**
-	 * Deuxieme menu du professeur
+	 * Deuxieme sous menu du professeur
+	 * @param choix int Précédent choix de l'utilisateur (QCM ou session)
+	 * @param p Professer professeur étant connecté
+	 */
+		
+	private void professeur2(int choix,Professeur p){		
+		boolean b = true;
+		while(b){
+			try{
+				int carac = View.demandeInt("_______MENU 1______\n 1- Ajouter \n 2- Supprimer \n 3- Retour au menu \n \n Choix :");
+				if(carac==3) b= false; 
+				else{
+					switch(choix) {
+						case 1 : /*QCM*/
+							switch(carac) { 
+							case 1 : p.creerQCM(); 	break;
+							case 2 : p.supprimerQCM();  	break;
+							}
+						break;
+						
+						case 2 : /*Session*/
+							switch(carac) { 
+							case 1 : p.creerSession(); 	break;
+							case 2 : p.supprimerSession();  	break;
+							}
+						break;
+						default : System.out.println("Erreur veuillez contacter le support"); break;
+					}
+				}
+			}catch(IOException e){
+				System.err.println("Problème : " + e);
+			}
+		}			
+	}
+	
+	/**
+	 * Troisieme menu du professeur
 	 */
 	
-	private void professeur2(Professeur p, Session s){
+	private void professeur3(Professeur p){
 		boolean b = true;
+		Set<Session> listeSessionProf = p.getSessions(); 
+		Session s = null;
+		
+		System.out.println("Veuillez choisir la session dont vous voulez consulter les résultats : ");
 		while(b)
 		{
 			try{
+				s = (Session) View.choix(listeSessionProf);
 				int carac = View.demandeInt("_______MENU 1______\n 1- Visualiser les résultats \n 2- Visualiser les statistiques \n 3- Deconnexion \n \n Choix :");
 				switch (carac){
 					case 1 : s.visualiserResultat(p); break;
-					case 2 : break;
+					case 2 : s.statistiques();
 					case 3 : b=false; break;				
 				default : break;
 				}
@@ -176,9 +217,23 @@ public class MenuController {
 				switch (carac){
 					case 1 : e.choisirSession();break;
 					case 2 :
+						
+						Promotion promo = e.getPromo();
+						
 						All<Session> listeSession = RechercheDonnees.rechercheSession();
+						All<Session> listeSessionPromo = new All<Session>();
+						Iterator itSession = listeSession.set.iterator();
+						
+						while(itSession.hasNext()){
+							Session s = (Session) itSession.next();
+							if (s.getPromotion().getPromo().equals(promo.getPromo())){
+								listeSessionPromo.add(s);
+							}
+						}
+						
 						System.out.println("Veuillez choisir la session dont vous voulez consulter les résultats : ");
-						Session s = (Session) View.choix(listeSession.set);
+						Session s = (Session) View.choix(listeSessionPromo.set);
+						
 						s.visualiserResultat(e);
 						break;
 					case 3 : b=false; break;				

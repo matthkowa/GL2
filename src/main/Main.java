@@ -32,9 +32,9 @@ public class Main {
 //		MenuController m=new MenuController();
 		//new IHMMenu();
 				
-		All<Etudiant> etu = RechercheDonnees.rechercheEtudiant();
-		Etudiant e = (Etudiant) View.choix(etu.set);
-		e.choisirSession();
+//		All<Etudiant> etu = RechercheDonnees.rechercheEtudiant();
+//		Etudiant e = (Etudiant) View.choix(etu.set);
+//		e.choisirSession();
 		
 				
 		// Prof = géneeric mdp EISTI

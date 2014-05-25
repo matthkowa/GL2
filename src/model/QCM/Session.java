@@ -238,7 +238,9 @@ public class Session implements Serializable {
 					
 				}
 				
-				Resultat nouveauResultat = new Resultat((note/compteurQuestion), e, (iterations+1),listeReponse);
+				note = (note/compteurQuestion)*20;
+				
+				Resultat nouveauResultat = new Resultat(note, e, (iterations+1),listeReponse);
 				
 				
 				if (iterations != 0){
@@ -299,31 +301,124 @@ public class Session implements Serializable {
 			
 		}else{
 			if (u instanceof Etudiant){
+				Date currentDate = new Date();
 				
-				All<Resultat> listeResultat = RechercheDonnees.rechercheResultat(this.hashCode());
-				Iterator itListeRes = listeResultat.set.iterator();
-				Boolean finBoucle = true;
-				Resultat resultat = new Resultat();
-				
-				while(itListeRes.hasNext() || finBoucle){
-					resultat = (Resultat) itListeRes.next();
+				if (currentDate.compareTo(this.dateFin)==1){
+					All<Resultat> listeResultat = RechercheDonnees.rechercheResultat(this.hashCode());
+					Iterator itListeRes = listeResultat.set.iterator();
+					Boolean finBoucle = true;
+					Resultat resultat = new Resultat();
 					
-					if (resultat.getEleve().equals((Etudiant) u)){
-						finBoucle = false;
+					while(itListeRes.hasNext() || finBoucle){
+						resultat = (Resultat) itListeRes.next();
+						
+						if (resultat.getEleve().equals((Etudiant) u)){
+							finBoucle = false;
+						}
 					}
-				}
-				
-				if (finBoucle){
-					System.out.println("Vous n'avez pas encore participé à la session.");
+					
+					if (finBoucle){
+						System.out.println("Vous n'avez pas encore participé à la session.");
+					}else{
+						System.out.println("Note : " + resultat.getNote());	
+					}	
 				}else{
-					System.out.println("Note : " + resultat.getNote());	
-				}			
+					System.out.println("La session n'est pas encore terminée, veuillez ressayer après le "+ View.affichageDate(this.dateFin)+".");
+				}
+							
 				
 			}else{
 				System.out.println("Erreur d'accès");
 			}
 		}
 		
+	}
+	
+	public void statistiques() {
+		System.out.println("Moyenne = " + this.moyenne());
+		System.out.println("Ecart-type = " + this.ecartType() + "\n");
+		this.afficherFrequences();
+	}
+	
+	private double moyenne() {
+		
+		All<Resultat> listeRes = RechercheDonnees.rechercheResultat(this.hashCode());
+		Iterator it = listeRes.set.iterator();
+		double moyenne = 0;
+		
+		while(it.hasNext()){
+			Resultat res = (Resultat) it.next();
+			moyenne += res.getNote();
+			
+		}
+		
+		return ( moyenne / listeRes.set.size() );
+		
+	}
+	
+	private double ecartType(){
+		
+		double moyenne = this.moyenne();
+		double ecartType = 0;
+		
+		All<Resultat> listeRes = RechercheDonnees.rechercheResultat(this.hashCode());
+		Iterator it = listeRes.set.iterator();
+		
+		while(it.hasNext()){
+			
+			Resultat res = (Resultat) it.next();
+			ecartType += ( (res.getNote())- moyenne ) * ( (res.getNote())- moyenne );
+			
+		}
+		
+		ecartType = Math.sqrt(ecartType / listeRes.set.size());
+		
+		return ecartType;
+	}
+	
+	private void afficherFrequences() {
+		
+		All<Resultat> listeRes = RechercheDonnees.rechercheResultat(this.hashCode());
+		Iterator it = listeRes.set.iterator();
+		double compteur = 0;
+		ArrayList<Double> effectifs = new ArrayList<Double>();
+		
+		
+		while(it.hasNext()){
+			
+			compteur = 0;
+			Resultat res = (Resultat) it.next();
+			Iterator itRes = res.getListeReponse().iterator();
+			
+			if (effectifs.isEmpty()){
+				for (int i = 1; i <= res.getListeReponse().size(); i++){
+					effectifs.add(0.0);
+				}
+				
+			}
+			
+			while(itRes.hasNext()){
+				Reponse r = (Reponse) itRes.next();
+				if (r.getEstVraie()){
+					effectifs.set((int) compteur,(effectifs.get((int) compteur))+1);
+				}
+				compteur ++;
+			}
+			
+			
+		}
+		
+		Iterator itEffectifs = effectifs.iterator();
+		System.out.println("Fréquences de bonnes réponses : ");
+		
+		int compteur2 = 1;
+		
+		while(itEffectifs.hasNext()){
+			double effectif = (double) itEffectifs.next();
+			double frequence =  effectif/compteur;
+			System.out.println("Question n°"+ compteur2 +" : " + frequence);
+			compteur2 ++;
+		}
 	}
 	
 }

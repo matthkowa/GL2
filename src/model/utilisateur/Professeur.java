@@ -9,7 +9,6 @@ import model.RechercheDonnees;
 import model.QCM.*;
 
 
-
 public class Professeur extends Utilisateur {
 	private static final long serialVersionUID = -5845845607959841888L;
 	private int idProf;
@@ -20,6 +19,7 @@ public class Professeur extends Utilisateur {
 	}
 	
 	/**
+	 * Constructeur complet de la classe Professeur
 	 * @param nom
 	 * @param prenom
 	 * @param dateNaissance
@@ -36,24 +36,41 @@ public class Professeur extends Utilisateur {
 		this.modules = modules;
 	}
 
+	/**
+	 * Renvoie l'idProf du professeur
+	 * @return idProf
+	 */
 	public int getIdProf() {
 		return idProf;
 	}
-
+	
+	/**
+	 * Modifie l'idProf du professeur
+	 * @param idProf
+	 */
 	public void setIdProf(int idProf) {
 		this.idProf = idProf;
 	}
 	
+	/**
+	 * Renvoie le set des Modules du Professeur
+	 * @return modules
+	 */
 	public Set<Module> getModules(){
 		return this.modules;
 	}
 	
+	/**
+	 * Modifie le set des Modules du professeur
+	 * @param modulesInit
+	 */
 	public void setModules(Set<Module> modulesInit){
 		this.modules=modulesInit;
 	}
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
+	/**
+	 * renvoie le hashCode du Professeur
+	 * @return hashCode identifiant de professeur
 	 */
 	@Override
 	public int hashCode() {
@@ -64,6 +81,47 @@ public class Professeur extends Utilisateur {
 		return result;
 	}
 	
+	public Set<QCM> getQCM() {
+		
+		All<QCM> listeQCM = RechercheDonnees.rechercheQCM();
+		All<QCM> listeQCMProf = new All<QCM>();
+		QCM q = null;
+		Iterator it = listeQCM.set.iterator();
+		boolean rep = false;
+		
+		while (it.hasNext()){
+			q = (QCM) it.next();
+			if (this.hashCode() == q.getCreateur().hashCode()){
+				listeQCMProf.add(q);
+			}
+		}
+		
+		return listeQCMProf.set;
+		
+	}
+	
+	/**
+	 * Renvoie le set des Sessions créées par le professeur
+	 */
+	public Set<Session> getSessions() {
+		All<Session> listeSession = RechercheDonnees.rechercheSession();
+		All<Session> listeSessionProf = new All<Session>();
+		Session s = null;
+		Iterator it = listeSession.set.iterator();
+		
+		while (it.hasNext()){
+			s = (Session) it.next();
+			if (this.hashCode() == s.getCreateur().hashCode()){
+				listeSessionProf.add(s);
+			}
+		}
+		
+		return listeSessionProf.set;
+	}
+	
+	/**
+	 * Permet au professeur de créer un QCM
+	 */
 	public void creerQCM(){
 		
 		try{
@@ -105,6 +163,38 @@ public class Professeur extends Utilisateur {
 		
 	}
 	
+	/**
+	 * Permet au professeur de supprimer un QCM
+	 */
+	public void supprimerQCM(){
+		String path = "QCM/qcm";
+		All<QCM> listeQCM = RechercheDonnees.rechercheQCM();
+		Set<QCM> listeQCMProf = this.getQCM();
+		QCM q = null;
+		Boolean rep = false;
+
+		try {
+			System.out.println("Veuillez choisir la session à supprimer : ");
+			q = (QCM) View.choix(listeQCMProf);	
+	
+			rep = View.demandeBoolean("Voulez-vous vraiment supprimer (oui/non) : "+q.getLibelle());
+
+			if(rep){
+				listeQCM.set.remove(q);
+				System.out.println("Supprimé.");
+				listeQCM.sauvegarder(path);
+			}else{ 
+				System.out.println("Annulé.");
+			}
+		}catch (IOException ioe){
+			System.out.println("Erreur d'entrée sortie");
+		}
+
+	}	
+	
+	/**
+	 * Permet au professeur de créer une Session
+	 */
 	public void creerSession(){
 		int repetition=1;
 		Date dateDebut;
@@ -131,6 +221,7 @@ public class Professeur extends Utilisateur {
 			System.out.println("Veuillez choisir un module parmi ceux ci-dessous : ");
 			All<Module> moduleList = RechercheDonnees.rechercheModule();
 			Module module = (Module) View.choix(moduleList.set);
+//			Module module = (Module) View.choix(this.modules);
 			
 			Session sess = new Session(dateDebut, dateFin, repetition, this, qcm, promotion, module);
 			System.out.println(sess.description());
@@ -155,6 +246,36 @@ public class Professeur extends Utilisateur {
 		{
 			System.out.println("Erreur lors de la création de la session, veuillez recommencer.");
 		}
+	}
+	
+	
+	/**
+	 * Permet au professeur de supprimer une Session
+	 */
+	public void supprimerSession(){
+		String path = "QCM/session";
+		All<Session> listeSession = RechercheDonnees.rechercheSession();
+		Set<Session> listeSessionProf = this.getSessions();
+		Session s = null;
+
+		boolean rep = false;
+		
+		try {
+			System.out.println("Veuillez choisir la session à supprimer : ");
+			s = (Session) View.choix(listeSessionProf);
+			rep = View.demandeBoolean("Voulez-vous vraiment supprimer (oui/non) : "+s);
+
+			if(rep){
+				listeSession.set.remove(s);
+				System.out.println("Supprimé.");
+				listeSession.sauvegarder(path);
+			}else{ 
+				System.out.println("Annulé.");
+			}
+		}catch (IOException ioe){
+			System.out.println("Erreur d'entrée sortie");
+		}
+
 	}
 
 }

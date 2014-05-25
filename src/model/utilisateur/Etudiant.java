@@ -2,6 +2,7 @@ package model.utilisateur;
 
 import java.io.IOException;
 import java.util.*;
+
 import model.RechercheDonnees;
 import model.QCM.*;
 import view.menu.View;;
@@ -11,28 +12,69 @@ public class Etudiant extends Utilisateur{
 	private static final long serialVersionUID = -3499573138679375552L;
 	private int idEtudiant;
 
+	/**
+	 * Constructeur complet de la classe Etudiant
+	 * @param nom
+	 * @param prenom
+	 * @param dateNaissance
+	 * @param adresse
+	 * @param tel
+	 * @param pseudo
+	 * @param motDePasse
+	 * @param idEtudiant
+	 */
 	public Etudiant(String nom, String prenom, Date dateNaissance, String adresse, int tel, String pseudo, String motDePasse,int idEtudiant){
 		super(nom, prenom, dateNaissance, adresse, tel, pseudo, motDePasse);
 		this.idEtudiant=idEtudiant;
 	}
 	
+	/**
+	 * Constructeur vide de la classe Etudiant
+	 */
 	public Etudiant(){
 		super();
 	}
 	
+	/**
+	 * Modifie l'idEtudiant de Etudiant
+	 * @param idEtudiant
+	 */
 	public void setIdEtudiant(int idEtudiant){
 		this.idEtudiant=idEtudiant;
 	}
 	
+	/**
+	 * Renoie l'idEtudiant de Etudiant
+	 * @return
+	 */
 	public int getIdEtudiant(){
 		return this.idEtudiant;
 	}
 	
-	
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
+	/**
+	 * Renvoie la promotion de l'étudiant
 	 */
+	public Promotion getPromo(){
+		All<Promotion> listePromo = RechercheDonnees.recherchePromo();
+		Iterator itPromo = listePromo.set.iterator();
+		Boolean finBoucle = true;
+		Promotion promo = null;
+		
+		while(itPromo.hasNext() || finBoucle){
+			promo = (Promotion) itPromo.next();
+			if (promo.getSetEtudiant().contains(this)){
+				finBoucle = false;
+			}
+		}
+		
+		return promo;
+	}
+	
+	
+	
+	/**
+	 * Renvoie le hashCode de l'étudiant
+	 **/
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -41,8 +83,9 @@ public class Etudiant extends Utilisateur{
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
+	/**
+	 * Compare l'étudiant à un autre objet
+	 * Renvoie vrai si obj = Etudiant, faux sinon 
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -60,15 +103,12 @@ public class Etudiant extends Utilisateur{
 		return true;
 	}
 	
+	/**
+	 * Permet à l'étudiant de choisir une session à laquelle participer
+	 */
 	public void choisirSession(){
-		All<Promotion> promoList = RechercheDonnees.recherchePromo();
-		Iterator itPromo = promoList.set.iterator();
-		Promotion promotion = new Promotion();
-		
-		while (itPromo.hasNext() || !(promotion.getSetEtudiant().contains((Etudiant) this)) ){
-			promotion = (Promotion) itPromo.next();
-			
-		}
+
+		Promotion promotion = this.getPromo();
 		
 		All<Session> sessionList = RechercheDonnees.rechercheSession();
 		Iterator itSession = sessionList.set.iterator();
@@ -93,31 +133,4 @@ public class Etudiant extends Utilisateur{
 			System.out.println("Erreur d'entrée sortie");
 		}
 	}
-
-	public void consulterResultat(Etudiant etu, Session sess){
-		Date currentDate = new Date();
-		if (currentDate.compareTo(sess.getDateFin())==1){
-//			TODO			
-//			res = (Resultat) res.relecture("QCM/" + sess.hashCode() + "/" + etu.idEtudiant);
-//			System.out.println(res);
-		}
-		else {
-			System.out.println("Vous n'êtes pas autorisé à consulter les résultats. Veuillez réessayer une fois la session terminée. ");
-		}
-		
-	}
-	
-//	public void consulterResultat(Etudiant etu){
-//		Date currentDate = new Date();
-//		if (currentDate.compareTo(sess.getDateFin())==1){
-//			Resultat res = new Resultat();
-//			res = (Resultat) res.relecture("QCM/*/" + etu.idEtudiant);
-//			System.out.println(res);
-//		}
-//		else {
-//			System.out.println("Vous n'êtes pas autorisé à consulter les résultats. Veuillez réessayer une fois la session terminée.");
-//		}
-//		
-//	}
-
 }
