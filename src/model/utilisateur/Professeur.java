@@ -120,17 +120,20 @@ public class Professeur extends Utilisateur {
 				repetition = View.demandeInt("Combien de fois autorisez vous les étudiants à répondre à ce QCM?");
 			}while (repetition<1);
 			
+			System.out.println("Veuillez choisir un QCM parmi ceux ci-dessous : ");
 			All<QCM> qcmList = RechercheDonnees.rechercheQCM();
 			QCM qcm = (QCM) View.choix(qcmList.set);
 			
+			System.out.println("Veuillez choisir une promotion parmi celles ci-dessous : ");
 			All<Promotion> promoList = RechercheDonnees.recherchePromo();
 			Promotion promotion = (Promotion) View.choix(promoList.set);
 			
+			System.out.println("Veuillez choisir un module parmi ceux ci-dessous : ");
 			All<Module> moduleList = RechercheDonnees.rechercheModule();
 			Module module = (Module) View.choix(moduleList.set);
 			
 			Session sess = new Session(dateDebut, dateFin, repetition, this, qcm, promotion, module);
-			System.out.println(sess);
+			System.out.println(sess.description());
 			
 			String path = "QCM/session";
 
@@ -139,6 +142,10 @@ public class Professeur extends Utilisateur {
 			setSession.sauvegarder(path);
 			
 			new File("Resultat/"+sess.hashCode()).mkdir();
+			All<Resultat> testList = new All<Resultat>();
+			Resultat test = new Resultat(0,new Etudiant(),0, new ArrayList<Reponse>());
+			testList.add(test);
+			testList.sauvegarder("Resultat/"+ sess.hashCode() +"/resultat");
 			
 			System.out.println("Votre session a bien été enregistrée. Retour au menu.");
 
@@ -148,11 +155,6 @@ public class Professeur extends Utilisateur {
 		{
 			System.out.println("Erreur lors de la création de la session, veuillez recommencer.");
 		}
-
-		/*File maSession = new File("QCM/");
-		String name = maSession.getName();
-		maSession.mkdir();*/
-		
-		
 	}
+
 }

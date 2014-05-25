@@ -20,6 +20,7 @@ public class Session implements Serializable {
 	private Module module;
 	
 	/**
+	 * Constructeur complet de Session
 	 * @param idSession
 	 * @param dateDebut
 	 * @param dateFin
@@ -39,6 +40,12 @@ public class Session implements Serializable {
 		this.qcm = qcm;
 		this.promotion = promotion;
 		this.module = module;
+	}
+	
+	/**
+	 * Constructeur vide de Session
+	 */
+	public Session() {
 	}
 
 	/**
@@ -158,32 +165,34 @@ public class Session implements Serializable {
 		return result;
 	}
 
+	
+	@Override
 	public String toString(){
+		return this.qcm.getLibelle() + " : " + View.affichageDate(dateDebut) + " " + View.affichageDate(dateFin);
+	}
+	
+	public String description(){
 		return "La session numéro " + this.hashCode() + " débute le " + View.affichageDate(dateDebut) + " et se termine le " + View.affichageDate(dateFin) + ".\nL'étudiant peut y répondre " + this.repetition + " fois.";
 	}
 	
 	public void repondreQCM(Etudiant e){
 		
 		All<Resultat> resultatSession = RechercheDonnees.rechercheResultat(this.hashCode());
-		
+			
 		Iterator itRes = resultatSession.set.iterator();
 		Resultat resultat = new Resultat();
-		Boolean entreeExistante = true;
 		int iterations = 0;	
 		
-		while (itRes.hasNext() || entreeExistante){
-			
+		while (itRes.hasNext()){
+
 			resultat = (Resultat) itRes.next();
 			
 			if (resultat.getEleve().equals(e)){
-				
-				entreeExistante = false;
-				iterations = resultat.getIterations();
-				
-			}
+					iterations = resultat.getIterations();
+				}
 			
 		}
-		
+
 		if (iterations < this.repetition){
 			
 			Date currentDate = new Date();
@@ -192,7 +201,8 @@ public class Session implements Serializable {
 				int compteurQuestion = 0;
 				int compteurReponse = 0;
 				int reponseChoisie;
-				int note = 0;
+				float note = 0;
+				ArrayList<Reponse> listeReponse = new ArrayList<Reponse>();
 				Iterator itQuestion = this.qcm.getQuestions().iterator();
 	
 				while(itQuestion.hasNext()){
@@ -215,6 +225,7 @@ public class Session implements Serializable {
 					try{
 					
 						reponseChoisie = View.demandeInt("Entrez le numéro de la réponse choisie :");
+						listeReponse.add((question.getReponses().get(reponseChoisie - 1)));
 						
 						if ((question.getReponses().get(reponseChoisie - 1)).getEstVraie() ){
 							note ++;
@@ -227,13 +238,14 @@ public class Session implements Serializable {
 					
 				}
 				
-				Resultat nouveauResultat = new Resultat(note, e, iterations++);
+				Resultat nouveauResultat = new Resultat((note/compteurQuestion), e, (iterations+1),listeReponse);
+				
 				
 				if (iterations != 0){
 					resultatSession.set.remove(resultat);
 				}
 				
-				String path = "Resultat/"+this.hashCode()+"resultat";
+				String path = "Resultat/"+this.hashCode()+"/resultat";
 				
 				resultatSession.add(nouveauResultat);
 				resultatSession.sauvegarder(path);
@@ -244,13 +256,74 @@ public class Session implements Serializable {
 				if(currentDate.compareTo(this.dateDebut)==-1){
 					System.out.println("La session n'est pas encore commencée, veuillez retenter à partir du "+ View.affichageDate(this.dateDebut));
 				}else{
-					System.out.println("la session est terminée, il n'est plus possible de répondre au questionnaire.");
+					System.out.println("La session est terminée, il n'est plus possible de répondre au questionnaire.");
 				}
 			}
 			
 		}else{
 			System.out.println("Vous avez déjà répondu "+ this.repetition + " fois au questionnaire, vous ne pouvez plus y répondre.");
 		}
+	}
+	
+	public void visualiserResultat(Utilisateur u){
+		
+		if (u instanceof Professeur){
+			try{
+				System.out.println("Veuillez choisir l'étudiant dont vous voulez consulter les résultats");
+				Etudiant eleve = (Etudiant) View.choix(this.promotion.getSetEtudiant());
+				
+				All<Resultat> listeResultat = RechercheDonnees.rechercheResultat(this.hashCode());
+				Iterator itListeRes = listeResultat.set.iterator();
+				Boolean finBoucle = true;
+				Resultat resultat = new Resultat();
+				Reponse reponse;
+				
+				while(itListeRes.hasNext() || finBoucle){
+					resultat = (Resultat) itListeRes.next();
+					
+					if (resultat.getEleve().equals(eleve)){
+						finBoucle = false;
+					}
+				}
+				
+				if (finBoucle){
+					System.out.println("L'étudiant en question n'a pas encore participé à la session.");
+				}else{
+					resultat.afficherResultats();	
+				}
+				
+			
+			} catch (IOException ioe){
+				System.out.println("Erreur d'entrée sortie");
+			}
+			
+		}else{
+			if (u instanceof Etudiant){
+				
+				All<Resultat> listeResultat = RechercheDonnees.rechercheResultat(this.hashCode());
+				Iterator itListeRes = listeResultat.set.iterator();
+				Boolean finBoucle = true;
+				Resultat resultat = new Resultat();
+				
+				while(itListeRes.hasNext() || finBoucle){
+					resultat = (Resultat) itListeRes.next();
+					
+					if (resultat.getEleve().equals((Etudiant) u)){
+						finBoucle = false;
+					}
+				}
+				
+				if (finBoucle){
+					System.out.println("Vous n'avez pas encore participé à la session.");
+				}else{
+					System.out.println("Note : " + resultat.getNote());	
+				}			
+				
+			}else{
+				System.out.println("Erreur d'accès");
+			}
+		}
+		
 	}
 	
 }

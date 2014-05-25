@@ -1,8 +1,10 @@
 package model.utilisateur;
 
+import java.io.IOException;
 import java.util.*;
-
+import model.RechercheDonnees;
 import model.QCM.*;
+import view.menu.View;;
 
 
 public class Etudiant extends Utilisateur{
@@ -44,6 +46,8 @@ public class Etudiant extends Utilisateur{
 	 */
 	@Override
 	public boolean equals(Object obj) {
+		if (obj == null)
+			return false;		
 		if (this == obj)
 			return true;
 		if (!super.equals(obj))
@@ -54,6 +58,40 @@ public class Etudiant extends Utilisateur{
 		if (idEtudiant != other.idEtudiant)
 			return false;
 		return true;
+	}
+	
+	public void choisirSession(){
+		All<Promotion> promoList = RechercheDonnees.recherchePromo();
+		Iterator itPromo = promoList.set.iterator();
+		Promotion promotion = new Promotion();
+		
+		while (itPromo.hasNext() || !(promotion.getSetEtudiant().contains((Etudiant) this)) ){
+			promotion = (Promotion) itPromo.next();
+			
+		}
+		
+		All<Session> sessionList = RechercheDonnees.rechercheSession();
+		Iterator itSession = sessionList.set.iterator();
+		Session sess = new Session();
+		All<Session> sessionPossibles = new All<Session>();
+		
+		while(itSession.hasNext()){
+			
+			sess = (Session) itSession.next();
+			
+			if (sess.getPromotion().getPromo().equals(promotion.getPromo())){
+				sessionPossibles.add(sess);
+			}
+			
+		}
+		
+		try{
+			System.out.println("Veuillez choisir la session à laquelle vous souhaitez participer : ");
+			sess = (Session) View.choix(sessionPossibles.set);
+			sess.repondreQCM(this);
+		}catch (IOException ioe){
+			System.out.println("Erreur d'entrée sortie");
+		}
 	}
 
 	public void consulterResultat(Etudiant etu, Session sess){

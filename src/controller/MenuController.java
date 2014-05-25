@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 
+import model.RechercheDonnees;
+import model.QCM.Session;
 import model.utilisateur.*;
 import view.menu.View;
 
@@ -117,14 +119,39 @@ public class MenuController {
 	 * Premier menu du professeur
 	 */
 	
-	private void professeur(){
+	private void professeur(Professeur p){
+		boolean b = true;
+		All<Session> listeSession = RechercheDonnees.rechercheSession();
+		System.out.println("Veuillez choisir la session dont vous voulez consulter les résultats : ");
+		try {
+			Session s = (Session) View.choix(listeSession.set);			
+			while(b){
+				int carac = View.demandeInt("_______MENU 1______\n 1- Visualiser les résultats \n 2- Visualiser les statistiques \n 3- Quitter \n \n Choix :");
+				switch (carac){
+					case 1 : professeur2(p,s);
+					case 2 : break;
+					case 3 : b=false; break;				
+				default : break;
+				}
+			}	
+		} catch (IOException ioe){
+			System.out.println("Erreur d'entrée sortie");
+		}
+		
+	}
+	
+	/**
+	 * Deuxieme menu du professeur
+	 */
+	
+	private void professeur2(Professeur p, Session s){
 		boolean b = true;
 		while(b)
 		{
 			try{
-				int carac = View.demandeInt("_______MENU 1______\n 1- Gérer les QCM \n 2- Visualiser les résultats \n 3- Deconnexion \n \n Choix :");
+				int carac = View.demandeInt("_______MENU 1______\n 1- Visualiser les résultats \n 2- Visualiser les statistiques \n 3- Deconnexion \n \n Choix :");
 				switch (carac){
-					case 1 : break;
+					case 1 : s.visualiserResultat(p); break;
 					case 2 : break;
 					case 3 : b=false; break;				
 				default : break;
@@ -140,20 +167,25 @@ public class MenuController {
 	 * Premier menu de l'etudiant
 	 */
 	
-	private void etudiant(){
+	private void etudiant(Etudiant e){
 		boolean b = true;
 		while(b)
 		{	
 			try{
 				int carac = View.demandeInt("_______MENU 1______\n 1- Répondre aux QCM \n 2- Visualiser les résultats \n 3- Deconnexion \n \n Choix :");
 				switch (carac){
-					case 1 : break;
-					case 2 : break;
+					case 1 : e.choisirSession();break;
+					case 2 :
+						All<Session> listeSession = RechercheDonnees.rechercheSession();
+						System.out.println("Veuillez choisir la session dont vous voulez consulter les résultats : ");
+						Session s = (Session) View.choix(listeSession.set);
+						s.visualiserResultat(e);
+						break;
 					case 3 : b=false; break;				
 				default : break;
 				}
 			}
-			catch(IOException e){
+			catch(IOException ioe){
 				System.out.println("Erreur");					
 			}				
 		}

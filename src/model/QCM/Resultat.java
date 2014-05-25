@@ -2,24 +2,30 @@ package model.QCM;
 
 import java.io.Serializable;
 import model.utilisateur.Etudiant;
+import java.util.*;
 
 import model.serializable.Serialiser;
 
 
 public class Resultat implements Serializable{
 
-	private int note;
+	private float note;
 	private Etudiant eleve;
 	private int iterations;
+	private ArrayList<Reponse> listeReponse;
+	
 	/**
+	 * Constructeur complet de Resultat
 	 * @param note
 	 * @param eleve
 	 * @param iterations
 	 */
-	public Resultat(int note, Etudiant eleve, int iterations) {
+	public Resultat(float note, Etudiant eleve, int iterations, ArrayList<Reponse> listeReponse) {
 		this.note = note;
 		this.eleve = eleve;
 		this.iterations = iterations;
+		this.listeReponse = new ArrayList<Reponse>();
+		this.listeReponse = listeReponse;
 	}
 	
 	/**
@@ -32,14 +38,14 @@ public class Resultat implements Serializable{
 	/**
 	 * @return the note
 	 */
-	public int getNote() {
+	public float getNote() {
 		return note;
 	}
 
 	/**
 	 * @param note the note to set
 	 */
-	public void setNote(int note) {
+	public void setNote(float note) {
 		this.note = note;
 	}
 
@@ -70,10 +76,24 @@ public class Resultat implements Serializable{
 	public void setIterations(int iterations) {
 		this.iterations = iterations;
 	}
+
+	/**
+	 * @return the listeReponse
+	 */
+	public ArrayList<Reponse> getListeReponse() {
+		return listeReponse;
+	}
 	
-	
-	
-	
-	
-	
+	public void afficherResultats() {
+		
+		Iterator it = this.listeReponse.iterator();
+		int compteur = 1;
+		System.out.println("Liste des réponses de l'élève "+ this.eleve.getNom() + " " + this.eleve.getPrenom() + " :");
+		while (it.hasNext()){
+			Reponse rep = (Reponse) it.next();
+			System.out.println(compteur + " - " + this.listeReponse.get(compteur - 1));
+		}
+		
+		System.out.println("Note : "+ this.note);
+	}
 }

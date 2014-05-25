@@ -77,6 +77,14 @@ public class QCM implements Serializable{
 		return result;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return libelle;
+	}
+	
 	public boolean creerQuestion() {
 		try{
 		String libelle = View.demandeString("Entrez l'énoncé de votre question :");
