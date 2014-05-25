@@ -13,11 +13,11 @@ public class MenuController {
 	 */
 	private void authentification(){		
 		AuthentificationController aut = new AuthentificationController();
-		Utilisateur util = aut.authentification();
+		/*Utilisateur util = aut.authentification();
 	if(aut.getAutReussi()){
-			if(util instanceof Administrateur){
+			if(util instanceof Administrateur){*/
 				administrateur();}
-			else { 
+		/*	else { 
 				if (util instanceof Professeur ){
 					professeur();}
 				else { 
@@ -28,8 +28,8 @@ public class MenuController {
 					}
 				}
 			}		
-		}
-	}
+		}*/
+//	}
 		
 	/**
 	 * Deuxieme sous menu de l'administrateur
