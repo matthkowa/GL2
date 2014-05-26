@@ -48,11 +48,11 @@ public class MenuController {
 			try{
 				String str = "Gérer ";
 				switch(choix){
-				case 1 : str += "administrateur";  break;
-				case 2 : str += "professeur"; break;
-				case 3 : str += "étudiant"; break;
-				case 4 : str += "promotion"; break;
-				case 5 : str += "module"; break;
+				case 1 : str += "les administrateurs";  break;
+				case 2 : str += "les professeurs"; break;
+				case 3 : str += "les étudiants"; break;
+				case 4 : str += "les promotions"; break;
+				case 5 : str += "les modules"; break;
 				}
 				int carac = View.demandeInt("_______"+str+"______\n 1- Ajouter \n 2- Modifier \n 3- Supprimer \n 4- Retour au menu \n \n Choix :");
 				if(carac==4) b= false; 
@@ -134,7 +134,7 @@ public class MenuController {
 		boolean b = true;
 		try {		
 			while(b){
-				int carac = View.demandeInt("_______MENU 1______\n 1- Gérer les QCMs \n 2- Gérer les sessions \n 3- Visualiser les résultats \n 4- Quitter \n \n Choix :");
+				int carac = View.demandeInt("_______MENU professeur______\n 1- Gérer les QCMs \n 2- Gérer les sessions \n 3- Visualiser les résultats \n 4- Quitter \n \n Choix :");
 				switch (carac){
 					case 1 : professeur2(carac,p);
 					case 2 : professeur2(carac,p);
@@ -159,6 +159,12 @@ public class MenuController {
 		boolean b = true;
 		while(b){
 			try{
+				String str = "Gérer ";
+				switch(choix){
+				case 1 : str +="des QCM"; break;
+				case 2 : str +="des Sessions"; break;
+				
+				}
 				int carac = View.demandeInt("_______MENU 1______\n 1- Ajouter \n 2- Supprimer \n 3- Retour au menu \n \n Choix :");
 				if(carac==3) b= false; 
 				else{
@@ -222,7 +228,7 @@ public class MenuController {
 		while(b)
 		{	
 			try{
-				int carac = View.demandeInt("_______MENU 1______\n 1- Répondre aux QCM \n 2- Visualiser les résultats \n 3- Deconnexion \n \n Choix :");
+				int carac = View.demandeInt("_______MENU Etudiant______\n 1- Répondre aux QCM \n 2- Visualiser les résultats \n 3- Deconnexion \n \n Choix :");
 				switch (carac){
 					case 1 : e.choisirSession();break;
 					case 2 :
