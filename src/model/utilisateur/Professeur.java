@@ -278,4 +278,9 @@ public class Professeur extends Utilisateur {
 
 	}
 
+	public String toString() {
+		return "Professeur [idProf=" + idProf + ", modules=" + modules + "]";
+	}
+	
+
 }
