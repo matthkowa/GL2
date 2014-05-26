@@ -29,7 +29,7 @@ public class Main {
 //		p.creerSession();
 //		p.creerQCM();
 	
-//		MenuController m=new MenuController();
+		MenuController m=new MenuController();
 		//new IHMMenu();
 				
 //		All<Etudiant> etu = RechercheDonnees.rechercheEtudiant();

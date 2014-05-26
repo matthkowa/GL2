@@ -52,7 +52,7 @@ public class Module implements Serializable{
 	
 	@Override
 	public String toString(){
-		return id + " " + nom;
+		return nom;
 	}
 
 

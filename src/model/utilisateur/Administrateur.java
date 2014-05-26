@@ -106,17 +106,21 @@ public class Administrateur extends Utilisateur implements Serializable{
 				break;
 			case 7 :
 				if (util instanceof Professeur){
+					System.out.println("Les modules ont été supprimés.");
 					Set<Module> modprof = new HashSet<Module>();
 					Module mod = new Module();
-					String rep = "oui";
-					while (rep=="oui"){
-						System.out.println("Entrer un module pour le professeur");
+					boolean rep=true;
+					while (rep){
+						System.out.println("Entrer un module nouveau pour le professeur");
 						All<Module> modules = new All<Module>();
 						modules = (All<Module>) modules.relecture("Module/Module");
 						mod = (Module)View.choix(modules.getSet());
+						if (mod==null){
+							newSet.add(util);
+							return newSet;
+						}
 						modprof.add(mod);
-						System.out.println("Voulez vous-entrer d'autres modules (oui/non)");
-						rep = (new Scanner(System.in)).nextLine();
+						rep = View.demandeBoolean("Voulez vous-entrer d'autres modules (oui/non)");
 					}
 					((Professeur) util).setModules(modprof);
 				}
@@ -141,6 +145,9 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String s = "Utilisateur/Administrateur/Administrateur";
 		All<Administrateur> newSet = RechercheDonnees.rechercheAdmin();
 		Administrateur a = (Administrateur)View.choix(newSet.set);
+		if (a==null){
+			return;
+		}
 		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+a);
 		Scanner sc2 = new Scanner(System.in);
 		String rep = sc2.next();
@@ -183,6 +190,9 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String s = "Utilisateur/Administrateur/Administrateur";
 		All<Administrateur> newSet = RechercheDonnees.rechercheAdmin();
 		Administrateur a = (Administrateur)View.choix(newSet.set);
+		if (a==null){
+			return;
+		}
 		String rep = View.demandeString("Voulez-vous vraiment modifier (oui/non) : "+a);
 		switch(rep){
 			case "oui" : 
@@ -209,15 +219,18 @@ public class Administrateur extends Utilisateur implements Serializable{
 			pseudoA = pseudoA.substring(0,10);
 		}
 		String mdp = "EISTI";
-		String rep = "oui";
+		boolean rep = true;
 		Set<Module> modprof = new HashSet();
 		Module mod = new Module();
-		while (rep=="oui"){
+		while (rep){
 			System.out.println("Entrer un module pour le professeur");
 			All<Module> modules = RechercheDonnees.rechercheModule();
 			mod = (Module)View.choix(modules.getSet());
+			if (mod==null){
+				return;
+			}
 			modprof.add(mod);
-			rep = View.demandeString("Voulez vous-entrer d'autres modules");
+			rep = View.demandeBoolean("Voulez vous-entrer d'autres modules");
 		}
 		String s = "Utilisateur/Professeur/Professeur";
 
@@ -235,6 +248,9 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String s = "Utilisateur/Professeur/Professeur";
 		All<Professeur> newSet = RechercheDonnees.rechercheProf();
 		Professeur a = (Professeur)View.choix(newSet.set);
+		if (a==null){
+			return;
+		}
 		String rep = View.demandeString("Voulez-vous vraiment supprimer (oui/non) : "+a);
 		switch(rep){
 			case "oui" : newSet.set.remove(a);System.out.println("Well done");newSet.sauvegarder(s);break;
@@ -251,6 +267,9 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String s = "Utilisateur/Professeur/Professeur";
 		All<Professeur> newSet = RechercheDonnees.rechercheProf();
 		Professeur p = (Professeur)View.choix(newSet.set);
+		if (p==null){
+			return;
+		}
 		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+p);
 		String rep = (new Scanner(System.in)).next();
 		switch(rep){
@@ -284,6 +303,9 @@ public class Administrateur extends Utilisateur implements Serializable{
 		System.out.println("Aucune promotion créée");
 		}else{
 		Promotion promo = (Promotion)View.choix(newPromo.getSet());
+		if (promo==null){
+			return;
+		}
 		newPromo.remove(promo);
 		promo.getSetEtudiant().add(new Etudiant(nom, prenom, naissance, adresse, telS, pseudoA, mdp, promo.getSetEtudiant().size()));
 		newPromo.add(promo);
@@ -301,7 +323,13 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String path = "Utilisateur/Etudiant/promotion";
 		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
 		Promotion promo = (Promotion)View.choix(newPromo.getSet());
+		if (promo==null){
+			return;
+		}
 		Etudiant etu = (Etudiant) View.choix(promo.getSetEtudiant());
+		if (etu==null){
+			return;
+		}
 		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+etu);
 		String rep = (new Scanner(System.in)).next();
 		switch(rep){
@@ -326,7 +354,13 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String path = "Utilisateur/Etudiant/promotion";
 		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
 		Promotion promo = (Promotion) View.choix(newPromo.getSet());
+		if (promo==null){
+			return;
+		}
 		Etudiant etu = (Etudiant) View.choix(promo.getSetEtudiant());
+		if (etu==null){
+			return;
+		}
 		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+etu);
 		String rep = (new Scanner(System.in)).next();
 		switch(rep){
@@ -364,6 +398,9 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String path = "Module/Module";
 		All<Module> modules = RechercheDonnees.rechercheModule();
 		Module mod = (Module) View.choix(modules.getSet());
+		if (mod==null){
+			return;
+		}
 		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+mod);
 		String rep = (new Scanner(System.in)).next();
 		switch(rep){
@@ -383,6 +420,9 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String path = "Module/Module";
 		All<Module> modules = RechercheDonnees.rechercheModule();
 		Module mod = (Module) View.choix(modules.getSet());
+		if (mod==null){
+			return;
+		}
 		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+mod);
 		String rep = (new Scanner(System.in)).next();
 		switch(rep){
@@ -422,6 +462,9 @@ public class Administrateur extends Utilisateur implements Serializable{
 	public void supPromo() throws IOException{
 		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
 		Promotion promo = (Promotion)View.choix(newPromo.getSet());
+		if (promo==null){
+			return;
+		}
 		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+promo);
 		String rep = (new Scanner(System.in)).next();
 		switch(rep){

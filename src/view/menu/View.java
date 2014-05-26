@@ -189,11 +189,16 @@ public class View {
 			System.out.println(" - "+i+" => "+A);
 			i++;			
 		}
-		int num = 0;
-		while(num<1 || num>liste.size()){
+		int num = -1;
+		while(num<0 || num>liste.size()){
 			num = demandeInt("Entrer le numéro d'un des objet ci-dessus : ");
 		}
-		return liste.get(num-1);
+		if (num==0){
+			return null;
+		}
+		else{
+			return liste.get(num-1);
+		}
 	}
 	
 }
