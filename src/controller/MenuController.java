@@ -17,23 +17,24 @@ public class MenuController {
 	 */
 	private void authentification(){		
 		AuthentificationController aut = new AuthentificationController();
-		/*Utilisateur util = aut.authentification();
+		Utilisateur util = aut.authentification();
 	if(aut.getAutReussi()){
-			if(util instanceof Administrateur){*/
-				administrateur();}
-		/*	else { 
+			System.out.println("Bonjour " + util.getNom() +" "+ util.getPrenom());
+			if(util instanceof Administrateur){
+				administrateur((Administrateur) util);}
+			else { 
 				if (util instanceof Professeur ){
-					professeur();}
+					professeur((Professeur) util);}
 				else { 
 					if (util instanceof Etudiant ){
-						etudiant();}
+						etudiant((Etudiant) util);}
 					else { 
-						System.out.println("Erreur");
+						System.out.println("Erreur de connexion l'utilisateur n'appartient pas à une catégorie précise");
 					}
 				}
 			}		
-		}*/
-//	}
+		}
+	}
 		
 	/**
 	 * Deuxieme sous menu de l'administrateur
@@ -45,7 +46,15 @@ public class MenuController {
 		boolean b = true;
 		while(b){
 			try{
-				int carac = View.demandeInt("_______MENU 1______\n 1- Ajouter \n 2- Modifier \n 3- Supprimer \n 4- Retour au menu \n \n Choix :");
+				String str = "Gérer ";
+				switch(choix){
+				case 1 : str += "administrateur";  break;
+				case 2 : str += "professeur"; break;
+				case 3 : str += "étudiant"; break;
+				case 4 : str += "promotion"; break;
+				case 5 : str += "module"; break;
+				}
+				int carac = View.demandeInt("_______"+str+"______\n 1- Ajouter \n 2- Modifier \n 3- Supprimer \n 4- Retour au menu \n \n Choix :");
 				if(carac==4) b= false; 
 				else{
 					switch(choix) {
@@ -97,8 +106,8 @@ public class MenuController {
 	/**
 	 * Premier menu d'administrateur 
 	 */
-	private void administrateur(){
-		Administrateur a = new Administrateur();
+	private void administrateur(Administrateur a){
+		
 		boolean b = true;
 		while(b){
 			try{
