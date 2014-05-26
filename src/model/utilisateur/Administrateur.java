@@ -441,8 +441,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 			String nomPromo = View.demandeString("Entrer le nom de la nouvelle promo : ");
 			String path = "Utilisateur/Etudiant/promotion";
 			Promotion promoInit = new Promotion(new HashSet<Etudiant>(),nomPromo);
-			//All<Promotion> newPromo = RechercheDonnees.recherchePromo();
-			All<Promotion> newPromo = new All<Promotion>();
+			All<Promotion> newPromo = RechercheDonnees.recherchePromo();
 			newPromo.add(promoInit);
 			newPromo.sauvegarder(path);
 		}

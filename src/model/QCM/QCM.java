@@ -6,7 +6,7 @@ import view.menu.*;
 import model.utilisateur.*;
 
 public class QCM implements Serializable{
-	
+	private static final long serialVersionUID = 7353225222327832500L;
 	private String libelle;
 	private Boolean estPrive;
 	private Professeur createur;

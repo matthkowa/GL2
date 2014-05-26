@@ -1,6 +1,7 @@
 package model.utilisateur;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 
 import model.RechercheDonnees;
@@ -8,7 +9,7 @@ import model.QCM.*;
 import view.menu.View;;
 
 
-public class Etudiant extends Utilisateur{
+public class Etudiant extends Utilisateur implements Serializable{
 	private static final long serialVersionUID = -3499573138679375552L;
 	private int idEtudiant;
 

@@ -10,7 +10,7 @@ import model.QCM.*;
 import view.menu.*;
 
 public class Session implements Serializable {
-
+	private static final long serialVersionUID = -5960989166074812266L;
 	private Date dateDebut;
 	private Date dateFin;
 	private int repetition;

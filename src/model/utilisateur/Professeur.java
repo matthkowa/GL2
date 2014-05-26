@@ -9,7 +9,7 @@ import model.RechercheDonnees;
 import model.QCM.*;
 
 
-public class Professeur extends Utilisateur {
+public class Professeur extends Utilisateur implements Serializable{
 	private static final long serialVersionUID = -5845845607959841888L;
 	private int idProf;
 	private Set<Module> modules;
@@ -228,7 +228,8 @@ public class Professeur extends Utilisateur {
 			
 			String path = "QCM/session";
 
-			All<Session> setSession = RechercheDonnees.rechercheSession();
+			//All<Session> setSession = RechercheDonnees.rechercheSession();
+			All<Session> setSession = new All<Session>();
 			setSession.add(sess);
 			setSession.sauvegarder(path);
 			
