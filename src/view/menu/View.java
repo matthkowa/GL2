@@ -180,6 +180,9 @@ public class View {
 	 * @throws IOException
 	 */
 	public static <T> Object choix(Set<T> set) throws IOException{
+		if (set.isEmpty()){
+			return null;
+		}
 		int i=1;
 		List<Object> liste = new ArrayList<Object>();
 		for (Object A : set){

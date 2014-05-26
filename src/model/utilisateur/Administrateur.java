@@ -299,9 +299,6 @@ public class Administrateur extends Utilisateur implements Serializable{
 
 		String path = "Utilisateur/Etudiant/promotion";
 		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
-		if(newPromo==null){
-		System.out.println("Aucune promotion créée");
-		}else{
 		Promotion promo = (Promotion)View.choix(newPromo.getSet());
 		if (promo==null){
 			return;
@@ -310,7 +307,6 @@ public class Administrateur extends Utilisateur implements Serializable{
 		promo.getSetEtudiant().add(new Etudiant(nom, prenom, naissance, adresse, telS, pseudoA, mdp, promo.getSetEtudiant().size()));
 		newPromo.add(promo);
 		newPromo.sauvegarder(path);
-		}
 	}
 	
 	/**
@@ -445,7 +441,8 @@ public class Administrateur extends Utilisateur implements Serializable{
 			String nomPromo = View.demandeString("Entrer le nom de la nouvelle promo : ");
 			String path = "Utilisateur/Etudiant/promotion";
 			Promotion promoInit = new Promotion(new HashSet<Etudiant>(),nomPromo);
-			All<Promotion> newPromo = RechercheDonnees.recherchePromo();
+			//All<Promotion> newPromo = RechercheDonnees.recherchePromo();
+			All<Promotion> newPromo = new All<Promotion>();
 			newPromo.add(promoInit);
 			newPromo.sauvegarder(path);
 		}

@@ -1,11 +1,19 @@
 package model.serializable;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SealedObject;
 import javax.crypto.SecretKey;
 
@@ -53,9 +61,8 @@ public class Serialiser implements Serializable{
 	 * Charge et décrypte un Objet d'une classe fille de Serializer dans un fichier
 	 * @param s chemin vers le fichier de chargement
 	 */
-	public Object relecture(String s) {
+	public Object relecture(String s)throws FileNotFoundException{
 		try	{
-
 			SecretKey key = null;
 			try	{
 				FileInputStream f = new FileInputStream(new File("secretkey"));
@@ -79,12 +86,28 @@ public class Serialiser implements Serializable{
 			f.close();
 			o = (Object) sealedObject.getObject(cipher);
 			return o;
-			
+		}catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		} catch (InvalidKeyException e) {
+			e.printStackTrace();
+			return null;
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			return null;
+		} catch (NoSuchPaddingException e) {
+			e.printStackTrace();
+			return null;
+		} catch (IllegalBlockSizeException e) {
+			e.printStackTrace();
+			return null;
+		} catch (BadPaddingException e) {
+			e.printStackTrace();
+			return null;
 		}
-		catch (Exception e){
-			System.out.println("Erreur h "+e);
-		}
-		return null;	
 	}
 	
 	

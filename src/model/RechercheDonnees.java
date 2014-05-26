@@ -1,5 +1,7 @@
 package model;
 
+import java.io.FileNotFoundException;
+
 import model.utilisateur.*;
 import model.QCM.*;
 
@@ -10,11 +12,13 @@ public class RechercheDonnees {
 	 * @return All<Administrateur>
 	 */
 	public static All<Administrateur> rechercheAdmin(){
-		String path = "Utilisateur/Administrateur/Administrateur";
-		All<Administrateur> newAdmin = new All<Administrateur>();
-		if(newAdmin.relecture(path)!=null){
-		return (All<Administrateur>) newAdmin.relecture(path);}
-		else return (new All<Administrateur>());
+		try{
+			String path = "Utilisateur/Administrateur/Administrateur";
+			All<Administrateur> newAdmin = new All<Administrateur>();
+			return (All<Administrateur>) newAdmin.relecture(path);
+		}catch(FileNotFoundException e){
+			return (new All<Administrateur>());
+		}
 	}
 	
 	/**
@@ -22,12 +26,13 @@ public class RechercheDonnees {
 	 * @return All<Professeur>
 	 */
 	public static All<Professeur> rechercheProf(){
-		String path = "Utilisateur/Professeur/Professeur";
-		All<Professeur> newProf = new All<Professeur>();
-		if (newProf.relecture(path)!=null){
-		return (All<Professeur>) newProf.relecture(path);
+		try{
+			String path = "Utilisateur/Professeur/Professeur";
+			All<Professeur> newProf = new All<Professeur>();
+			return (All<Professeur>) newProf.relecture(path);
+		}catch(FileNotFoundException e){
+			return (new All<Professeur>());
 		}
-		else return (new All<Professeur>());
 	}
 	
 	/**
@@ -36,15 +41,16 @@ public class RechercheDonnees {
 	 */
 	
 	public static All<Etudiant> rechercheEtudiant(){
-		String path = "Utilisateur/Etudiant/promotion";
-		All<Etudiant> newEtudiant = new All<Etudiant>();
-		All<Promotion> p = (All<Promotion>) newEtudiant.relecture(path);
-		for(Promotion p1 : p.getSet()){
-			newEtudiant.addAll(p1.getSetEtudiant());
+		try{
+			String path = "Utilisateur/Etudiant/promotion";
+			All<Etudiant> newEtudiant = new All<Etudiant>();
+			All<Promotion> p = (All<Promotion>) newEtudiant.relecture(path);
+			for(Promotion p1 : p.getSet()){
+				newEtudiant.addAll(p1.getSetEtudiant());
+			}
+			return (newEtudiant) ;
 		}
-		if (newEtudiant!=null){
-		return (newEtudiant) ;
-		}else{
+		catch(FileNotFoundException e){
 			return (new All<Etudiant>());
 		}
 	}
@@ -54,12 +60,14 @@ public class RechercheDonnees {
 	 * @return All<Module>
 	 */
 	public static All<Module> rechercheModule(){
-		String path = "Module/module";
-		All<Module> newModule = new All<Module>();
-		if(newModule.relecture(path)!=null){
-		return (All<Module>) newModule.relecture(path);
+		try{
+			String path = "Module/module";
+			All<Module> newModule = new All<Module>();
+			return (All<Module>) newModule.relecture(path);
 		}
-		else return (new All<Module>());
+		catch(FileNotFoundException e){
+			return (new All<Module>());
+		}
 	}
 	
 	/**
@@ -67,12 +75,15 @@ public class RechercheDonnees {
 	 * @return All<Promotion>
 	 */
 	public static All<Promotion> recherchePromo(){
-		String path = "Utilisateur/Etudiant/promotion";
-		All<Promotion> newPromo = new All<Promotion>();
-		if(newPromo.relecture(path)==null) {
+		try{
+			String path = "Utilisateur/Etudiant/promotion";
+			All<Promotion> newPromo = new All<Promotion>();
+			newPromo = (All<Promotion>) newPromo.relecture(path);
+			return newPromo;
+		}
+		catch(FileNotFoundException e){
 			return new All<Promotion>();
-		}else
-		return (All<Promotion>) newPromo.relecture(path);
+		}
 	}
 	
 	/**
@@ -80,12 +91,13 @@ public class RechercheDonnees {
 	 * @return All<QCM>
 	 */
 	public static All<QCM> rechercheQCM(){
-		String path = "QCM/qcm";
-		All<QCM> newQCM = new All<QCM>();
-		if(newQCM.relecture(path)==null) {
+		try{
+			String path = "QCM/qcm";
+			All<QCM> newQCM = new All<QCM>();
+			return (All<QCM>) newQCM.relecture(path);
+		}catch(FileNotFoundException e){
 			return new All<QCM>();
-		}else
-		return (All<QCM>) newQCM.relecture(path);
+		}
 	}
 	
 	/**
@@ -93,12 +105,13 @@ public class RechercheDonnees {
 	 * @return All<Session>
 	 */
 	public static All<Session> rechercheSession(){
-		String path = "QCM/session";
-		All<Session> newSession = new All<Session>();
-		if(newSession.relecture(path)==null) {
+		try{
+			String path = "QCM/session";
+			All<Session> newSession = new All<Session>();
+			return (All<Session>) newSession.relecture(path);
+		}catch(FileNotFoundException e){
 			return new All<Session>();
-		}else
-		return (All<Session>) newSession.relecture(path);
+		}
 	}
 	
 	/**
@@ -106,11 +119,12 @@ public class RechercheDonnees {
 	 * @return All<Session>
 	 */
 	public static All<Resultat> rechercheResultat(int id){
-		String path = "Resultat/"+id+"/resultat";
-		All<Resultat> newResultat = new All<Resultat>();
-		if(newResultat.relecture(path)==null) {
+		try{
+			String path = "Resultat/"+id+"/resultat";
+			All<Resultat> newResultat = new All<Resultat>();
+			return (All<Resultat>) newResultat.relecture(path);
+		}catch(FileNotFoundException e){
 			return new All<Resultat>();
-		}else
-		return (All<Resultat>) newResultat.relecture(path);
+		}
 	}
 }
