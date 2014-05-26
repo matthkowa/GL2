@@ -323,7 +323,7 @@ public class Session implements Serializable {
 						System.out.println("Note : " + resultat.getNote());	
 					}	
 				}else{
-					System.out.println("La session n'est pas encore terminée, veuillez ressayer après le "+ View.affichageDate(this.dateFin)+".");
+					System.out.println("La session n'est pas encore terminée, veuillez réessayer après le "+ View.affichageDate(this.dateFin)+".");
 				}
 							
 				
