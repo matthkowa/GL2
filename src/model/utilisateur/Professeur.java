@@ -14,19 +14,23 @@ public class Professeur extends Utilisateur implements Serializable{
 	private int idProf;
 	private Set<Module> modules;
 	
+	/**
+	 * Constructeur vide de Professeur
+	 */
 	public Professeur() {
 		super();	
 	}
 	
 	/**
 	 * Constructeur complet de la classe Professeur
-	 * @param nom
-	 * @param prenom
-	 * @param dateNaissance
-	 * @param adresse
-	 * @param tel
-	 * @param pseudo
-	 * @param motDePasse
+	 * @param nom chaine de caractères
+	 * @param prenom chaine de caractères
+	 * @param dateNaissance date de naissance sous forme d'objet de type date
+	 * @param adresse chaine de caractères
+	 * @param tel numéro de teléphone sous forme d'entier
+	 * @param pseudo chaine de caractères
+	 * @param motDePasse mot de passe sous forme de chaine de caractères
+	 * @param id identifiant spécifique de l'administrateur (entier)
 	 */
 	public Professeur(String nom, String prenom, Date dateNaissance,
 			String adresse, int tel, String pseudo, String motDePasse,int id, Set<Module> modules) {
@@ -279,6 +283,11 @@ public class Professeur extends Utilisateur implements Serializable{
 
 	}
 
+		
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
 	public String toString() {
 		return super.toString() + " modules=" + modules;
 	}

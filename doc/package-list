@@ -1,5 +1,5 @@
 controller
-initialNode
 model
-serializable
+model.serializable
+model.utilisateur
 view.menu

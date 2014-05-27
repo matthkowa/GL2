@@ -8,6 +8,7 @@ public class Module implements Serializable{
 	private int id;
 	private String nom;
 	/**
+	 * Constructeur complet de L'objet Module
 	 * @param id
 	 * @param nom
 	 */
@@ -16,29 +17,35 @@ public class Module implements Serializable{
 		this.nom = nom;
 	}
 	
+	/**
+	 * Constructeur vide de L'objet Module
+	 */
 	public Module() {
 	}
 	
 	/**
+	 * getter de l'attribut nom
 	 * @return the nom
 	 */
 	public String getNom() {
 		return nom;
 	}
 	/**
+	 * setter de l'attribut nom
 	 * @param nom the nom to set
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 	/**
+	 * getter de l'attribut id
 	 * @return the id
 	 */
 	public int getId() {
 		return id;
 	}
 	
-	/* (non-Javadoc)
+	/**
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -50,6 +57,9 @@ public class Module implements Serializable{
 		return result;
 	}
 	
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString(){
 		return nom;
