@@ -57,6 +57,14 @@ public class Promotion extends Serialiser implements Serializable{
 	public String toString(){
 		return promo + " : \n" + setEtudiant.toString();
 	}
+
+	public void add(Etudiant etu) {
+		this.setEtudiant.add(etu);
+	}
+
+	public void remove(Etudiant etu) {
+		this.setEtudiant.remove(etu);
+	}
 	
 
 }

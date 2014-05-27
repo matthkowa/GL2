@@ -60,36 +60,36 @@ public class MenuController {
 					switch(choix) {
 						case 1 : /*Administrateur*/
 							switch(carac) { 
-							case 1 : a.addAdmin(); 	break;
+							case 1 : a.addAdmin(); 		break;
 							case 2 : a.modifAdmin();  	break;
-							case 3 : a.supAdmin();  break;
+							case 3 : a.supAdmin();  	break;
 							}
 						break;
 						
 						case 2 : /*Professeur*/
 							switch(carac) { 
-							case 1 : a.addProf(); 	break;
+							case 1 : a.addProf(); 		break;
 							case 2 : a.modifProf();  	break;
-							case 3 : a.supProf(); 	break;
+							case 3 : a.supProf(); 		break;
 							}
 						break;
 						case 3 :/*Etudiant*/
 							switch(carac) { 
-							case 1 : a.addEleve(); 	break;
+							case 1 : a.addEleve(); 		break;
 							case 2 : a.modifEleve();  	break;
 							case 3 : a.supEleve();  	break;
 							}
 						break;
 						case 4 :/*Promotion*/
 							switch(carac) { 
-							case 1 : a.addPromo();	break;
-							case 2 : /*Modifier Promo*/  		break;
+							case 1 : a.addPromo();		break;
+							case 2 : a.modifPromo();	break;
 							case 3 : a.supPromo();  	break;
 							}
 						break;
 						case 5 :/*Modules*/
 							switch(carac) { 
-							case 1 : a.addModule(); 		break;
+							case 1 : a.addModule(); 	break;
 							case 2 : a.modifModule();  	break;
 							case 3 : a.supModule();  	break;
 							}

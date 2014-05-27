@@ -1,16 +1,12 @@
 package model.utilisateur;
 
 import view.menu.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Scanner;
-
 import model.RechercheDonnees;
 
 
@@ -69,7 +65,6 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException 
 	 */
 	public <T extends Utilisateur> Set<T> modifdonnees(Set<T> newSet,T util,String path) throws IOException{
-		Scanner sc2 =  new Scanner(System.in);
 		newSet.remove(util);
 		int rep2 = 0;
 		System.out.println("Que voulez-vous modifier ?");
@@ -83,7 +78,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 			System.out.println("7 / Module");
 		}
 		while ((rep2<1) ||(rep2>7)){
-			rep2 = sc2.nextInt();
+			rep2 = View.demandeInt("Entrer un des numéros ci-dessus");
 		}
 		switch(rep2){
 			case 1 : 
@@ -251,7 +246,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		}
 		String mdp = "EISTI";
 		boolean rep = true;
-		Set<Module> modprof = new HashSet();
+		Set<Module> modprof = new HashSet<Module>();
 		All<Module> modules = RechercheDonnees.rechercheModule();
 		Module mod = new Module();
 		while (rep){
@@ -556,5 +551,67 @@ public class Administrateur extends Utilisateur implements Serializable{
 			System.out.println("Annulation");
 		}
 	}
+	
+	/**
+	 * Fonction qui modifie une promotion parmi une liste de promotion.
+	 * @throws IOException 
+	 */
+	public void modifPromo() throws IOException{
+		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
+		if (newPromo.isEmpty()){
+			System.out.println("Il n'y a pas de promotions");
+			return;
+		}
+		Promotion promo = (Promotion)View.choix(newPromo.getSet());
+		if (promo==null){
+			System.out.println("Annulation");
+			return;
+		}
+		newPromo.remove(promo);
+		int rep = -1;
+		while ((rep<0)||(rep>2)){
+			System.out.println("0 - Annuler\n1 - modifier nom\n2 - Modifier élèves");
+			rep = View.demandeInt("Entrer un des nombres ci-dessus");
+		}
+		switch(rep){
+			case 0 :
+				System.out.println("Annulation");
+				break;
+			case 1 :
+				promo.setPromo(View.demandeString("Entrer le nouveau nom de la promotion"));
+				System.out.println("la promo "+promo+" a bien été mise à jour");
+				break;
+			case 2 :
+				if (promo.getSetEtudiant().isEmpty()){
+					System.out.println("Il n'y a pas d'étudiant dans cette promotion");
+					return;
+				}
+				Etudiant etu = (Etudiant) View.choix(promo.getSetEtudiant());
+				if (etu==null){
+					System.out.println("Annulation");
+					return;
+				}
+				if (newPromo.isEmpty()){
+					System.out.println("Il n'y a pas d'autre promotions");
+					promo.add(etu);
+					break;
+				}
+				Promotion promo1 = (Promotion)View.choix(newPromo.getSet());
+				if (promo1==null){
+					System.out.println("Annulation");
+					promo.add(etu);
+					break;
+				}
+				newPromo.remove(promo1);
+				promo1.add(etu);
+				promo.remove(etu);
+				newPromo.add(promo1);
+				System.out.println("L'etudiant "+etu+" a bien été transférer en "+promo1.getPromo());
+				break;
+		}
+		newPromo.add(promo);
+		newPromo.sauvegarder("Utilisateur/Etudiant/promotion");
+	}
+	
 	
 }
