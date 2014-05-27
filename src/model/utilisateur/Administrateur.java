@@ -116,11 +116,19 @@ public class Administrateur extends Utilisateur implements Serializable{
 						modules = (All<Module>) modules.relecture("Module/Module");
 						mod = (Module)View.choix(modules.getSet());
 						if (mod==null){
+							System.out.println("Il n'y a pas de modules");
 							newSet.add(util);
 							return newSet;
 						}
 						modprof.add(mod);
-						rep = View.demandeBoolean("Voulez vous-entrer d'autres modules (oui/non)");
+						modules.remove(mod);
+						if (modules.isEmpty()){
+							System.out.println("Il n'y a pas d'autres modules");
+							rep=false;
+						}
+						else{
+							rep = View.demandeBoolean("Voulez vous-entrer d'autres modules (oui/non)");
+						}
 					}
 					((Professeur) util).setModules(modprof);
 				}
@@ -130,7 +138,15 @@ public class Administrateur extends Utilisateur implements Serializable{
 				}
 		}
 		newSet.add(util);
-		System.out.println("Well done");
+		if (util instanceof Professeur){
+			System.out.println("Le professeur : "+(Professeur)util+" a bien été modifié");
+		}
+		if (util instanceof Etudiant){
+			System.out.println("L'étudiant : "+(Etudiant)util+" a bien été modifié");
+		}
+		if (util instanceof Administrateur){
+			System.out.println("L'administrateur : "+util+" a bien été modifié");
+		}
 		return newSet;
 	}
 	
@@ -146,14 +162,16 @@ public class Administrateur extends Utilisateur implements Serializable{
 		All<Administrateur> newSet = RechercheDonnees.rechercheAdmin();
 		Administrateur a = (Administrateur)View.choix(newSet.set);
 		if (a==null){
+			System.out.println("Il n'y a pas d'administrateurs");
 			return;
 		}
-		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+a);
-		Scanner sc2 = new Scanner(System.in);
-		String rep = sc2.next();
-		switch(rep){
-			case "oui" : newSet.set.remove(a);System.out.println("Well done");newSet.sauvegarder(s);break;
-			default : System.out.println("tant pis");break;
+		boolean rep = View.demandeBoolean("Voulez-vous vraiment supprimer (oui/non) : "+a);
+		if (rep){ 
+			newSet.set.remove(a);
+			newSet.sauvegarder(s);
+			System.out.println("L'administrateur : "+a+" a bien été supprimé");
+		}else{
+			System.out.println("Annulation");
 		}
 	}
 	
@@ -177,7 +195,9 @@ public class Administrateur extends Utilisateur implements Serializable{
 		
 		String s = "Utilisateur/Administrateur/Administrateur";
 		All<Administrateur> newSet = RechercheDonnees.rechercheAdmin();
-		newSet.add(new Administrateur(nom, prenom, naissance, adresse, telS, pseudoA, mdp, newSet.set.size()));
+		Administrateur a = new Administrateur(nom, prenom, naissance, adresse, telS, pseudoA, mdp, newSet.set.size());
+		newSet.add(a);
+		System.out.println("L'administrateur : "+a+" a bien été ajouté");
 		newSet.sauvegarder(s);
 	}	
 		
@@ -191,15 +211,15 @@ public class Administrateur extends Utilisateur implements Serializable{
 		All<Administrateur> newSet = RechercheDonnees.rechercheAdmin();
 		Administrateur a = (Administrateur)View.choix(newSet.set);
 		if (a==null){
+			System.out.println("Il n'y a pas d'administrateurs");
 			return;
 		}
-		String rep = View.demandeString("Voulez-vous vraiment modifier (oui/non) : "+a);
-		switch(rep){
-			case "oui" : 
-				newSet.set = this.modifdonnees(newSet.set, a, s);
-				newSet.sauvegarder(s);
-				break;
-			default : System.out.println("tant pis");break;
+		boolean rep = View.demandeBoolean("Voulez-vous vraiment modifier (oui/non) : "+a);
+		if (rep){ 
+			newSet.set = this.modifdonnees(newSet.set, a, s);
+			newSet.sauvegarder(s);
+		}else{
+			System.out.println("Annulation");
 		}
 	}
 	
@@ -227,6 +247,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 			All<Module> modules = RechercheDonnees.rechercheModule();
 			mod = (Module)View.choix(modules.getSet());
 			if (mod==null){
+				System.out.println("Il n'y a pas de modules");
 				return;
 			}
 			modprof.add(mod);
@@ -235,7 +256,9 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String s = "Utilisateur/Professeur/Professeur";
 
 		All<Professeur> newSet = RechercheDonnees.rechercheProf();
-		newSet.add(new Professeur(nom, prenom, naissance, adresse, telS, pseudoA, mdp, newSet.set.size(), modprof));
+		Professeur a = new Professeur(nom, prenom, naissance, adresse, telS, pseudoA, mdp, newSet.set.size(), modprof);
+		newSet.add(a);
+		System.out.println("Le professeur : "+a+" a bien été ajouté.");
 		newSet.sauvegarder(s);
 	}
 	
@@ -249,12 +272,16 @@ public class Administrateur extends Utilisateur implements Serializable{
 		All<Professeur> newSet = RechercheDonnees.rechercheProf();
 		Professeur a = (Professeur)View.choix(newSet.set);
 		if (a==null){
+			System.out.println("Il n'y a pas de professeurs");
 			return;
 		}
-		String rep = View.demandeString("Voulez-vous vraiment supprimer (oui/non) : "+a);
-		switch(rep){
-			case "oui" : newSet.set.remove(a);System.out.println("Well done");newSet.sauvegarder(s);break;
-			default : System.out.println("tant pis");break;
+		boolean rep = View.demandeBoolean("Voulez-vous vraiment supprimer (oui/non) : "+a);
+		if (rep){
+			newSet.set.remove(a);
+			newSet.sauvegarder(s);
+			System.out.println("Le professeur : "+a+" a bien été supprimé.");
+		}else{
+			System.out.println("Annulation");
 		}
 	}
 	
@@ -268,16 +295,15 @@ public class Administrateur extends Utilisateur implements Serializable{
 		All<Professeur> newSet = RechercheDonnees.rechercheProf();
 		Professeur p = (Professeur)View.choix(newSet.set);
 		if (p==null){
+			System.out.println("Il n'y a pas de professeurs");
 			return;
 		}
-		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+p);
-		String rep = (new Scanner(System.in)).next();
-		switch(rep){
-			case "oui" : 
-				newSet.set = this.modifdonnees(newSet.set, p, s);
-				newSet.sauvegarder(s);
-				break;
-			default : System.out.println("tant pis");break;
+		boolean rep = View.demandeBoolean("Voulez-vous vraiment modifier (oui/non) : "+p);
+		if (rep){
+			newSet.set = this.modifdonnees(newSet.set, p, s);
+			newSet.sauvegarder(s);
+		}else {
+			System.out.println("tant pis");
 		}
 	}
 	
@@ -301,12 +327,15 @@ public class Administrateur extends Utilisateur implements Serializable{
 		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
 		Promotion promo = (Promotion)View.choix(newPromo.getSet());
 		if (promo==null){
+			System.out.println("Il n'y a pas de promotions");
 			return;
 		}
 		newPromo.remove(promo);
-		promo.getSetEtudiant().add(new Etudiant(nom, prenom, naissance, adresse, telS, pseudoA, mdp, promo.getSetEtudiant().size()));
+		Etudiant etu = new Etudiant(nom, prenom, naissance, adresse, telS, pseudoA, mdp, promo.getSetEtudiant().size());
+		promo.getSetEtudiant().add(etu);
 		newPromo.add(promo);
 		newPromo.sauvegarder(path);
+		System.out.println("L'étudiant : "+etu+" a bien été ajouté.");
 	}
 	
 	/**
@@ -320,24 +349,23 @@ public class Administrateur extends Utilisateur implements Serializable{
 		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
 		Promotion promo = (Promotion)View.choix(newPromo.getSet());
 		if (promo==null){
+			System.out.println("Il n'y a pas d'étudiants");
 			return;
 		}
 		Etudiant etu = (Etudiant) View.choix(promo.getSetEtudiant());
 		if (etu==null){
+			System.out.println("Il n'y a pas de promotions");
 			return;
 		}
-		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+etu);
-		String rep = (new Scanner(System.in)).next();
-		switch(rep){
-			case "oui" : 
-				newPromo.remove(promo);
-				promo.getSetEtudiant().remove(etu);
-				newPromo.add(promo);
-				newPromo.sauvegarder(s);
-				break;
-			default : 
-				System.out.println("tant pis");
-				break;
+		boolean rep = View.demandeBoolean("Voulez-vous vraiment supprimer (oui/non) : "+etu);
+		if (rep){
+			newPromo.remove(promo);
+			promo.getSetEtudiant().remove(etu);
+			newPromo.add(promo);
+			newPromo.sauvegarder(s);
+			System.out.println("L'étudiant : "+etu+" a bien été supprimé.");
+		}else{
+			System.out.println("Annulation");
 		}
 	}
  
@@ -351,20 +379,20 @@ public class Administrateur extends Utilisateur implements Serializable{
 		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
 		Promotion promo = (Promotion) View.choix(newPromo.getSet());
 		if (promo==null){
+			System.out.println("Il n'y a pas d'étudiants");
 			return;
 		}
 		Etudiant etu = (Etudiant) View.choix(promo.getSetEtudiant());
 		if (etu==null){
+			System.out.println("Il n'y a pas de promotions");
 			return;
 		}
-		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+etu);
-		String rep = (new Scanner(System.in)).next();
-		switch(rep){
-			case "oui" : 
-				promo.setSetEtudiant(this.modifdonnees(promo.getSetEtudiant(), etu, path));
-				promo.sauvegarder(path);
-				break;
-			default : System.out.println("tant pis");break;
+		boolean rep = View.demandeBoolean("Voulez-vous vraiment modifier (oui/non) : "+etu);
+		if (rep){ 
+			promo.setSetEtudiant(this.modifdonnees(promo.getSetEtudiant(), etu, path));
+			promo.sauvegarder(path);
+		}else{
+			System.out.println("Annulation");
 		}
 	}
 	
@@ -377,8 +405,10 @@ public class Administrateur extends Utilisateur implements Serializable{
 			String nom = View.demandeString("Entrer le nom du nouveau module : ");
 			String path = "Module/Module";
 			All<Module> modules = RechercheDonnees.rechercheModule();
-			modules.set.add(new Module(modules.getSet().size(), nom));
+			Module mod = new Module(modules.getSet().size(), nom);
+			modules.set.add(mod);
 			modules.sauvegarder(path);
+			System.out.println("Le module : "+mod+" a bien été ajouté.");
 		}
 		catch(IOException e)
 		{
@@ -395,16 +425,16 @@ public class Administrateur extends Utilisateur implements Serializable{
 		All<Module> modules = RechercheDonnees.rechercheModule();
 		Module mod = (Module) View.choix(modules.getSet());
 		if (mod==null){
+			System.out.println("Il n'y a pas de modules");
 			return;
 		}
-		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+mod);
-		String rep = (new Scanner(System.in)).next();
-		switch(rep){
-			case "oui" : 
-				modules.set.remove(mod);
-				modules.sauvegarder(path);
-				break;
-			default : System.out.println("tant pis");break;
+		boolean rep = View.demandeBoolean("Voulez-vous vraiment supprimer (oui/non) : "+mod);
+		if (rep){
+			modules.set.remove(mod);
+			modules.sauvegarder(path);
+			System.out.println("Le module : "+mod+" a bien été supprimé.");
+		}else{
+			System.out.println("Annulation");
 		}
 	}
 	
@@ -417,18 +447,18 @@ public class Administrateur extends Utilisateur implements Serializable{
 		All<Module> modules = RechercheDonnees.rechercheModule();
 		Module mod = (Module) View.choix(modules.getSet());
 		if (mod==null){
+			System.out.println("Il n'y a pas de modules");
 			return;
 		}
-		System.out.println("Voulez-vous vraiment modifier (oui/non) : "+mod);
-		String rep = (new Scanner(System.in)).next();
-		switch(rep){
-			case "oui" :
-				modules.set.remove(mod);
-				mod.setNom(View.demandeString("Entrer le nouveau nom du module : "+mod.getNom()));
-				modules.add(mod);
-				modules.sauvegarder(path);
-				break;
-			default : System.out.println("tant pis");break;
+		boolean rep = View.demandeBoolean("Voulez-vous vraiment modifier (oui/non) : "+mod);
+		if (rep){
+			modules.set.remove(mod);
+			mod.setNom(View.demandeString("Entrer le nouveau nom du module : "+mod.getNom()));
+			modules.add(mod);
+			modules.sauvegarder(path);
+			System.out.println("Le module : "+mod+" a bien été modifié.");
+		}else{
+			System.out.println("Annulation");
 		}
 	}
 	
@@ -444,6 +474,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 			All<Promotion> newPromo = RechercheDonnees.recherchePromo();
 			newPromo.add(promoInit);
 			newPromo.sauvegarder(path);
+			System.out.println("La promo : "+promoInit+" a bien été ajoutée.");
 		}
 		catch(IOException e)
 		{
@@ -459,17 +490,17 @@ public class Administrateur extends Utilisateur implements Serializable{
 		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
 		Promotion promo = (Promotion)View.choix(newPromo.getSet());
 		if (promo==null){
+			System.out.println("Il n'y a pas de promotions");
 			return;
 		}
-		System.out.println("Voulez-vous vraiment supprimer (oui/non) : "+promo);
-		String rep = (new Scanner(System.in)).next();
-		switch(rep){
-			case "oui" : 
-				newPromo.set.remove(promo);
-				newPromo.sauvegarder("Utilisateur/Etudiant/promotion");
-				System.out.println("Well Done!");
-				break;
-			default : System.out.println("tant pis");break;
+		boolean rep = View.demandeBoolean("Voulez-vous vraiment supprimer (oui/non) : "+promo);
+		if (rep){
+			newPromo.set.remove(promo);
+			newPromo.sauvegarder("Utilisateur/Etudiant/promotion");
+			System.out.println("La promo : "+promo+" a bien été supprimée.");
+		}
+		else{
+			System.out.println("Annulation");
 		}
 	}
 	

@@ -188,6 +188,7 @@ public class View {
 		for (Object A : set){
 			liste.add(A);
 		};
+		System.out.println(" - 0 => Annuler");
 		for (Object A : liste){
 			System.out.println(" - "+i+" => "+A);
 			i++;			

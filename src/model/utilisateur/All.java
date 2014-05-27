@@ -62,6 +62,15 @@ public class All<T> extends Serialiser implements Serializable{
 	}
 	
 	/**
+	 * vérifie si le set d'objet est vide.
+	 * @return booléen
+	 */
+	public boolean isEmpty(){
+		return this.set.isEmpty();
+		
+	}
+	
+	/**
 	 * supprime un objet T à l'attribut set (set d'objet T)
 	 * @param objet objet de type T
 	 */
