@@ -28,6 +28,44 @@
 	Ne serait-il pas mieux de sauvegarder les élèves dans un set de promo ?
 	De même pour les réponses dans des sets de reponses avec des attributs propre ( session par exemple)
 	
- 	 
+ 	  	 
+================================================
+
+Et si on mettait à jour le TODO ici pour qu'on puisse dire ce qu'on a déjà fait ou non ^^
+
+
+Afficher 0 => Sortie de modifier	DONE
+
+Afficher des messages genre vous avez reussi à créer a la place de Well done dans la suppression => untel a été supprimé	 DONE
+
+Ajout de 2 fois le meme module à un prof DONE
+
+Si liste vide pour modifier afficher "aucun module" par exemple		DONE
+
+si suppression de module => supprimer les modules lié au profs		LES MODULES SONT TOUS SUPPRIMER AU DEBUT DE LA MODIF
+
+
+Veuillez choisir la session à supprimer :
+- 1 => Test
+Entrer le numéro d'un des objet ci-dessus :
+0
+Exception in thread "main" java.lang.NullPointerException
+
+
+Avis nico 27/05 22h38
+
+"Modifier" une promo ne fonctionne pas.		DONE
+
+Quelque soit l'endroit, lorsqu'on fait "0" pour annuler, il nous affiche
+"il n'y a pas de..." il faudrait le changer parce que c'est pas du tout ça.		DONE
+
+La modification du "nom" ou du "prenom" d'un utilisateur n'entraine pas un changement du "pseudo". 	MDP NON MODIFIABLE
+
+Lors de "l'ajout" d'un étudiant, après avoir entré le numéro de téléphone,
+il n'y a aucune phrase. Les différentes promo s'affiche directement sans
+explication et on peut de plus "annuler" ce qui ne devrait pas être possible.		DONE
+
+L'affichage des étudiants dans une promo est décalé à chaque nouvel étudiant
+à cause du "\n" à la fin du toString d'utilisateur. Je pense qu'il faudrait le retirer.
  	 				
  
