@@ -3,7 +3,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -17,7 +16,9 @@ public class IHMBarreMenu  extends JMenuBar{
 	
 	
 	
-	  private JMenu test1 = new JMenu("Fichier");
+
+	private static final long serialVersionUID = -2342025907211862489L;
+	private JMenu test1 = new JMenu("Fichier");
 	  private JMenu test1_2 = new JMenu("Sous ficher");
 	  private JMenu test2 = new JMenu("Edition");
 	  private JMenu authentification = new JMenu("Authentification");

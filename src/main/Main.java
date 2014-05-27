@@ -4,15 +4,9 @@ package main;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
-import java.util.NoSuchElementException;
+
 
 //import view.IHM.IHMMenu;
-
-import model.RechercheDonnees;
-import model.utilisateur.*;
-import view.menu.*;
-import model.QCM.*;
 
 import controller.MenuController;
 
@@ -20,7 +14,6 @@ import controller.MenuController;
 public class Main {
 	
 	//.
-	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException{
 		/*Administrateur a = new Administrateur();
 		a.addMo();*/

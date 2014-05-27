@@ -105,7 +105,7 @@ public class QCM implements Serializable{
 				ajoutReponse = false;
 			}
 			
-			Iterator it = question.getReponses().iterator();
+			Iterator<Reponse> it = question.getReponses().iterator();
 			boolean bonneReponse = false;
 			
 			while (it.hasNext() && !(bonneReponse)){

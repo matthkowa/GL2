@@ -237,7 +237,7 @@ public class MenuController {
 						
 						All<Session> listeSession = RechercheDonnees.rechercheSession();
 						All<Session> listeSessionPromo = new All<Session>();
-						Iterator itSession = listeSession.set.iterator();
+						Iterator<Session> itSession = listeSession.set.iterator();
 						
 						while(itSession.hasNext()){
 							Session s = (Session) itSession.next();

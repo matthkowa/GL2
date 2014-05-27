@@ -90,9 +90,7 @@ public class Professeur extends Utilisateur implements Serializable{
 		All<QCM> listeQCM = RechercheDonnees.rechercheQCM();
 		All<QCM> listeQCMProf = new All<QCM>();
 		QCM q = null;
-		Iterator it = listeQCM.set.iterator();
-		boolean rep = false;
-		
+		Iterator<QCM> it = listeQCM.set.iterator();
 		while (it.hasNext()){
 			q = (QCM) it.next();
 			if (this.hashCode() == q.getCreateur().hashCode()){
@@ -111,7 +109,7 @@ public class Professeur extends Utilisateur implements Serializable{
 		All<Session> listeSession = RechercheDonnees.rechercheSession();
 		All<Session> listeSessionProf = new All<Session>();
 		Session s = null;
-		Iterator it = listeSession.set.iterator();
+		Iterator<Session> it = listeSession.set.iterator();
 		
 		while (it.hasNext()){
 			s = (Session) it.next();

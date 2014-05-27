@@ -46,7 +46,7 @@ public class Etudiant extends Utilisateur implements Serializable{
 	
 	/**
 	 * Renoie l'idEtudiant de Etudiant
-	 * @return
+	 * @return idEtudiant
 	 */
 	public int getIdEtudiant(){
 		return this.idEtudiant;
@@ -57,7 +57,7 @@ public class Etudiant extends Utilisateur implements Serializable{
 	 */
 	public Promotion getPromo(){
 		All<Promotion> listePromo = RechercheDonnees.recherchePromo();
-		Iterator itPromo = listePromo.set.iterator();
+		Iterator<Promotion> itPromo = listePromo.set.iterator();
 		Boolean finBoucle = true;
 		Promotion promo = null;
 		
@@ -112,7 +112,7 @@ public class Etudiant extends Utilisateur implements Serializable{
 		Promotion promotion = this.getPromo();
 		
 		All<Session> sessionList = RechercheDonnees.rechercheSession();
-		Iterator itSession = sessionList.set.iterator();
+		Iterator<Session> itSession = sessionList.set.iterator();
 		Session sess = new Session();
 		All<Session> sessionPossibles = new All<Session>();
 		

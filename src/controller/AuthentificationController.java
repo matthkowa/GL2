@@ -58,7 +58,6 @@ public class AuthentificationController {
 	 * @return utilisateur correspondant aux identifiants ou utilisateur vide
 	 */
 	private Utilisateur verifierPseudoMdp(All<Utilisateur> liste,String pseudo,String mdp){
-		int i =0;		
 		Boolean b = true;
 		for(Utilisateur u : liste.getSet()){
 			if(u.getPseudo().compareTo(pseudo) == 0){
@@ -68,7 +67,6 @@ public class AuthentificationController {
 					return u;					
 				}
 			}
-			i++;
 		}
 		if(b){
 			System.out.println("Echec Essayez Encore");
