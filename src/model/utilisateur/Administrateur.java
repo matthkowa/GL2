@@ -108,15 +108,18 @@ public class Administrateur extends Utilisateur implements Serializable{
 				if (util instanceof Professeur){
 					System.out.println("Les modules ont été supprimés.");
 					Set<Module> modprof = new HashSet<Module>();
+					All<Module> modules = RechercheDonnees.rechercheModule();
 					Module mod = new Module();
 					boolean rep=true;
 					while (rep){
-						System.out.println("Entrer un module nouveau pour le professeur");
-						All<Module> modules = new All<Module>();
-						modules = (All<Module>) modules.relecture("Module/Module");
+						System.out.println("Entrer un nouveau module pour le professeur");
+						if (modules.isEmpty()){
+							System.out.println("Il n'y a pas d'autres modules");
+							break;
+						}
 						mod = (Module)View.choix(modules.getSet());
 						if (mod==null){
-							System.out.println("Il n'y a pas de modules");
+							System.out.println("Annulation");
 							newSet.add(util);
 							return newSet;
 						}
@@ -160,6 +163,10 @@ public class Administrateur extends Utilisateur implements Serializable{
 	public void supAdmin() throws NoSuchElementException,IOException{
 		String s = "Utilisateur/Administrateur/Administrateur";
 		All<Administrateur> newSet = RechercheDonnees.rechercheAdmin();
+		if (newSet.isEmpty()){
+			System.out.println("Il n'y a pas d'administrateurs");
+			return;
+		}
 		Administrateur a = (Administrateur)View.choix(newSet.set);
 		if (a==null){
 			System.out.println("Il n'y a pas d'administrateurs");
@@ -209,6 +216,10 @@ public class Administrateur extends Utilisateur implements Serializable{
 	public void modifAdmin() throws NoSuchElementException,IOException{
 		String s = "Utilisateur/Administrateur/Administrateur";
 		All<Administrateur> newSet = RechercheDonnees.rechercheAdmin();
+		if (newSet.isEmpty()){
+			System.out.println("Il n'y a pas d'administrateurs");
+			return;
+		}
 		Administrateur a = (Administrateur)View.choix(newSet.set);
 		if (a==null){
 			System.out.println("Il n'y a pas d'administrateurs");
@@ -241,14 +252,17 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String mdp = "EISTI";
 		boolean rep = true;
 		Set<Module> modprof = new HashSet();
+		All<Module> modules = RechercheDonnees.rechercheModule();
 		Module mod = new Module();
 		while (rep){
 			System.out.println("Entrer un module pour le professeur");
-			All<Module> modules = RechercheDonnees.rechercheModule();
+			if (modules.isEmpty()){
+				System.out.println("Il n'y a pas d'autres modules");
+				return;
+			}
 			mod = (Module)View.choix(modules.getSet());
 			if (mod==null){
-				System.out.println("Il n'y a pas de modules");
-				return;
+				break;
 			}
 			modprof.add(mod);
 			rep = View.demandeBoolean("Voulez vous-entrer d'autres modules");
@@ -270,6 +284,10 @@ public class Administrateur extends Utilisateur implements Serializable{
 	public void supProf() throws NoSuchElementException,IOException{
 		String s = "Utilisateur/Professeur/Professeur";
 		All<Professeur> newSet = RechercheDonnees.rechercheProf();
+		if (newSet.isEmpty()){
+			System.out.println("Il n'y a pas de professeurs");
+			return;
+		}
 		Professeur a = (Professeur)View.choix(newSet.set);
 		if (a==null){
 			System.out.println("Il n'y a pas de professeurs");
@@ -293,6 +311,10 @@ public class Administrateur extends Utilisateur implements Serializable{
 	public void modifProf() throws NoSuchElementException,IOException{
 		String s = "Utilisateur/Professeur/Professeur";
 		All<Professeur> newSet = RechercheDonnees.rechercheProf();
+		if (newSet.isEmpty()){
+			System.out.println("Il n'y a pas de professeurs");
+			return;
+		}
 		Professeur p = (Professeur)View.choix(newSet.set);
 		if (p==null){
 			System.out.println("Il n'y a pas de professeurs");
@@ -322,12 +344,16 @@ public class Administrateur extends Utilisateur implements Serializable{
 			pseudoA = pseudoA.substring(0,10);
 		}
 		String mdp = "EISTI";
-
+		System.out.println("Entrer la promotion de l'étudiant :");
 		String path = "Utilisateur/Etudiant/promotion";
 		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
+		if (newPromo.isEmpty()){
+			System.out.println("Il n'y a pas de promotions");
+			return;
+		}
 		Promotion promo = (Promotion)View.choix(newPromo.getSet());
 		if (promo==null){
-			System.out.println("Il n'y a pas de promotions");
+			System.out.println("Annulation");
 			return;
 		}
 		newPromo.remove(promo);
@@ -344,17 +370,24 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException
 	 */
 	public void supEleve() throws NoSuchElementException,IOException{
-		String s = "";
 		String path = "Utilisateur/Etudiant/promotion";
 		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
+		if (newPromo.isEmpty()){
+			System.out.println("Il n'y a pas de promotions");
+			return;
+		}
 		Promotion promo = (Promotion)View.choix(newPromo.getSet());
 		if (promo==null){
-			System.out.println("Il n'y a pas d'étudiants");
+			System.out.println("Annulation");
+			return;
+		}
+		if (promo.getSetEtudiant().isEmpty()){
+			System.out.println("Il n'y a pas d'étudiant dans cette promotion");
 			return;
 		}
 		Etudiant etu = (Etudiant) View.choix(promo.getSetEtudiant());
 		if (etu==null){
-			System.out.println("Il n'y a pas de promotions");
+			System.out.println("Il n'y a pas d'étudiants");
 			return;
 		}
 		boolean rep = View.demandeBoolean("Voulez-vous vraiment supprimer (oui/non) : "+etu);
@@ -362,7 +395,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 			newPromo.remove(promo);
 			promo.getSetEtudiant().remove(etu);
 			newPromo.add(promo);
-			newPromo.sauvegarder(s);
+			newPromo.sauvegarder(path);
 			System.out.println("L'étudiant : "+etu+" a bien été supprimé.");
 		}else{
 			System.out.println("Annulation");
@@ -377,14 +410,22 @@ public class Administrateur extends Utilisateur implements Serializable{
 	public void modifEleve() throws IOException{
 		String path = "Utilisateur/Etudiant/promotion";
 		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
+		if (newPromo.isEmpty()){
+			System.out.println("Il n'y a pas de promotions");
+			return;
+		}
 		Promotion promo = (Promotion) View.choix(newPromo.getSet());
 		if (promo==null){
-			System.out.println("Il n'y a pas d'étudiants");
+			System.out.println("Annulation");
+			return;
+		}
+		if (promo.getSetEtudiant().isEmpty()){
+			System.out.println("Il n'y a pas d'étudiant dans cette promotion");
 			return;
 		}
 		Etudiant etu = (Etudiant) View.choix(promo.getSetEtudiant());
 		if (etu==null){
-			System.out.println("Il n'y a pas de promotions");
+			System.out.println("Annulation");
 			return;
 		}
 		boolean rep = View.demandeBoolean("Voulez-vous vraiment modifier (oui/non) : "+etu);
@@ -423,9 +464,13 @@ public class Administrateur extends Utilisateur implements Serializable{
 	public void supModule() throws IOException{
 		String path = "Module/Module";
 		All<Module> modules = RechercheDonnees.rechercheModule();
+		if (modules.isEmpty()){
+			System.out.println("Il n'y a pas de modules");
+			return;
+		}
 		Module mod = (Module) View.choix(modules.getSet());
 		if (mod==null){
-			System.out.println("Il n'y a pas de modules");
+			System.out.println("Annulation");
 			return;
 		}
 		boolean rep = View.demandeBoolean("Voulez-vous vraiment supprimer (oui/non) : "+mod);
@@ -445,9 +490,13 @@ public class Administrateur extends Utilisateur implements Serializable{
 	public void modifModule() throws IOException{
 		String path = "Module/Module";
 		All<Module> modules = RechercheDonnees.rechercheModule();
+		if (modules.isEmpty()){
+			System.out.println("Il n'y a pas de modules");
+			return;
+		}
 		Module mod = (Module) View.choix(modules.getSet());
 		if (mod==null){
-			System.out.println("Il n'y a pas de modules");
+			System.out.println("Annulation");
 			return;
 		}
 		boolean rep = View.demandeBoolean("Voulez-vous vraiment modifier (oui/non) : "+mod);
@@ -488,6 +537,10 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 */
 	public void supPromo() throws IOException{
 		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
+		if (newPromo.isEmpty()){
+			System.out.println("Il n'y a pas de promotions");
+			return;
+		}
 		Promotion promo = (Promotion)View.choix(newPromo.getSet());
 		if (promo==null){
 			System.out.println("Il n'y a pas de promotions");
