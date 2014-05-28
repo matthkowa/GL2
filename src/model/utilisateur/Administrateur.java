@@ -474,8 +474,10 @@ public class Administrateur extends Utilisateur implements Serializable{
 			modules.sauvegarder(path);
 			All<Professeur> professeurs = RechercheDonnees.rechercheProf();
 			for (Professeur P : professeurs.getSet()){
-				if (P.getModules().contains(mod)){
-					P.supprimerModule(mod);
+				for (Module M : P.getModules()){
+					if (mod.equals(M)){
+						P.supprimerModule(M);
+					}
 				}
 			}
 			professeurs.sauvegarder("Utilisateur/Professeur/Professeur");
