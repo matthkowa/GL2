@@ -472,6 +472,13 @@ public class Administrateur extends Utilisateur implements Serializable{
 		if (rep){
 			modules.set.remove(mod);
 			modules.sauvegarder(path);
+			All<Professeur> professeurs = RechercheDonnees.rechercheProf();
+			for (Professeur P : professeurs.getSet()){
+				if (P.getModules().contains(mod)){
+					P.supprimerModule(mod);
+				}
+			}
+			professeurs.sauvegarder("Utilisateur/Professeur/Professeur");
 			System.out.println("Le module : "+mod+" a bien été supprimé.");
 		}else{
 			System.out.println("Annulation");

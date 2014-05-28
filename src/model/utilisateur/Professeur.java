@@ -280,6 +280,15 @@ public class Professeur extends Utilisateur implements Serializable{
 		}
 
 	}
+	
+	
+	/**
+	 * Permet de supprimer un module du professeur
+	 * @param mod module à supprimer
+	 */
+	public void supprimerModule(Module mod){
+		this.modules.remove(mod);
+	}
 
 		
 	/**
