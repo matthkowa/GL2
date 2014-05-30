@@ -134,4 +134,8 @@ public class Etudiant extends Utilisateur implements Serializable{
 			System.out.println("Erreur d'entrée sortie");
 		}
 	}
+	
+	public String toString(){
+		return super.toString() + ")\n";
+	}
 }

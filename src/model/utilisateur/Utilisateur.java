@@ -154,14 +154,14 @@ public class Utilisateur implements Serializable{
 	 */
 	@Override
 	public String toString(){
-		String s="";
+		String s="(";
 		s+=this.getNom()+" / ";
 		s+=this.getPrenom()+" / ";
 		s+=View.affichageDate(getDateNaissance())+" / ";
 		s+=this.getAdresse()+" / ";
 		s+="0" + this.getTel()+" / ";
 		s+=this.getPseudo()+" / ";
-		s+=this.getMotDePasse()+" \n ";
+		s+=this.getMotDePasse()+"";
 		return s;
 	}
 	

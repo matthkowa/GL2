@@ -622,5 +622,8 @@ public class Administrateur extends Utilisateur implements Serializable{
 		newPromo.sauvegarder("dataSave/Utilisateur/Etudiant/promotion");
 	}
 	
+	public String toString(){
+		return super.toString() + ")\n";
+	}
 	
 }

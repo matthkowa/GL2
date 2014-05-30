@@ -296,7 +296,7 @@ public class Professeur extends Utilisateur implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return super.toString() + " modules=" + modules;
+		return super.toString() + " modules=" + modules + ")\n";
 	}
 	
 
