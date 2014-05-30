@@ -151,7 +151,7 @@ public class Professeur extends Utilisateur implements Serializable{
 	}
 	
 	/**
-	 * Permet au professeur de créer un QCM
+	 * Permet au professeur de créer un QCM 
 	 */
 	public void creerQCM(){
 		
