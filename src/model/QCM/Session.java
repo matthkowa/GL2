@@ -340,7 +340,7 @@ public class Session implements Serializable {
 					}
 				}
 				if (finBoucle){
-					System.out.println("L'étudiant en question n'a pas encore participé à la session.");
+					System.out.println( eleve.getPrenom() + " n'a pas encore participé à la session.");
 				}else{
 					resultat.afficherResultats();	
 				}
