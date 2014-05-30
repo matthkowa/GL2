@@ -11,7 +11,7 @@ import view.menu.View;
 
 public class MenuController {
 	/**
-	 * Crée un objet AuthentificationController puis lance la fonction d'identification associée
+	 * Crée un objet AuthentificationController puis lance la fonction d'identification associée 
 	 * Verifie ensuite si l'authentification a reussi 
 	 * Verifie si l'utilisateur est un administrateur ou professeur ou etudiant et lance les fonctions associées 
 	 */
