@@ -288,7 +288,6 @@ public class Professeur extends Utilisateur implements Serializable{
 				System.out.println("Annulation");
 				return;
 			}
-//			Module module = (Module) View.choix(this.modules);
 			
 			Session sess = new Session(dateDebut, dateFin, repetition, this, qcm, promotion, module);
 			System.out.println(sess.description());
