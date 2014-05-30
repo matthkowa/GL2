@@ -255,8 +255,9 @@ public class MenuController {
 						
 						System.out.println("Veuillez choisir la session dont vous voulez consulter les résultats : ");
 						Session s = (Session) View.choix(listeSessionPromo.set);
-						
-						s.visualiserResultat(e);
+						if(s != null){
+						s.visualiserResultat(e);}
+						else{System.out.println("Annulé");}
 						break;
 					case 3 : b=false; break;				
 				default : break;

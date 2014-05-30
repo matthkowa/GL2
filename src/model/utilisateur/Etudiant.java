@@ -61,13 +61,12 @@ public class Etudiant extends Utilisateur implements Serializable{
 		Boolean finBoucle = true;
 		Promotion promo = null;
 		
-		while(itPromo.hasNext() || finBoucle){
+		while(itPromo.hasNext() && finBoucle){
 			promo = (Promotion) itPromo.next();
 			if (promo.getSetEtudiant().contains(this)){
 				finBoucle = false;
-			}
+			}		
 		}
-		
 		return promo;
 	}
 	
@@ -115,21 +114,21 @@ public class Etudiant extends Utilisateur implements Serializable{
 		Iterator<Session> itSession = sessionList.set.iterator();
 		Session sess = new Session();
 		All<Session> sessionPossibles = new All<Session>();
-		
 		while(itSession.hasNext()){
 			
 			sess = (Session) itSession.next();
-			
 			if (sess.getPromotion().getPromo().equals(promotion.getPromo())){
 				sessionPossibles.add(sess);
 			}
 			
 		}
-		
 		try{
-			System.out.println("Veuillez choisir la session à laquelle vous souhaitez participer : ");
+			if(!sessionPossibles.set.isEmpty()){
+			System.out.println("Veuillez choisir la session à laquelle vous souhaitez participer : ");}
 			sess = (Session) View.choix(sessionPossibles.set);
-			sess.repondreQCM(this);
+			if (sess!=null){
+			sess.repondreQCM(this);}
+			
 		}catch (IOException ioe){
 			System.out.println("Erreur d'entrée sortie");
 		}

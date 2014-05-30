@@ -408,7 +408,7 @@ public class Session implements Serializable {
 			
 		}
 		
-		return ( moyenne / listeRes.set.size() );
+		return ( moyenne / (listeRes.set.size()-1 ));
 		
 	}
 	
@@ -430,8 +430,9 @@ public class Session implements Serializable {
 			ecartType += ( (res.getNote())- moyenne ) * ( (res.getNote())- moyenne );
 			
 		}
+		ecartType -= ( moyenne*moyenne );
 		
-		ecartType = Math.sqrt(ecartType / listeRes.set.size());
+		ecartType = Math.sqrt(ecartType / (listeRes.set.size()-1));
 		
 		return ecartType;
 	}
@@ -479,7 +480,7 @@ public class Session implements Serializable {
 		
 		while(itEffectifs.hasNext()){
 			double effectif = (double) itEffectifs.next();
-			double frequence =  effectif/compteur;
+			double frequence =  effectif/(listeRes.set.size()-1);
 			System.out.println("Question n°"+ compteur2 +" : " + frequence);
 			compteur2 ++;
 		}
