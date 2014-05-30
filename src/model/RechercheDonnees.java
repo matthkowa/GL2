@@ -27,7 +27,7 @@ public class RechercheDonnees {
 	 */
 	public static All<Professeur> rechercheProf(){
 		try{
-			String path = "Utilisateur/Professeur/Professeur";
+			String path = "dataSave/Utilisateur/Professeur/Professeur";
 			All<Professeur> newProf = new All<Professeur>();
 			return (All<Professeur>) newProf.relecture(path);
 		}catch(FileNotFoundException e){
