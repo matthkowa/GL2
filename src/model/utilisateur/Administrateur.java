@@ -8,6 +8,7 @@ import java.util.Set;
 import java.io.IOException;
 import java.io.Serializable;
 import model.RechercheDonnees;
+import model.QCM.QCM;
 
 
 public class Administrateur extends Utilisateur implements Serializable{
@@ -293,6 +294,16 @@ public class Administrateur extends Utilisateur implements Serializable{
 		boolean rep = View.demandeBoolean("Voulez-vous vraiment supprimer (oui/non) : "+a);
 		if (rep){
 			newSet.set.remove(a);
+			All<QCM> allqcm = RechercheDonnees.rechercheQCM();
+			Set<QCM> allqcmprof = a.getQCM();
+			if(!allqcmprof.isEmpty()){
+				for (QCM Q : allqcmprof){
+					if (Q.getEstPrive()){
+						allqcm.remove(Q);
+					}
+				}
+			}
+			allqcm.sauvegarder("dataSave/QCM/qcm");
 			newSet.sauvegarder(s);
 			System.out.println("Le professeur : "+a+" a bien été supprimé.");
 		}else{

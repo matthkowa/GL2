@@ -110,12 +110,15 @@ public class Professeur extends Utilisateur implements Serializable{
 	public Set<QCM> getQCM() {
 		
 		All<QCM> listeQCM = RechercheDonnees.rechercheQCM();
+		if(listeQCM.isEmpty()){
+			return new HashSet<QCM>();
+		}
 		All<QCM> listeQCMProf = new All<QCM>();
 		QCM q = null;
 		Iterator<QCM> it = listeQCM.set.iterator();
 		while (it.hasNext()){
 			q = (QCM) it.next();
-			if (this.hashCode() == q.getCreateur().hashCode()){
+			if ((!q.getEstPrive())||(this.hashCode() == q.getCreateur().hashCode())){
 				listeQCMProf.add(q);
 			}
 		}
