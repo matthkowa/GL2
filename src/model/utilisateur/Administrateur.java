@@ -164,7 +164,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		}
 		Administrateur a = (Administrateur)View.choix(newSet.set);
 		if (a==null){
-			System.out.println("Il n'y a pas d'administrateurs");
+			System.out.println("Annulation");
 			return;
 		}
 		boolean rep = View.demandeBoolean("Voulez-vous vraiment supprimer (oui/non) : "+a);
@@ -217,7 +217,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		}
 		Administrateur a = (Administrateur)View.choix(newSet.set);
 		if (a==null){
-			System.out.println("Il n'y a pas d'administrateurs");
+			System.out.println("Annulation");
 			return;
 		}
 		boolean rep = View.demandeBoolean("Voulez-vous vraiment modifier (oui/non) : "+a);
@@ -285,7 +285,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		}
 		Professeur a = (Professeur)View.choix(newSet.set);
 		if (a==null){
-			System.out.println("Il n'y a pas de professeurs");
+			System.out.println("Annulation");
 			return;
 		}
 		boolean rep = View.demandeBoolean("Voulez-vous vraiment supprimer (oui/non) : "+a);
@@ -312,7 +312,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		}
 		Professeur p = (Professeur)View.choix(newSet.set);
 		if (p==null){
-			System.out.println("Il n'y a pas de professeurs");
+			System.out.println("Annulation");
 			return;
 		}
 		boolean rep = View.demandeBoolean("Voulez-vous vraiment modifier (oui/non) : "+p);
@@ -547,7 +547,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		}
 		Promotion promo = (Promotion)View.choix(newPromo.getSet());
 		if (promo==null){
-			System.out.println("Il n'y a pas de promotions");
+			System.out.println("Annulation");
 			return;
 		}
 		boolean rep = View.demandeBoolean("Voulez-vous vraiment supprimer (oui/non) : "+promo);

@@ -159,7 +159,7 @@ public class Utilisateur implements Serializable{
 		s+=this.getPrenom()+" / ";
 		s+=View.affichageDate(getDateNaissance())+" / ";
 		s+=this.getAdresse()+" / ";
-		s+=this.getTel()+" / ";
+		s+="0" + this.getTel()+" / ";
 		s+=this.getPseudo()+" / ";
 		s+=this.getMotDePasse()+" \n ";
 		return s;
