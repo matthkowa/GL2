@@ -15,7 +15,7 @@ public class MenuController {
 	 * Verifie ensuite si l'authentification a reussi 
 	 * Verifie si l'utilisateur est un administrateur ou professeur ou etudiant et lance les fonctions associées 
 	 */
-	private void authentification(){		
+	private void authentification(){
 		AuthentificationController aut = new AuthentificationController();
 		Utilisateur util = aut.authentification();
 	if(aut.getAutReussi()){
