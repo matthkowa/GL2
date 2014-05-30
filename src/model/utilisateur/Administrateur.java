@@ -57,6 +57,34 @@ public class Administrateur extends Utilisateur implements Serializable{
 		this.id = id;
 	}
 	
+	/**
+	 * vérifie qu'on pseudo n'existe pas déjà parmi les utilisateurs
+	 */
+	public boolean verif(String pseudoA){
+		boolean verif = false;
+		All<Utilisateur> utilisateurs = new All<Utilisateur>();
+		All<Administrateur> listeA = RechercheDonnees.rechercheAdmin();
+		All<Professeur> listeP = RechercheDonnees.rechercheProf();
+		All<Etudiant> listeE = RechercheDonnees.rechercheEtudiant();
+		for(Etudiant e : listeE.getSet()){
+			utilisateurs.add((Utilisateur) e);
+	
+		}
+		for(Professeur p : listeP.getSet()){
+			utilisateurs.add((Utilisateur) p);
+		}
+		for(Administrateur a : listeA.getSet()){
+			utilisateurs.add((Utilisateur) a);			
+		}
+		for (Utilisateur U : utilisateurs.getSet()){
+			if (U.getPseudo().equals(pseudoA)){
+				verif=true;
+				break;
+			}
+		}
+		return verif;
+	}
+	
 	
 	/**
 	 * Fonction qui demande ce qui doit être modifier chez un utilisateur quelconque
@@ -195,6 +223,10 @@ public class Administrateur extends Utilisateur implements Serializable{
 		if (pseudoA.length()>10){
 			pseudoA = pseudoA.substring(0,10);
 		}
+		System.out.println(verif(pseudoA));
+		while(verif(pseudoA)){
+			pseudoA = View.demandeString("Entrer un pseudo qui n'existe pas déjà");
+		}
 		String mdp = "EISTI";
 		
 		
@@ -246,6 +278,9 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String pseudoA=(nom+prenom).toLowerCase();
 		if (pseudoA.length()>10){
 			pseudoA = pseudoA.substring(0,10);
+		}
+		while(verif(pseudoA)){
+			pseudoA = View.demandeString("Entrer un pseudo qui n'existe pas déjà");
 		}
 		String mdp = "EISTI";
 		boolean rep = true;
@@ -351,6 +386,9 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String pseudoA=(nom+prenom).toLowerCase();
 		if (pseudoA.length()>10){
 			pseudoA = pseudoA.substring(0,10);
+		}
+		while(verif(pseudoA)){
+			pseudoA = View.demandeString("Entrer un pseudo qui n'existe pas déjà");
 		}
 		String mdp = "EISTI";
 		System.out.println("Entrer la promotion de l'étudiant :");

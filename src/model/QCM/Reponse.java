@@ -8,7 +8,6 @@ public class Reponse implements Serializable {
 	private Boolean estVraie;
 	
 	/**
-	 * @param id
 	 * @param libelle
 	 * @param estVraie
 	 */

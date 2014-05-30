@@ -21,7 +21,6 @@ public class Session implements Serializable {
 	
 	/**
 	 * Constructeur complet de Session
-	 * @param idSession
 	 * @param dateDebut
 	 * @param dateFin
 	 * @param repetition
