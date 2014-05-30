@@ -12,13 +12,15 @@ public class RechercheDonnees {
 	 * @return All<Administrateur>
 	 */
 	public static All<Administrateur> rechercheAdmin(){
-		try{
 			String path = "dataSave/Utilisateur/Administrateur/Administrateur";
 			All<Administrateur> newAdmin = new All<Administrateur>();
-			return (All<Administrateur>) newAdmin.relecture(path);
-		}catch(FileNotFoundException e){
-			return (new All<Administrateur>());
-		}
+			newAdmin = (All<Administrateur>) newAdmin.relecture(path);
+			if (newAdmin==null){
+				return (new All<Administrateur>());
+			}
+			else{
+				return newAdmin;
+			}
 	}
 	
 	/**
@@ -26,12 +28,14 @@ public class RechercheDonnees {
 	 * @return All<Professeur>
 	 */
 	public static All<Professeur> rechercheProf(){
-		try{
-			String path = "dataSave/Utilisateur/Professeur/Professeur";
-			All<Professeur> newProf = new All<Professeur>();
-			return (All<Professeur>) newProf.relecture(path);
-		}catch(FileNotFoundException e){
+		String path = "dataSave/Utilisateur/Professeur/Professeur";
+		All<Professeur> newProf = new All<Professeur>();
+		newProf = (All<Professeur>) newProf.relecture(path);
+		if (newProf==null){
 			return (new All<Professeur>());
+		}
+		else{
+			return newProf;
 		}
 	}
 	
@@ -41,18 +45,18 @@ public class RechercheDonnees {
 	 */
 	
 	public static All<Etudiant> rechercheEtudiant(){
-		try{
 			String path = "dataSave/Utilisateur/Etudiant/promotion";
 			All<Etudiant> newEtudiant = new All<Etudiant>();
 			All<Promotion> p = (All<Promotion>) newEtudiant.relecture(path);
-			for(Promotion p1 : p.getSet()){
-				newEtudiant.addAll(p1.getSetEtudiant());
+			if (p==null){
+				return (new All<Etudiant>());
 			}
-			return (newEtudiant) ;
-		}
-		catch(FileNotFoundException e){
-			return (new All<Etudiant>());
-		}
+			else{
+				for(Promotion p1 : p.getSet()){
+					newEtudiant.addAll(p1.getSetEtudiant());
+				}
+				return newEtudiant;
+			}
 	}
 	
 	/**
@@ -60,13 +64,14 @@ public class RechercheDonnees {
 	 * @return All<Module>
 	 */
 	public static All<Module> rechercheModule(){
-		try{
-			String path = "dataSave/Module/module";
-			All<Module> newModule = new All<Module>();
-			return (All<Module>) newModule.relecture(path);
-		}
-		catch(FileNotFoundException e){
+		String path = "dataSave/Module/module";
+		All<Module> newModule = new All<Module>();
+		All<Module> modules = (All<Module>) newModule.relecture(path);
+		if (modules==null){
 			return (new All<Module>());
+		}
+		else{
+			return modules;
 		}
 	}
 	
@@ -75,14 +80,14 @@ public class RechercheDonnees {
 	 * @return All<Promotion>
 	 */
 	public static All<Promotion> recherchePromo(){
-		try{
-			String path = "dataSave/Utilisateur/Etudiant/promotion";
-			All<Promotion> newPromo = new All<Promotion>();
-			newPromo = (All<Promotion>) newPromo.relecture(path);
-			return newPromo;
+		String path = "dataSave/Utilisateur/Etudiant/promotion";
+		All<Promotion> newPromo = new All<Promotion>();
+		newPromo = (All<Promotion>) newPromo.relecture(path);
+		if (newPromo==null){
+			return (new All<Promotion>());
 		}
-		catch(FileNotFoundException e){
-			return new All<Promotion>();
+		else{
+			return newPromo;
 		}
 	}
 	
@@ -91,13 +96,15 @@ public class RechercheDonnees {
 	 * @return All<QCM>
 	 */
 	public static All<QCM> rechercheQCM(){
-		try{
 			String path = "dataSave/QCM/qcm";
 			All<QCM> newQCM = new All<QCM>();
-			return (All<QCM>) newQCM.relecture(path);
-		}catch(FileNotFoundException e){
-			return new All<QCM>();
-		}
+			newQCM = (All<QCM>) newQCM.relecture(path);
+			if (newQCM==null){
+				return (new All<QCM>());
+			}
+			else{
+				return newQCM;
+			}
 	}
 	
 	/**
@@ -105,12 +112,14 @@ public class RechercheDonnees {
 	 * @return All<Session>
 	 */
 	public static All<Session> rechercheSession(){
-		try{
-			String path = "dataSave/QCM/session";
-			All<Session> newSession = new All<Session>();
-			return (All<Session>) newSession.relecture(path);
-		}catch(FileNotFoundException e){
-			return new All<Session>();
+		String path = "dataSave/QCM/session";
+		All<Session> newSession = new All<Session>();
+		newSession = (All<Session>) newSession.relecture(path);
+		if (newSession==null){
+			return (new All<Session>());
+		}
+		else{
+			return newSession;
 		}
 	}
 	
@@ -119,12 +128,14 @@ public class RechercheDonnees {
 	 * @return All<Session>
 	 */
 	public static All<Resultat> rechercheResultat(int id){
-		try{
-			String path = "dataSave/Resultat/"+id+"/resultat";
-			All<Resultat> newResultat = new All<Resultat>();
-			return (All<Resultat>) newResultat.relecture(path);
-		}catch(FileNotFoundException e){
-			return new All<Resultat>();
+		String path = "dataSave/Resultat/"+id+"/resultat";
+		All<Resultat> newResultat = new All<Resultat>();
+		newResultat = (All<Resultat>) newResultat.relecture(path);
+		if (newResultat==null){
+			return (new All<Resultat>());
+		}
+		else{
+			return newResultat;
 		}
 	}
 }

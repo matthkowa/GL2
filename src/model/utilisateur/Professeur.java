@@ -258,7 +258,13 @@ public class Professeur extends Utilisateur implements Serializable{
 				System.out.println("Il n'y a pas de QCM");
 				return;
 			}
-			QCM qcm = (QCM) View.choix(qcmList.set);
+			All<QCM> qcmListPossible = new All<QCM>();
+			for (QCM Q : qcmList.getSet()){
+				if((!Q.getEstPrive())||(Q.getCreateur()==this)){
+					qcmListPossible.add(Q);
+				}
+			}
+			QCM qcm = (QCM) View.choix(qcmListPossible.set);
 			if(qcm==null){
 				System.out.println("Annulation");
 				return;
@@ -277,12 +283,7 @@ public class Professeur extends Utilisateur implements Serializable{
 			}
 			
 			System.out.println("Veuillez choisir un module parmi ceux ci-dessous : ");
-			All<Module> moduleList = RechercheDonnees.rechercheModule();
-			if (moduleList.isEmpty()){
-				System.out.println("Il n'y a pas de modules");
-				return;
-			}
-			Module module = (Module) View.choix(moduleList.set);
+			Module module = (Module) View.choix(qcm.getCreateur().getModules());
 			if(module==null){
 				System.out.println("Annulation");
 				return;

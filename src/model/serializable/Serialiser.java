@@ -61,7 +61,7 @@ public class Serialiser implements Serializable{
 	 * Charge et décrypte un Objet d'une classe fille de Serializer dans un fichier
 	 * @param s chemin vers le fichier de chargement
 	 */
-	public Object relecture(String s)throws FileNotFoundException{
+	public Object relecture(String s){
 		try	{
 			SecretKey key = null;
 			try	{
@@ -74,18 +74,21 @@ public class Serialiser implements Serializable{
 			catch (Exception e){
 				System.out.println("Erreur "+e);
 			}
-			
-			FileInputStream f = new FileInputStream(new File(s));
-			ObjectInputStream ois = new ObjectInputStream(f);
-			Object o = ((Object) ois.readObject());			
-			SealedObject sealedObject = ((SealedObject) o);
-			String algorithmName = sealedObject.getAlgorithm();
-	        Cipher cipher = Cipher.getInstance(algorithmName);
-	        cipher.init(Cipher.DECRYPT_MODE, key);
-			ois.close();
-			f.close();
-			o = (Object) sealedObject.getObject(cipher);
-			return o;
+			try{
+				FileInputStream f = new FileInputStream(new File(s));
+				ObjectInputStream ois = new ObjectInputStream(f);
+				Object o = ((Object) ois.readObject());			
+				SealedObject sealedObject = ((SealedObject) o);
+				String algorithmName = sealedObject.getAlgorithm();
+		        Cipher cipher = Cipher.getInstance(algorithmName);
+		        cipher.init(Cipher.DECRYPT_MODE, key);
+				ois.close();
+				f.close();
+				o = (Object) sealedObject.getObject(cipher);
+				return o;
+			}catch(FileNotFoundException e){
+				return null;
+			}
 		}catch (IOException e) {
 			e.printStackTrace();
 			return null;

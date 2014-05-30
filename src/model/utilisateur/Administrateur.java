@@ -256,12 +256,13 @@ public class Administrateur extends Utilisateur implements Serializable{
 			System.out.println("Entrer un module pour le professeur");
 			if (modules.isEmpty()){
 				System.out.println("Il n'y a pas d'autres modules");
-				return;
+				break;
 			}
 			mod = (Module)View.choix(modules.getSet());
 			if (mod==null){
 				break;
 			}
+			modules.remove(mod);
 			modprof.add(mod);
 			rep = View.demandeBoolean("Voulez vous-entrer d'autres modules");
 		}
@@ -366,7 +367,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		}
 		newPromo.remove(promo);
 		Etudiant etu = new Etudiant(nom, prenom, naissance, adresse, telS, pseudoA, mdp, promo.getSetEtudiant().size());
-		promo.getSetEtudiant().add(etu);
+		promo.setEtudiant.add(etu);
 		newPromo.add(promo);
 		newPromo.sauvegarder(path);
 		System.out.println("L'étudiant : "+etu+" a bien été ajouté.");
@@ -401,7 +402,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		boolean rep = View.demandeBoolean("Voulez-vous vraiment supprimer (oui/non) : "+etu);
 		if (rep){
 			newPromo.remove(promo);
-			promo.getSetEtudiant().remove(etu);
+			promo.setEtudiant.remove(etu);
 			newPromo.add(promo);
 			newPromo.sauvegarder(path);
 			System.out.println("L'étudiant : "+etu+" a bien été supprimé.");
@@ -438,8 +439,10 @@ public class Administrateur extends Utilisateur implements Serializable{
 		}
 		boolean rep = View.demandeBoolean("Voulez-vous vraiment modifier (oui/non) : "+etu);
 		if (rep){ 
+			newPromo.remove(promo);
 			promo.setSetEtudiant(this.modifdonnees(promo.getSetEtudiant(), etu, path));
-			promo.sauvegarder(path);
+			newPromo.add(promo);
+			newPromo.sauvegarder(path);
 		}else{
 			System.out.println("Annulation");
 		}
@@ -486,14 +489,16 @@ public class Administrateur extends Utilisateur implements Serializable{
 			modules.set.remove(mod);
 			modules.sauvegarder(path);
 			All<Professeur> professeurs = RechercheDonnees.rechercheProf();
-			for (Professeur P : professeurs.getSet()){
-				for (Module M : P.getModules()){
-					if (mod.equals(M)){
-						P.supprimerModule(M);
+			if (!professeurs.isEmpty()){
+				for (Professeur P : professeurs.getSet()){
+					for (Module M : P.getModules()){
+						if (mod.equals(M)){
+							P.supprimerModule(M);
+						}
 					}
 				}
+				professeurs.sauvegarder("dataSave/Utilisateur/Professeur/Professeur");
 			}
-			professeurs.sauvegarder("Utilisateur/Professeur/Professeur");
 			System.out.println("Le module : "+mod+" a bien été supprimé.");
 		}else{
 			System.out.println("Annulation");
