@@ -13,7 +13,7 @@ public class RechercheDonnees {
 	 */
 	public static All<Administrateur> rechercheAdmin(){
 		try{
-			String path = "Utilisateur/Administrateur/Administrateur";
+			String path = "dataSave/Utilisateur/Administrateur/Administrateur";
 			All<Administrateur> newAdmin = new All<Administrateur>();
 			return (All<Administrateur>) newAdmin.relecture(path);
 		}catch(FileNotFoundException e){
