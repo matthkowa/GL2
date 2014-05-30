@@ -136,8 +136,8 @@ public class MenuController {
 			while(b){
 				int carac = View.demandeInt("_______MENU professeur______\n 1- Gérer les QCMs \n 2- Gérer les sessions \n 3- Visualiser les résultats \n 4- Quitter \n \n Choix :");
 				switch (carac){
-					case 1 : professeur2(carac,p);
-					case 2 : professeur2(carac,p);
+					case 1 : professeur2(carac,p);break;
+					case 2 : professeur2(carac,p);break;
 					case 3 : professeur3(p); break;
 					case 4 : b=false; break;				
 				default : break;
@@ -208,7 +208,7 @@ public class MenuController {
 				int carac = View.demandeInt("_______MENU 1______\n 1- Visualiser les résultats \n 2- Visualiser les statistiques \n 3- Deconnexion \n \n Choix :");
 				switch (carac){
 					case 1 : s.visualiserResultat(p); break;
-					case 2 : s.statistiques();
+					case 2 : s.statistiques();break;
 					case 3 : b=false; break;				
 				default : break;
 				}

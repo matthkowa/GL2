@@ -3,7 +3,7 @@ package model.QCM;
 import java.io.*;
 
 public class Reponse implements Serializable {
-	
+	private static final long serialVersionUID = 7124325040745293219L;
 	private String libelle;
 	private Boolean estVraie;
 	
@@ -38,7 +38,7 @@ public class Reponse implements Serializable {
 		return estVraie;
 	}
 
-	/* (non-Javadoc)
+	/**
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -54,8 +54,33 @@ public class Reponse implements Serializable {
 			
 		return toStr;
 	}
+	
+	/**
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Reponse other = (Reponse) obj;
+		if (estVraie == null) {
+			if (other.estVraie != null)
+				return false;
+		} else if (!estVraie.equals(other.estVraie))
+			return false;
+		if (libelle == null) {
+			if (other.libelle != null)
+				return false;
+		} else if (!libelle.equals(other.libelle))
+			return false;
+		return true;
+	}
 
-	/* (non-Javadoc)
+	/**
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override

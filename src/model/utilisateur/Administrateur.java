@@ -162,14 +162,16 @@ public class Administrateur extends Utilisateur implements Serializable{
 			System.out.println("Il n'y a pas d'administrateurs");
 			return;
 		}
-		Administrateur a = (Administrateur)View.choix(newSet.set);
+		newSet.remove(this);
+		Administrateur a = (Administrateur)View.choix(newSet.getSet());
 		if (a==null){
 			System.out.println("Annulation");
 			return;
 		}
 		boolean rep = View.demandeBoolean("Voulez-vous vraiment supprimer (oui/non) : "+a);
 		if (rep){ 
-			newSet.set.remove(a);
+			newSet.remove(a);
+			newSet.add(this);
 			newSet.sauvegarder(s);
 			System.out.println("L'administrateur : "+a+" a bien été supprimé");
 		}else{

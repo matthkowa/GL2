@@ -73,6 +73,28 @@ public class Professeur extends Utilisateur implements Serializable{
 	}
 	
 	/**
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Professeur other = (Professeur) obj;
+		if (idProf != other.idProf)
+			return false;
+		if (modules == null) {
+			if (other.modules != null)
+				return false;
+		} else if (!modules.equals(other.modules))
+			return false;
+		return true;
+	}
+	
+	/**
 	 * renvoie le hashCode du Professeur
 	 * @return hashCode identifiant de professeur
 	 */
@@ -172,17 +194,28 @@ public class Professeur extends Utilisateur implements Serializable{
 		String path = "dataSave/QCM/qcm";
 		All<QCM> listeQCM = RechercheDonnees.rechercheQCM();
 		Set<QCM> listeQCMProf = this.getQCM();
-		QCM q = null;
+		if(listeQCMProf.isEmpty()){
+			System.out.println("Il n'y a pas de QCM");
+			return;
+		}
 		Boolean rep = false;
 
 		try {
-			System.out.println("Veuillez choisir la session à supprimer : ");
-			q = (QCM) View.choix(listeQCMProf);	
+			System.out.println("Veuillez choisir le QCM à supprimer : ");
+			QCM q = (QCM) View.choix(listeQCMProf);
+			if (q==null){
+				System.out.println("Annulation");
+				return;
+			}
 	
 			rep = View.demandeBoolean("Voulez-vous vraiment supprimer (oui/non) : "+q.getLibelle());
-
 			if(rep){
-				listeQCM.set.remove(q);
+				for (QCM Q : listeQCM.getSet()){
+					if (Q.equals(q)){
+						q = Q;
+					}
+				}
+				listeQCM.remove(q);
 				System.out.println("Supprimé.");
 				listeQCM.sauvegarder(path);
 			}else{ 

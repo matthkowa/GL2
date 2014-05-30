@@ -60,7 +60,7 @@ public class QCM implements Serializable{
 		return questions;
 	}
 
-	/* (non-Javadoc)
+	/**
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -75,6 +75,41 @@ public class QCM implements Serializable{
 		result = prime * result
 				+ ((questions == null) ? 0 : questions.hashCode());
 		return result;
+	}
+
+	/**
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		QCM other = (QCM) obj;
+		if (createur == null) {
+			if (other.createur != null)
+				return false;
+		} else if (!createur.equals(other.createur))
+			return false;
+		if (estPrive == null) {
+			if (other.estPrive != null)
+				return false;
+		} else if (!estPrive.equals(other.estPrive))
+			return false;
+		if (libelle == null) {
+			if (other.libelle != null)
+				return false;
+		} else if (!libelle.equals(other.libelle))
+			return false;
+		if (questions == null) {
+			if (other.questions != null)
+				return false;
+		} else if (!questions.equals(other.questions))
+			return false;
+		return true;
 	}
 	
 	/* (non-Javadoc)

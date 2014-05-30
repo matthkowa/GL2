@@ -6,7 +6,7 @@ import java.util.*;
 import view.menu.View;
 
 public class Question implements Serializable{
-
+	private static final long serialVersionUID = -7425131709858983169L;
 	private String libelle;
 	private ArrayList<Reponse> reponses;
 	
@@ -40,7 +40,32 @@ public class Question implements Serializable{
 		return reponses;
 	}
 	
-	/* (non-Javadoc)
+	/**
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Question other = (Question) obj;
+		if (libelle == null) {
+			if (other.libelle != null)
+				return false;
+		} else if (!libelle.equals(other.libelle))
+			return false;
+		if (reponses == null) {
+			if (other.reponses != null)
+				return false;
+		} else if (!reponses.equals(other.reponses))
+			return false;
+		return true;
+	}
+	
+	/**
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
