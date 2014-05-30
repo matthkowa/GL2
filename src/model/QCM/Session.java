@@ -144,8 +144,55 @@ public class Session implements Serializable {
 	public void setModule(Module module) {
 		this.module = module;
 	}
+	
+	/**
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Session other = (Session) obj;
+		if (createur == null) {
+			if (other.createur != null)
+				return false;
+		} else if (!createur.equals(other.createur))
+			return false;
+		if (dateDebut == null) {
+			if (other.dateDebut != null)
+				return false;
+		} else if (!dateDebut.equals(other.dateDebut))
+			return false;
+		if (dateFin == null) {
+			if (other.dateFin != null)
+				return false;
+		} else if (!dateFin.equals(other.dateFin))
+			return false;
+		if (module == null) {
+			if (other.module != null)
+				return false;
+		} else if (!module.equals(other.module))
+			return false;
+		if (promotion == null) {
+			if (other.promotion != null)
+				return false;
+		} else if (!promotion.equals(other.promotion))
+			return false;
+		if (qcm == null) {
+			if (other.qcm != null)
+				return false;
+		} else if (!qcm.equals(other.qcm))
+			return false;
+		if (repetition != other.repetition)
+			return false;
+		return true;
+	}
 
-	/* (non-Javadoc)
+	/**
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -179,7 +226,7 @@ public class Session implements Serializable {
 		
 		All<Resultat> resultatSession = RechercheDonnees.rechercheResultat(this.hashCode());
 			
-		Iterator itRes = resultatSession.set.iterator();
+		Iterator<Resultat> itRes = resultatSession.set.iterator();
 		Resultat resultat = new Resultat();
 		int iterations = 0;	
 		
@@ -203,7 +250,7 @@ public class Session implements Serializable {
 				int reponseChoisie;
 				float note = 0;
 				ArrayList<Reponse> listeReponse = new ArrayList<Reponse>();
-				Iterator itQuestion = this.qcm.getQuestions().iterator();
+				Iterator<Question> itQuestion = this.qcm.getQuestions().iterator();
 	
 				while(itQuestion.hasNext()){
 					
@@ -211,7 +258,7 @@ public class Session implements Serializable {
 					compteurReponse = 0;
 					Question question = (Question) itQuestion.next();
 					System.out.println("Question n°" + compteurQuestion + " : " + question.getLibelle());
-					Iterator itReponse = question.getReponses().iterator();
+					Iterator<Reponse> itReponse = question.getReponses().iterator();
 					
 					
 					while(itReponse.hasNext()){
@@ -247,7 +294,7 @@ public class Session implements Serializable {
 					resultatSession.set.remove(resultat);
 				}
 				
-				String path = "Resultat/"+this.hashCode()+"/resultat";
+				String path = "dataSave/Resultat/"+this.hashCode()+"/resultat";
 				
 				resultatSession.add(nouveauResultat);
 				resultatSession.sauvegarder(path);
@@ -273,21 +320,25 @@ public class Session implements Serializable {
 			try{
 				System.out.println("Veuillez choisir l'étudiant dont vous voulez consulter les résultats");
 				Etudiant eleve = (Etudiant) View.choix(this.promotion.getSetEtudiant());
+				if(eleve==null){
+					System.out.println("Annulation");
+					return;
+				}
 				
 				All<Resultat> listeResultat = RechercheDonnees.rechercheResultat(this.hashCode());
-				Iterator itListeRes = listeResultat.set.iterator();
+				if (listeResultat.isEmpty()){
+					System.out.println("Il n'y a pas de résultats");
+					return;
+				}
 				Boolean finBoucle = true;
 				Resultat resultat = new Resultat();
-				Reponse reponse;
-				
-				while(itListeRes.hasNext() || finBoucle){
-					resultat = (Resultat) itListeRes.next();
-					
+
+				for (Resultat R : listeResultat.getSet()){
+					resultat=R;
 					if (resultat.getEleve().equals(eleve)){
 						finBoucle = false;
 					}
 				}
-				
 				if (finBoucle){
 					System.out.println("L'étudiant en question n'a pas encore participé à la session.");
 				}else{
@@ -305,13 +356,14 @@ public class Session implements Serializable {
 				
 				if (currentDate.compareTo(this.dateFin)==1){
 					All<Resultat> listeResultat = RechercheDonnees.rechercheResultat(this.hashCode());
-					Iterator itListeRes = listeResultat.set.iterator();
+					if (listeResultat.isEmpty()){
+						System.out.println("Il n'y a pas de résultats");
+						return;
+					}
 					Boolean finBoucle = true;
 					Resultat resultat = new Resultat();
-					
-					while(itListeRes.hasNext() || finBoucle){
-						resultat = (Resultat) itListeRes.next();
-						
+					for (Resultat R : listeResultat.getSet()){
+						resultat=R;
 						if (resultat.getEleve().equals((Etudiant) u)){
 							finBoucle = false;
 						}
@@ -343,7 +395,11 @@ public class Session implements Serializable {
 	private double moyenne() {
 		
 		All<Resultat> listeRes = RechercheDonnees.rechercheResultat(this.hashCode());
-		Iterator it = listeRes.set.iterator();
+		if (listeRes.isEmpty()){
+			System.out.println("Il n'y a pas de résultats");
+			return 0d;
+		}
+		Iterator<Resultat> it = listeRes.set.iterator();
 		double moyenne = 0;
 		
 		while(it.hasNext()){
@@ -362,7 +418,11 @@ public class Session implements Serializable {
 		double ecartType = 0;
 		
 		All<Resultat> listeRes = RechercheDonnees.rechercheResultat(this.hashCode());
-		Iterator it = listeRes.set.iterator();
+		if (listeRes.isEmpty()){
+			System.out.println("Il n'y a pas de résultats");
+			return 0d;
+		}
+		Iterator<Resultat> it = listeRes.set.iterator();
 		
 		while(it.hasNext()){
 			
@@ -379,7 +439,11 @@ public class Session implements Serializable {
 	private void afficherFrequences() {
 		
 		All<Resultat> listeRes = RechercheDonnees.rechercheResultat(this.hashCode());
-		Iterator it = listeRes.set.iterator();
+		if (listeRes.isEmpty()){
+			System.out.println("Il n'y a pas de résultats");
+			return ;
+		}
+		Iterator<Resultat> it = listeRes.set.iterator();
 		double compteur = 0;
 		ArrayList<Double> effectifs = new ArrayList<Double>();
 		
@@ -388,7 +452,7 @@ public class Session implements Serializable {
 			
 			compteur = 0;
 			Resultat res = (Resultat) it.next();
-			Iterator itRes = res.getListeReponse().iterator();
+			Iterator<Reponse> itRes = res.getListeReponse().iterator();
 			
 			if (effectifs.isEmpty()){
 				for (int i = 1; i <= res.getListeReponse().size(); i++){
@@ -408,7 +472,7 @@ public class Session implements Serializable {
 			
 		}
 		
-		Iterator itEffectifs = effectifs.iterator();
+		Iterator<Double> itEffectifs = effectifs.iterator();
 		System.out.println("Fréquences de bonnes réponses : ");
 		
 		int compteur2 = 1;

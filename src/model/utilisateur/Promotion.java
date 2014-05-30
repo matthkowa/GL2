@@ -6,7 +6,7 @@ import java.util.Set;
 import model.serializable.Serialiser;
 
 
-public class Promotion extends Serialiser implements Serializable{
+public class Promotion extends Serialiser{
 	private static final long serialVersionUID = 383244048373251545L;
 	protected Set<Etudiant> setEtudiant;
 	private String promo;
@@ -63,6 +63,31 @@ public class Promotion extends Serialiser implements Serializable{
 		this.promo = promo;
 	}
 	
+	/**
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Promotion other = (Promotion) obj;
+		if (promo == null) {
+			if (other.promo != null)
+				return false;
+		} else if (!promo.equals(other.promo))
+			return false;
+		if (setEtudiant == null) {
+			if (other.setEtudiant != null)
+				return false;
+		} else if (!setEtudiant.equals(other.setEtudiant))
+			return false;
+		return true;
+	}
+
 	/**
 	 * @see java.lang.Object#hashCode()
 	 */

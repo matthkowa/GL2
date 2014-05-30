@@ -129,6 +129,10 @@ public class Professeur extends Utilisateur implements Serializable{
 	 */
 	public Set<Session> getSessions() {
 		All<Session> listeSession = RechercheDonnees.rechercheSession();
+		if (listeSession.isEmpty()){
+			System.out.println("Il' n'y a pas de session");
+			return new HashSet<Session>();
+		}
 		All<Session> listeSessionProf = new All<Session>();
 		Session s = null;
 		Iterator<Session> it = listeSession.set.iterator();
@@ -247,15 +251,39 @@ public class Professeur extends Utilisateur implements Serializable{
 			
 			System.out.println("Veuillez choisir un QCM parmi ceux ci-dessous : ");
 			All<QCM> qcmList = RechercheDonnees.rechercheQCM();
+			if (qcmList.isEmpty()){
+				System.out.println("Il n'y a pas de QCM");
+				return;
+			}
 			QCM qcm = (QCM) View.choix(qcmList.set);
+			if(qcm==null){
+				System.out.println("Annulation");
+				return;
+			}
 			
 			System.out.println("Veuillez choisir une promotion parmi celles ci-dessous : ");
 			All<Promotion> promoList = RechercheDonnees.recherchePromo();
+			if (promoList.isEmpty()){
+				System.out.println("Il n'y a pas de promotions");
+				return;
+			}
 			Promotion promotion = (Promotion) View.choix(promoList.set);
+			if(promotion==null){
+				System.out.println("Annulation");
+				return;
+			}
 			
 			System.out.println("Veuillez choisir un module parmi ceux ci-dessous : ");
 			All<Module> moduleList = RechercheDonnees.rechercheModule();
+			if (moduleList.isEmpty()){
+				System.out.println("Il n'y a pas de modules");
+				return;
+			}
 			Module module = (Module) View.choix(moduleList.set);
+			if(module==null){
+				System.out.println("Annulation");
+				return;
+			}
 //			Module module = (Module) View.choix(this.modules);
 			
 			Session sess = new Session(dateDebut, dateFin, repetition, this, qcm, promotion, module);
@@ -263,16 +291,15 @@ public class Professeur extends Utilisateur implements Serializable{
 			
 			String path = "dataSave/QCM/session";
 
-			//All<Session> setSession = RechercheDonnees.rechercheSession();
-			All<Session> setSession = new All<Session>();
+			All<Session> setSession = RechercheDonnees.rechercheSession();
 			setSession.add(sess);
 			setSession.sauvegarder(path);
 			
-			new File("Resultat/"+sess.hashCode()).mkdir();
+			new File("dataSave/Resultat/"+sess.hashCode()).mkdir();
 			All<Resultat> testList = new All<Resultat>();
 			Resultat test = new Resultat(0,new Etudiant(),0, new ArrayList<Reponse>());
 			testList.add(test);
-			testList.sauvegarder("Resultat/"+ sess.hashCode() +"/resultat");
+			testList.sauvegarder("dataSave/Resultat/"+ sess.hashCode() +"/resultat");
 			
 			System.out.println("Votre session a bien été enregistrée. Retour au menu.");
 
@@ -292,6 +319,10 @@ public class Professeur extends Utilisateur implements Serializable{
 		String path = "dataSave/QCM/session";
 		All<Session> listeSession = RechercheDonnees.rechercheSession();
 		Set<Session> listeSessionProf = this.getSessions();
+		if (listeSessionProf.isEmpty()){
+			System.out.println("Il n'y a pas de sessions");
+			return;
+		}
 		Session s = null;
 
 		boolean rep = false;
@@ -299,9 +330,19 @@ public class Professeur extends Utilisateur implements Serializable{
 		try {
 			System.out.println("Veuillez choisir la session à supprimer : ");
 			s = (Session) View.choix(listeSessionProf);
+			if (s==null){
+				System.out.println("Annulation");
+				return;
+			}
 			rep = View.demandeBoolean("Voulez-vous vraiment supprimer (oui/non) : "+s);
 
 			if(rep){
+				for (Session S : listeSession.getSet()){
+					if (S.equals(s)){
+						s = S;
+					}
+				}
+				listeSession.remove(s);
 				listeSession.set.remove(s);
 				System.out.println("Supprimé.");
 				listeSession.sauvegarder(path);

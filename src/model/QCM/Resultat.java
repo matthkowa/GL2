@@ -86,7 +86,7 @@ public class Resultat implements Serializable{
 	
 	public void afficherResultats() {
 		
-		Iterator it = this.listeReponse.iterator();
+		Iterator<Reponse> it = this.listeReponse.iterator();
 		int compteur = 1;
 		System.out.println("Liste des réponses de l'élève "+ this.eleve.getNom() + " " + this.eleve.getPrenom() + " :");
 		while (it.hasNext()){

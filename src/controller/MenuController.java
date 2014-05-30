@@ -198,6 +198,9 @@ public class MenuController {
 	private void professeur3(Professeur p){
 		boolean b = true;
 		Set<Session> listeSessionProf = p.getSessions(); 
+		if (listeSessionProf.isEmpty()){
+			System.out.println("Il n'y a pas de session relative à ce professeur");
+		}
 		Session s = null;
 		
 		System.out.println("Veuillez choisir la session dont vous voulez consulter les résultats : ");
@@ -205,6 +208,10 @@ public class MenuController {
 		{
 			try{
 				s = (Session) View.choix(listeSessionProf);
+				if (s==null){
+					System.out.println("Annulation");
+					return;
+				}
 				int carac = View.demandeInt("_______MENU 1______\n 1- Visualiser les résultats \n 2- Visualiser les statistiques \n 3- Deconnexion \n \n Choix :");
 				switch (carac){
 					case 1 : s.visualiserResultat(p); break;
