@@ -156,7 +156,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException
 	 */
 	public void supAdmin() throws NoSuchElementException,IOException{
-		String s = "Utilisateur/Administrateur/Administrateur";
+		String s = "dataSave/Utilisateur/Administrateur/Administrateur";
 		All<Administrateur> newSet = RechercheDonnees.rechercheAdmin();
 		if (newSet.isEmpty()){
 			System.out.println("Il n'y a pas d'administrateurs");
@@ -195,7 +195,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		String mdp = "EISTI";
 		
 		
-		String s = "Utilisateur/Administrateur/Administrateur";
+		String s = "dataSave/Utilisateur/Administrateur/Administrateur";
 		All<Administrateur> newSet = RechercheDonnees.rechercheAdmin();
 		Administrateur a = new Administrateur(nom, prenom, naissance, adresse, telS, pseudoA, mdp, newSet.set.size());
 		newSet.add(a);
@@ -209,7 +209,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException
 	 */
 	public void modifAdmin() throws NoSuchElementException,IOException{
-		String s = "Utilisateur/Administrateur/Administrateur";
+		String s = "dataSave/Utilisateur/Administrateur/Administrateur";
 		All<Administrateur> newSet = RechercheDonnees.rechercheAdmin();
 		if (newSet.isEmpty()){
 			System.out.println("Il n'y a pas d'administrateurs");
@@ -262,7 +262,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 			modprof.add(mod);
 			rep = View.demandeBoolean("Voulez vous-entrer d'autres modules");
 		}
-		String s = "Utilisateur/Professeur/Professeur";
+		String s = "dataSave/Utilisateur/Professeur/Professeur";
 
 		All<Professeur> newSet = RechercheDonnees.rechercheProf();
 		Professeur a = new Professeur(nom, prenom, naissance, adresse, telS, pseudoA, mdp, newSet.set.size(), modprof);
@@ -277,7 +277,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException
 	 */
 	public void supProf() throws NoSuchElementException,IOException{
-		String s = "Utilisateur/Professeur/Professeur";
+		String s = "dataSave/Utilisateur/Professeur/Professeur";
 		All<Professeur> newSet = RechercheDonnees.rechercheProf();
 		if (newSet.isEmpty()){
 			System.out.println("Il n'y a pas de professeurs");
@@ -304,7 +304,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException
 	 */
 	public void modifProf() throws NoSuchElementException,IOException{
-		String s = "Utilisateur/Professeur/Professeur";
+		String s = "dataSave/Utilisateur/Professeur/Professeur";
 		All<Professeur> newSet = RechercheDonnees.rechercheProf();
 		if (newSet.isEmpty()){
 			System.out.println("Il n'y a pas de professeurs");
@@ -340,7 +340,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		}
 		String mdp = "EISTI";
 		System.out.println("Entrer la promotion de l'étudiant :");
-		String path = "Utilisateur/Etudiant/promotion";
+		String path = "dataSave/Utilisateur/Etudiant/promotion";
 		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
 		if (newPromo.isEmpty()){
 			System.out.println("Il n'y a pas de promotions");
@@ -365,7 +365,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException
 	 */
 	public void supEleve() throws NoSuchElementException,IOException{
-		String path = "Utilisateur/Etudiant/promotion";
+		String path = "dataSave/Utilisateur/Etudiant/promotion";
 		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
 		if (newPromo.isEmpty()){
 			System.out.println("Il n'y a pas de promotions");
@@ -382,7 +382,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		}
 		Etudiant etu = (Etudiant) View.choix(promo.getSetEtudiant());
 		if (etu==null){
-			System.out.println("Il n'y a pas d'étudiants");
+			System.out.println("Annulation");
 			return;
 		}
 		boolean rep = View.demandeBoolean("Voulez-vous vraiment supprimer (oui/non) : "+etu);
@@ -403,7 +403,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException
 	 */
 	public void modifEleve() throws IOException{
-		String path = "Utilisateur/Etudiant/promotion";
+		String path = "dataSave/Utilisateur/Etudiant/promotion";
 		All<Promotion> newPromo = RechercheDonnees.recherchePromo();
 		if (newPromo.isEmpty()){
 			System.out.println("Il n'y a pas de promotions");
@@ -439,7 +439,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		try
 		{
 			String nom = View.demandeString("Entrer le nom du nouveau module : ");
-			String path = "Module/Module";
+			String path = "dataSave/Module/Module";
 			All<Module> modules = RechercheDonnees.rechercheModule();
 			Module mod = new Module(modules.getSet().size(), nom);
 			modules.set.add(mod);
@@ -457,7 +457,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException
 	 */
 	public void supModule() throws IOException{
-		String path = "Module/Module";
+		String path = "dataSave/Module/Module";
 		All<Module> modules = RechercheDonnees.rechercheModule();
 		if (modules.isEmpty()){
 			System.out.println("Il n'y a pas de modules");
@@ -492,7 +492,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 	 * @throws IOException
 	 */
 	public void modifModule() throws IOException{
-		String path = "Module/Module";
+		String path = "dataSave/Module/Module";
 		All<Module> modules = RechercheDonnees.rechercheModule();
 		if (modules.isEmpty()){
 			System.out.println("Il n'y a pas de modules");
@@ -522,7 +522,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		try
 		{
 			String nomPromo = View.demandeString("Entrer le nom de la nouvelle promo : ");
-			String path = "Utilisateur/Etudiant/promotion";
+			String path = "dataSave/Utilisateur/Etudiant/promotion";
 			Promotion promoInit = new Promotion(new HashSet<Etudiant>(),nomPromo);
 			All<Promotion> newPromo = RechercheDonnees.recherchePromo();
 			newPromo.add(promoInit);
@@ -553,7 +553,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 		boolean rep = View.demandeBoolean("Voulez-vous vraiment supprimer (oui/non) : "+promo);
 		if (rep){
 			newPromo.set.remove(promo);
-			newPromo.sauvegarder("Utilisateur/Etudiant/promotion");
+			newPromo.sauvegarder("dataSave/Utilisateur/Etudiant/promotion");
 			System.out.println("La promo : "+promo+" a bien été supprimée.");
 		}
 		else{
@@ -619,7 +619,7 @@ public class Administrateur extends Utilisateur implements Serializable{
 				break;
 		}
 		newPromo.add(promo);
-		newPromo.sauvegarder("Utilisateur/Etudiant/promotion");
+		newPromo.sauvegarder("dataSave/Utilisateur/Etudiant/promotion");
 	}
 	
 	

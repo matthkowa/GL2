@@ -150,7 +150,7 @@ public class Professeur extends Utilisateur implements Serializable{
 				}
 			}
 			
-			String path = "QCM/qcm";
+			String path = "dataSave/QCM/qcm";
 
 			All<QCM> setQCM = RechercheDonnees.rechercheQCM();
 			setQCM.add(qcm);
@@ -169,7 +169,7 @@ public class Professeur extends Utilisateur implements Serializable{
 	 * Permet au professeur de supprimer un QCM
 	 */
 	public void supprimerQCM(){
-		String path = "QCM/qcm";
+		String path = "dataSave/QCM/qcm";
 		All<QCM> listeQCM = RechercheDonnees.rechercheQCM();
 		Set<QCM> listeQCMProf = this.getQCM();
 		QCM q = null;
@@ -228,7 +228,7 @@ public class Professeur extends Utilisateur implements Serializable{
 			Session sess = new Session(dateDebut, dateFin, repetition, this, qcm, promotion, module);
 			System.out.println(sess.description());
 			
-			String path = "QCM/session";
+			String path = "dataSave/QCM/session";
 
 			//All<Session> setSession = RechercheDonnees.rechercheSession();
 			All<Session> setSession = new All<Session>();
@@ -256,7 +256,7 @@ public class Professeur extends Utilisateur implements Serializable{
 	 * Permet au professeur de supprimer une Session
 	 */
 	public void supprimerSession(){
-		String path = "QCM/session";
+		String path = "dataSave/QCM/session";
 		All<Session> listeSession = RechercheDonnees.rechercheSession();
 		Set<Session> listeSessionProf = this.getSessions();
 		Session s = null;

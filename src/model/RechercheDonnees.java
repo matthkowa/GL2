@@ -42,7 +42,7 @@ public class RechercheDonnees {
 	
 	public static All<Etudiant> rechercheEtudiant(){
 		try{
-			String path = "Utilisateur/Etudiant/promotion";
+			String path = "dataSave/Utilisateur/Etudiant/promotion";
 			All<Etudiant> newEtudiant = new All<Etudiant>();
 			All<Promotion> p = (All<Promotion>) newEtudiant.relecture(path);
 			for(Promotion p1 : p.getSet()){
@@ -61,7 +61,7 @@ public class RechercheDonnees {
 	 */
 	public static All<Module> rechercheModule(){
 		try{
-			String path = "Module/module";
+			String path = "dataSave/Module/module";
 			All<Module> newModule = new All<Module>();
 			return (All<Module>) newModule.relecture(path);
 		}
@@ -76,7 +76,7 @@ public class RechercheDonnees {
 	 */
 	public static All<Promotion> recherchePromo(){
 		try{
-			String path = "Utilisateur/Etudiant/promotion";
+			String path = "dataSave/Utilisateur/Etudiant/promotion";
 			All<Promotion> newPromo = new All<Promotion>();
 			newPromo = (All<Promotion>) newPromo.relecture(path);
 			return newPromo;
@@ -92,7 +92,7 @@ public class RechercheDonnees {
 	 */
 	public static All<QCM> rechercheQCM(){
 		try{
-			String path = "QCM/qcm";
+			String path = "dataSave/QCM/qcm";
 			All<QCM> newQCM = new All<QCM>();
 			return (All<QCM>) newQCM.relecture(path);
 		}catch(FileNotFoundException e){
@@ -106,7 +106,7 @@ public class RechercheDonnees {
 	 */
 	public static All<Session> rechercheSession(){
 		try{
-			String path = "QCM/session";
+			String path = "dataSave/QCM/session";
 			All<Session> newSession = new All<Session>();
 			return (All<Session>) newSession.relecture(path);
 		}catch(FileNotFoundException e){
@@ -120,7 +120,7 @@ public class RechercheDonnees {
 	 */
 	public static All<Resultat> rechercheResultat(int id){
 		try{
-			String path = "Resultat/"+id+"/resultat";
+			String path = "dataSave/Resultat/"+id+"/resultat";
 			All<Resultat> newResultat = new All<Resultat>();
 			return (All<Resultat>) newResultat.relecture(path);
 		}catch(FileNotFoundException e){

@@ -69,3 +69,15 @@ L'affichage des étudiants dans une promo est décalé à chaque nouvel étudiant
 à cause du "\n" à la fin du toString d'utilisateur. Je pense qu'il faudrait le retirer.
  	 				
  
+ 
+Avis nico 30/05 11h57
+
+modifier tous les "tant pis" et les "Well done"
+
+---------------------------------------IMPORTANT----------------------------------------
+
+Le professeur doit pouvoir visualiser la réponse (partielle ou totale) des élèves à N'IMPORTE QUEL MOMENT !
+
+-------------------------------------FIN IMPORTANT--------------------------------------
+
+détail sur Session : "l'étudiant en question n'a pas encore participé à la session" à modifier en "l'étudiant" + nom + "..."
